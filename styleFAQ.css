@@ -30,10 +30,30 @@
 .bulle-gauche{
 	font-weight: bold;
 }
+.bulle-gauche::before{
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: -12px;
+	border-width: 7px;
+	border-style: solid;
+	border-color: transparent #ccc transparent transparent;
+	
+}
 
 .bulle-droite{
 	float: right;
 }
 
+.bulle-droite::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    
+    border-width: 15px;
+    border-style: solid;
+    border-color: transparent transparent transparent #ccc;
+}
 
 
