@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="StyleAuthentication.css">
+    <title>Inscription</title>
 </head>
 <body>
-    <p>vffyf</p>
+    <div id="navbar" class="navbar"></div>
+    <div class="formulaire">
+        <h1>Formulaire d'inscription</h1>
+        <form method="post">
+            <label for="lastname">Nom</label><br>
+            <input type="text" id="lastname" name="lastname" placeholder="Smith"><br>
+            <label for="firstname">Prénom</label><br>
+            <input type="text" id="firstname" name="firstname" placeholder="David"><br>
+            <label for="email">Email</label><br>
+            <input type="email" id="email" name="email" placeholder="david.smith@gmail.com"></input><br>
+            <label for="birthdate">Date de naissance</label><br>
+            <input type="date" id="birthdate" name="birthdate" placeholder="jj/mm/aaaa"><br>
+            <label for="address">Adresse</label><br>
+            <input type="text" id="address" name="address" placeholder="1 avenue des champs Elysés, Paris 75001"><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password" placeholder=""><br>
+            <input type="submit" value="S'inscrire">
+        </form>
+    </div>
+    <div id="footer" class="footer"></div>
 </body>
+<script src="Navbar.js"></script>
+<script src="Footer.js"></script>
 </html>
