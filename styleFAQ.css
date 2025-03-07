@@ -1,0 +1,59 @@
+
+#titrefaq { 
+	text-align: center;
+}
+
+.box {
+	width: 400px; 
+    height: 500px; 
+    border: 2px solid #3FDC00; 
+    background-color: #3FDC00; 
+    border-radius: 10px; 
+    padding: 20px; 
+    margin: 20px auto;
+}
+
+.bulle-sms{
+
+	position: relative;
+	border: 2px solid #ccc;
+	background-color: #ccc;
+	padding: 5px;
+	border-radius: 4px;
+	margin: 10px;
+	max-width: 300px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	display: inline-block;
+}
+
+.bulle-gauche{
+	font-weight: bold;
+}
+.bulle-gauche::before{
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: -12px;
+	border-width: 7px;
+	border-style: solid;
+	border-color: transparent #ccc transparent transparent;
+	
+}
+
+.bulle-droite{
+	float: right;
+}
+
+.bulle-droite::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    
+    border-width: 15px;
+    border-style: solid;
+    border-color: transparent transparent transparent #ccc;
+}
+
+
