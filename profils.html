@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma première page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Barre de navigation -->
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li>
+                    <a href="https://www.isep.fr/"> 
+                        <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                    </a>
+                </li>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">À propos</a></li>
+                <li><a href="#">Contact</a></li>
+                <li>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Rechercher..." id="searchInput">
+                        <button onclick="searchFunction()">🔍</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Conteneur principal -->
+    <div class="conteneur">
+        <div class="slider-wrapper">
+            <div class="image-slider">
+                <img src="https://cdn.campus-lyon.org/wp-content/uploads/sites/3/2020/03/image-1.jpg" alt="Image 1" class="active">
+                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image 2">
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const images = document.querySelectorAll('.image-slider img');
+        let currentIndex = 0;
+
+        setInterval(() => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }, 5000);
+    </script>
+
+    <!-- Contenu supplémentaire -->
+    <div>
+        <p>Ma première page avec du texte (sans style)</p>
+    </div>
+
+    <h1>Ceci est un grand titre</h1>
+    <h2>Ceci est un titre plus petit</h2>
+    <p>Ceci est un paragraphe</p>
+
+    <a href="https://www.isep.fr/"> 
+        <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+    </a>
+
+    <p>Les parcours de formation de l'ISEP sont :</p>
+    <ol>
+        <li>Le parcours ingénieur logiciel</li>
+        <li>Le parcours architecte des informations</li>
+        <li>Le parcours sécurité numérique et réseau</li>
+    </ol>
+
+    <!-- JavaScript -->
+    <script>
+        const images = document.querySelectorAll('.image-slider img');
+        let currentIndex = 0;
+
+        setInterval(() => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }, 2000);
+    </script>
+
+</body>
+</html>
