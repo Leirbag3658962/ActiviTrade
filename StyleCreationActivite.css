@@ -1,0 +1,33 @@
+#titrecreation{
+	text-align:center;
+}
+.input{
+	width: 170px;
+	height: 20px;
+}
+
+.gauche{
+	text-align: left;
+}
+
+.droite{
+	text-align: right;
+}
+
+.gauche, .droite{
+	width: 45%;
+}
+
+.conteneur{
+	display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin: auto;
+}
+
+#inputDescription{
+	width: 70%;
+	padding: 8px;
+	margin-bottom: 10px;
+}

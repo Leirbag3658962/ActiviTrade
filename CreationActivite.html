@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="StyleCreationActivite.css">
+<link rel="stylesheet" href="StyleAuthentication.css">
+<title>Créer une nouvelle activité</title>
+</head>
+<body>
+<nav id="navbar" class="navbar"></nav>
+<h1 id="titrecreation">Création d'une nouvelle activité</h1>
+<div class="conteneur">
+	<div class="gauche">
+	<form>
+		<label for="labNomActivite">Nom d'activité </label>
+		<br>
+		<input class="input" type="text" id="inputNom" name="inputNom"><br>
+		<br>
+		<label for="labDate">Date </label>
+		<br>
+		<input class="input" type="date" id="inputDate" name="inputDate"><br>
+		<br>
+		<label for="labDuree">Durée </label>
+		<br>
+		<input class="input" type="text" id="inputDuree" name="inputDuree"><br>
+		<br>
+		<label for="labCategorie">Catégorie </label>
+		<br>
+		<select class="input" id="inputCategorie" name="inputCategorie">
+			<option value="test1">Test1</option>
+			<option value="test2">Test2</option>
+		</select><br>
+		<br>
+		<label for="labAdresse">Adresse </label>
+		<br>
+		<input class="input" type="text" id="inputAdresse" name="inputAdresse"><br>
+		<br>
+		<label for="labNbrParticipant">Nombre de participants </label>
+		<br>
+		<input class="input" type="text" id="inputNbrParticipant" name="inputNbrParticipant"><br>
+	</form>
+	</div>
+	<div class="droite">
+		<label for="labDescription">Description de l'activité </label>
+		<br>
+		<textarea type="text" id="inputDescription" name="inputDescription"></textarea><br>
+	</div>
+</div>
+
+<br>
+<div id="footer" class="footer"></div>
+</body>
+<script src="Navbar.js"></script>
+<script src="Footer.js"></script>
+</html>
