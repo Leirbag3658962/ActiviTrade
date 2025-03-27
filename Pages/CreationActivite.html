@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="StyleCreationActivite.css">
-<link rel="stylesheet" href="StyleAuthentication.css">
+<link rel="stylesheet" href="../Style/CreationActivite.css">
+<link rel="stylesheet" href="../Style/Navbar.css">
+<link rel="stylesheet" href="../Style/Footer.css">
 <title>Créer une nouvelle activité</title>
 </head>
 <body>
-<nav id="navbar" class="navbar"></nav>
+<header id="navbar" class="navbar"></header>
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
 <div class="conteneur">
 	<div class="gauche">
@@ -62,8 +63,12 @@
 	
 </div>
 <br>
-<div id="footer" class="footer"></div>
+<footer id="footer" class="footer"></footer>
 </body>
-<script src="Navbar.js"></script>
-<script src="Footer.js"></script>
+<script src="../Components/Navbar.js"></script>
+<script>
+	document.getElementById("navbar").innerHTML = Navbar();
+</script>
+<script src="../Components/NavbarAnim.js"></script>
+<script src="../Components/Footer.js"></script>
 </html>
