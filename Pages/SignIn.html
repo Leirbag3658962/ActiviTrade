@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="StyleAuthentication.css">
+    <link rel="stylesheet" href="../Style/SignIn.css">
+    <link rel="stylesheet" href="../Style/Navbar.css">
+    <link rel="stylesheet" href="../Style/Footer.css">
     <title>Inscription</title>
 </head>
 <body>
-    <nav id="navbar" class="navbar"></nav>
-    <div class="formulaire">
+    <header id="navbar" class="navbar">
+        
+    </header>
+    <div class="boxform">
         <h1>Formulaire d'inscription</h1>
         <form method="post">
             <label for="lastname">Nom</label><br>
@@ -18,16 +22,24 @@
             <label for="email">Email</label><br>
             <input type="email" id="email" name="email" placeholder="david.smith@gmail.com"></input><br>
             <label for="birthdate">Date de naissance</label><br>
-            <input type="date" id="birthdate" name="birthdate" placeholder="jj/mm/aaaa"><br>
+            <input type="date" id="birthdate" name="birthdate" placeholder="mm/jj/aaaa"><br>
             <label for="address">Adresse</label><br>
             <input type="text" id="address" name="address" placeholder="1 avenue des champs Elysés, Paris 75001"><br>
             <label for="password">Password</label><br>
             <input type="password" id="password" name="password" placeholder=""><br>
+            <div id="checkboxdiv" class="checkboxdiv">
+                <input type="checkbox" value="CGU" name="condition[]">J'ai lu et j'accepte les <a href="">Conditions Générales d'Utilisation</a><br>
+            </div>
+            <br>
             <input type="submit" value="S'inscrire">
         </form>
     </div>
-    <div id="footer" class="footer"></div>
+    <footer id="footer" class="footer"></footer>
 </body>
-<script src="Navbar.js"></script>
-<script src="Footer.js"></script>
+<script src="../Components/Navbar.js"></script>
+<script>
+    document.getElementById("navbar").innerHTML = Navbar();
+</script>
+<script src="../Components/NavbarAnim.js"></script>
+<script src="../Components/Footer.js"></script>
 </html>
