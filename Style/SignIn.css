@@ -1,0 +1,50 @@
+.boxform {
+	width: 400px; 
+    border: 2px solid lightblue; 
+    background-color: lightblue; 
+    border-radius: 10px; 
+    padding: 20px; 
+    margin: 20px auto;
+    text-align: center;
+}
+
+.checkboxdiv {
+    width: 200px;
+    text-align: left;
+    margin-left: 25%;
+}
+
+input[type=text] {
+    background: transparent;
+    border-radius: 5%;
+    border: 2px solid;
+    width: 200px;
+}
+
+input[type=email] {
+    background: transparent;
+    border-radius: 5%;
+    border: 2px solid;
+    width: 200px;
+}
+
+input[type=date] {
+    background: transparent;
+    border-radius: 5%;
+    border: 2px solid;
+    width: 200px;
+}
+
+input[type=password] {
+    background: transparent;
+    border-radius: 5%;
+    border: 2px solid;
+    width: 200px;
+}
+
+input[type=submit] {
+    background-color: lightgrey;
+    border-radius: 20%;
+    border: 2px solid;
+    height: 40px;
+}
