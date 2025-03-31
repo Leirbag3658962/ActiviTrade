@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../Style/CreationActivite.css">
+<link rel="stylesheet" href="../Style/Navbar.css">
+<link rel="stylesheet" href="../Style/Footer.css">
+</head>
+<body>
+<header id="navbar" class="navbar"></header>
+
+<form>
+	<label id="titreAvis">Note d'activité </label>
+	<br>
+	<input class="input" type="text" id="inputNote" name="inputNote"><br>
+	<br>
+	<label id="titreAvis">Commentaire </label>
+	<br>
+	<textarea type="text" id="inputCommentaire" name="inputCommentaire" rows="10" cols="80"></textarea><br>
+	<br>
+	</form>
+	
+<footer id="footer" class="footer"></footer>
+<button id="Button">Confirmer</button>
+</body>
+
+<script src="../Components/Navbar.js"></script>
+<script>
+	document.getElementById("navbar").innerHTML = Navbar();
+</script>
+<script src="../Components/NavbarAnim.js"></script>
+<script src="../Components/Footer.js"></script>
+</html>
