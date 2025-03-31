@@ -7,18 +7,18 @@
 }
 
 .gauche{
+	width: 50%;
+	margin-top: 50px;
 	text-align: left;
 }
 
 .droite{
+	width: 50%;
+	margin-top: 50px;
 	text-align: left;
 }
 
-.gauche, .droite{
-	width: 45%;
-}
-
-.conteneur{
+.conteneurForm{
 	display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -36,4 +36,24 @@
 
 #labPicture{
 	margin-left: 40px;
+}
+
+.conteneurImage{
+	display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin: auto;
+}
+
+.Cells{
+	height:224px;
+	width: 300px;
+	margin-left: 20px;
+	background-color:#AFAFAF;
+	cursor: pointer;
+}
+
+.Cells:hover {
+	border-style: dotted;
 }
