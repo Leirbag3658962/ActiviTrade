@@ -52,7 +52,7 @@
 		
 		<label for="labDescription">Description de l'activité </label>
 		<br>
-		<textarea type="text" id="inputDescription" name="inputDescription"rows="6" cols="50"></textarea><br>
+		<textarea type="text" id="inputDescription" name="inputDescription"rows="6" cols="80"></textarea><br>
 	</div>
 </div>
 <br><br>
