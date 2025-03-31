@@ -59,9 +59,7 @@ nav {
   background: #333;
   transition: transform 0.3s ease-out;
 }
-.navlinks-container a:hover::after {
-  transform: scaleX(1);
-}
+
 
 .nav-authentication {
   margin-left: auto;
@@ -86,7 +84,7 @@ nav {
   display: none;
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
   nav {
     padding: 15px 20px;
     position: relative;
@@ -116,6 +114,10 @@ nav {
     background: #355e3b;
     align-items: center;
     position: relative;
+  }
+
+  .navlinks-container a:hover::after {
+    transform: scaleX(1);
   }
 
   .hamburger span {
@@ -159,7 +161,7 @@ nav {
     top: 100%;
     left: 0;
     transform: translate(-100%);
-    height: 100vh;
+    height: 85vh;
     padding: 15px 50px 15px 20px;
     border-right: 1px solid #c5c5c6;
   }
@@ -193,9 +195,9 @@ nav {
   }
 }
 
-@media (max-width: 500px) {
+@media screen and (max-width: 500px) {
   .nav-icon img {
-    width: 30px;
+    width: 90px;
   }
   .nav-icon span {
     font-size: 20px;

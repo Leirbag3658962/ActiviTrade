@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="StyleAuthentication.css">
-    <link rel="stylesheet" href="styleFAQ.css">
-    <title>Connexion</title>
+    <link rel="stylesheet" href="../Style/LogIn.css">
+    <link rel="stylesheet" href="../Style/Navbar.css">
+    <link rel="stylesheet" href="../Style/Footer.css">
+    <title>Inscription</title>
 </head>
 <body>
-    <nav id="navbar" class="navbar"></nav>
+    <header id="navbar" class="navbar">
+    </header>
     <div class="boxform">
         <h1>Connexion</h1>
+        <br>
         <form method="post">
             <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" placeholder="david.smith@gmail.com"></input><br>
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" placeholder=""><br>
+            <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required></input><br>
+            <label for="password">Mot de passe</label><br>
+            <input type="password" id="password" name="password" placeholder="" required><br>
             <br>
             <input type="submit" value="Se connecter">
         </form>
+        <p>Vous n'avez pas encore de compte? Inscrivez-vous <a href="SignIn.html">ici</a></p>
     </div>
     <footer id="footer" class="footer"></footer>
 </body>
-<script src="Navbar.js"></script>
-<script src="Footer.js"></script>
+<script src="../Components/Navbar.js"></script>
+<script>
+    document.getElementById("navbar").innerHTML = Navbar();
+</script>
+<script src="../Components/NavbarAnim.js"></script>
+<script src="../Components/Footer.js"></script>
 </html>

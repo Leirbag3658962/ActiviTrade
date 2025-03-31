@@ -4,6 +4,5 @@
     background: #355e3b; 
     color: white;
     width: 100%;
-    position: fixed;
-    bottom: 0;
+    position: relative;
 }
