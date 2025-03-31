@@ -1,2 +1,2 @@
 # ActiviTrade
-Projet APP Info G11A  24-25
+Projet APP Développement Web G11A - TechWave  2024-2025

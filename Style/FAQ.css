@@ -1,0 +1,78 @@
+
+#titrefaq { 
+	text-align: center;
+}
+
+.box {
+	width: 400px; 
+    height: 500px; 
+    border: 2px solid #AFAFAF; 
+    background-color: #AFAFAF; 
+    border-radius: 10px; 
+    padding: 20px; 
+    margin: 20px auto;
+}
+
+.bulle-sms{
+
+	position: relative;
+	border: 2px solid white;
+	background-color: white;
+	padding: 5px;
+	border-radius: 4px;
+	margin: 10px;
+	max-width: 280px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	display: inline-block;
+}
+
+.bulle-gauche{
+	font-weight: bold;
+}
+.bulle-gauche::before{
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: -12px;
+	border-width: 7px;
+	border-style: solid;
+	border-color: transparent white transparent transparent;
+	
+}
+
+.bulle-droite{
+	float: right;
+}
+
+.bulle-droite::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    
+    border-width: 15px;
+    border-style: solid;
+    border-color: transparent transparent transparent white;
+}
+
+#BoutonFAQ{
+	display: flex;
+	align-items: center;
+	color: white;
+	font-weight: bold;
+	height: 25px;
+	background-color: black;
+	margin: 0 auto;
+	border: 1px solid;
+	border-color: black;
+	border-radius: 10px 10px 10px 10px;
+}
+
+.icone{
+	border: 1px solid;
+	border-color: #AFAFAF;
+	background-color: #AFAFAF;
+}
+
+
