@@ -1,10 +1,8 @@
-//document.addEventListener("DOMContentLoaded", function () {
 function Navbar() {
-
     return `
     <nav class="navbar">
         <a href="#" class="nav-icon" aria-label="homepage" aria-current="page">
-            <img src="../img/logo.png" alt="chat icon" />
+            <img src="../img/logo.png" alt="Activitrade logo" />
         </a>
 
         <div class="main-navlinks">
@@ -14,10 +12,10 @@ function Navbar() {
                 <span></span>
             </button>
             <div class="navlinks-container">
-            <a href="#" aria-current="page">Home</a>
-            <a href="#">Services</a>
-            <a href="#">Pricing</a>
-            <a href="#">Community</a>
+            <a href="#" aria-current="page">Accueil</a>
+            <a href="#">Activités</a>
+            <a href="#">Création</a>
+            <a href="#">Mon compte</a>
             <a href="#">Contact</a>
             </div>
         </div>
@@ -27,8 +25,8 @@ function Navbar() {
             <img src="../img/user.svg" alt="user icon" />
             </a>
             <div class="sign-btns">
-            <button type="button">Sign In</button>
-            <button type="button">Sign Up</button>
+            <button type="button">Se connecter</button>
+            <button type="button">S'inscrire</button>
             </div>
         </div>
     </nav>
