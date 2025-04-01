@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Style/Navbar.css">
+    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/ReservationActivite.css">
+    <title>ReservationActivite</title>
+</head>
+
+<body>
+<header id="navbar" class="navbar">
+</header>
+<br><br>
+<h1>Réservation: Club de lecture</h1>
+<div class="container">
+    <div class="boxform">
+        <h2>Participant</h2><br>
+        <form method="post">
+            <label for="lastname">Nom</label><br>
+            <input type="text" id="lastname" name="lastname" placeholder="Smith" required><br>
+            <label for="firstname">Prénom</label><br>
+            <input type="text" id="firstname" name="firstname" placeholder="David" required><br>
+            <label for="age">Age</label><br>
+            <input type="text" id="age" name="age" placeholder="" required><br><br>
+            <button id="Button">Ajouter un participant</button>
+        </form>
+    </div>
+    <table class="info-table">
+        <tr>
+            <th>Nombre de participants: </th>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+    </table>
+</div>
+<div class="button-confirmer">
+    <div class="button-container">
+        <button id="confirmer">Comfirmer</button>
+    </div>
+</div>
+<footer id="footer" class="footer"></footer>
+</body>
+<script src="../Components/Navbar.js"></script>
+<script>
+    document.getElementById("navbar").innerHTML = Navbar();
+</script>
+<script src="../Components/NavbarAnim.js"></script>
+<script src="../Components/Footer.js"></script>
+</html>
