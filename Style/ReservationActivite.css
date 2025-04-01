@@ -3,11 +3,11 @@ h1 {
 }
 
 .container {
-    display: flex; /* 使用 Flexbox 布局 */
-    justify-content: center; /* 水平居中 */
-    align-items: flex-start; /* 垂直对齐到顶部 */
-    gap: 20px; /* 元素之间的间距 */
-    margin: 20px; /* 整体向外留一些空间 */
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; 
+    gap: 20px; 
+    margin: 20px; 
 }
 
 
@@ -17,10 +17,9 @@ h1 {
     background-color: #E5E4E2;
     border-radius: 10px;
     padding: 20px;
-    /*margin: 20px auto;*/
     text-align: center;
     max-width: 450px;
-    margin-right: 20px; /* 给表单右边留点空间 */
+    margin-right: 20px; 
 }
 
 .checkboxdiv {
@@ -86,16 +85,16 @@ form input{
     font-family: 'Arial', sans-serif;
     font-size: 14px;
     font-weight: bold;
-    color: black; /* 字体颜色 */
-    background-color: white; /* 背景颜色 */
-    border: 2px solid black; /* 黑色边框 */
+    color: black; 
+    background-color: white;
+    border: 2px solid black; 
     padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
 }
 
 #confirmer:hover {
-    background-color: #f0f0f0; /* 悬停时略微变浅 */
+    background-color: #f0f0f0; 
 }
 
 @media screen and (max-width: 500px) {
