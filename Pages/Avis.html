@@ -9,22 +9,24 @@
 <body>
 <header id="navbar" class="navbar"></header>
 
-<form>
-	<label id="titreAvis">Note d'activité </label>
-	<br>
-	<input class="input" type="text" id="inputNote" name="inputNote"><br>
-	<br>
-	<label id="titreAvis">Commentaire </label>
-	<br>
-	<textarea type="text" id="inputCommentaire" name="inputCommentaire" rows="10" cols="80"></textarea><br>
-	<br>
+<div class="boxform">
+	<form>
+		<label for="inputNote">Note d'activité</label>
+		<br>
+		<input class="input" type="text" id="inputNote" name="inputNote">&nbsp;&nbsp;&nbsp;&nbsp;
+		<span class="note-text">Saisir une note de 0 à 5</span>
+		<br><br>
+		<label for="inputCommentaire">Commentaire</label>
+		<br>
+		<textarea id="inputCommentaire" name="inputCommentaire" rows="10" cols="80"></textarea><br><br>
+		<div class="button-container">
+			<button id="Button">Confirmer</button>
+		</div>
 	</form>
-	
-<button id="Button">Confirmer</button>
+</div>
 <footer id="footer" class="footer"></footer>
 
 </body>
-
 <script src="../Components/Navbar.js"></script>
 <script>
 	document.getElementById("navbar").innerHTML = Navbar();
