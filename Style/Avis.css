@@ -1,9 +1,23 @@
+.boxform {
+    width: 50%;
+    border: 2px solid #E5E4E2;
+    background-color: #E5E4E2;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 700px;
+}
+
+.input {
+    width: 150px;
+    height: 30px;
+}
 
 #titreAvis {
     font-family: 'Arial', sans-serif;
     font-size: 18px;
     font-weight: bold;
-    color: #333;
+    color: #333333;
 }
 
 #Button {
@@ -11,7 +25,7 @@
     font-size: 14px;
     font-weight: bold;
     color: white;
-    background-color: black;
+    background-color: #343434;
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
@@ -19,5 +33,9 @@
 }
 
 #Button:hover {
-    background-color: #333;
+    background-color: #1B1B1B;
+}
+
+.button-container {
+    text-align: right;
 }
