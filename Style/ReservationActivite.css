@@ -1,0 +1,112 @@
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: flex-start; /* 垂直对齐到顶部 */
+    gap: 20px; /* 元素之间的间距 */
+    margin: 20px; /* 整体向外留一些空间 */
+}
+
+
+.boxform {
+    width: 50%;
+    border: 2px solid #E5E4E2;
+    background-color: #E5E4E2;
+    border-radius: 10px;
+    padding: 20px;
+    /*margin: 20px auto;*/
+    text-align: center;
+    max-width: 450px;
+    margin-right: 20px; /* 给表单右边留点空间 */
+}
+
+.checkboxdiv {
+    width: 200px;
+    text-align: left;
+    margin-left: 25%;
+}
+
+input[type=text] {
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid;
+    width: 200px;
+}
+
+.info-table {
+    width: 20%;
+    border-collapse: collapse;
+}
+
+.info-table th, .info-table td {
+    border: 1px solid #E5E4E2;
+    padding: 8px;
+    text-align: left;
+    height: 35px;
+}
+
+.info-table th {
+    background-color: #E5E4E2;
+}
+
+#Button {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: #343434;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+#Button:hover {
+    background-color: #1B1B1B;
+}
+
+form input{
+    height: 25px;
+    margin-bottom: 15px;
+}
+
+.button-confirmer {
+    text-align: right;
+    padding-right: 380px;
+    padding-bottom: 20px;
+}
+
+.button-container {
+    display: inline-block; /
+}
+
+#confirmer {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: black; /* 字体颜色 */
+    background-color: white; /* 背景颜色 */
+    border: 2px solid black; /* 黑色边框 */
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#confirmer:hover {
+    background-color: #f0f0f0; /* 悬停时略微变浅 */
+}
+
+@media screen and (max-width: 500px) {
+    .boxform {
+        width: 80%;
+    }
+    .checkboxdiv {
+        width: 80%;
+        margin-left: 10%;
+    }
+    input[type=text] {
+        width: 80%;
+    }
+}
