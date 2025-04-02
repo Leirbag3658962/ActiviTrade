@@ -12,7 +12,6 @@
     text-align: center;
 }
 
-/* 滚动框样式 */
 .forum-box {
     width: 100%;
     max-height: 350px; 
@@ -22,7 +21,6 @@
     overflow-y: auto; 
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
-
 
 .question {
     background-color: white;
