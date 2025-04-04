@@ -20,6 +20,13 @@
     color: #333333;
 }
 
+#inputCommentaire {
+    width: 600px;
+    height: 300px;
+    overflow: auto; /* 出现滚动条 */
+    resize: none;   /* 禁止用户拖动改变大小（可选） */
+}
+
 #Button {
     font-family: 'Arial', sans-serif;
     font-size: 14px;
