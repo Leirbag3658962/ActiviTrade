@@ -23,8 +23,8 @@
 #inputCommentaire {
     width: 600px;
     height: 300px;
-    overflow: auto; /* 出现滚动条 */
-    resize: none;   /* 禁止用户拖动改变大小（可选） */
+    overflow: auto;
+    resize: none;
 }
 
 #Button {
