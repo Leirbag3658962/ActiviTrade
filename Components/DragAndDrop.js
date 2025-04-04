@@ -5,20 +5,20 @@ dropZones.forEach(zone => {
   const preview = zone.querySelector(".ImageActivite");
   const text = zone.querySelector(".Paragraph")
 
-  // Clique sur la zone => clique sur input
+  
   zone.addEventListener("click", () => fileInput.click());
 
-  // Changement de fichier
+  
   fileInput.addEventListener("change", (event) => {
-    handleFile(event.target.files[0], preview, text);
+    handleFile(event.target.files[0], preview, text, zone);
   });
 
-  // Empêche le comportement par défaut (ouvrir le fichier)
+  
   ["dragover", "dragleave", "drop"].forEach(event => {
     zone.addEventListener(event, (e) => e.preventDefault());
   });
 
-  // Changement de fond au survol
+  
   zone.addEventListener("dragover", () => {
     zone.style.backgroundColor = "#e3e3e3";
   });
@@ -27,22 +27,24 @@ dropZones.forEach(zone => {
     zone.style.backgroundColor = "#f9f9f9";
   });
 
-  // Quand un fichier est déposé
+  
   zone.addEventListener("drop", (event) => {
     zone.style.backgroundColor = "#f9f9f9";
+
     const file = event.dataTransfer.files[0];
-    handleFile(file, preview, text);
+    handleFile(file, preview, text, zone);
   });
 });
 
-// Fonction pour afficher l'image
-function handleFile(file, previewElement) {
+
+function handleFile(file, previewElement, textElement, zone) {
   if (file && file.type.startsWith("image/")) {
     const reader = new FileReader();
     reader.onload = (e) => {
       previewElement.src = e.target.result;
       previewElement.style.display = "block";
-      text.style.display = "none";
+      textElement.style.display = "none";
+      zone.style.border = "none";
     };
     reader.readAsDataURL(file);
   }
