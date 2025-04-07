@@ -43,6 +43,8 @@ function handleFile(file, previewElement, textElement, zone) {
     reader.onload = (e) => {
       previewElement.src = e.target.result;
       previewElement.style.display = "block";
+      previewElement.style.width = "100%";
+      previewElement.style.height = "150px";
       textElement.style.display = "none";
       zone.style.border = "none";
     };
