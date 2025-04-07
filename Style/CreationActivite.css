@@ -42,20 +42,33 @@
 	display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 80%;
     margin: auto;
 }
 
 .Cells{
 	height:224px;
 	width: 300px;
-	margin-left: 20px;
-	background-color:#AFAFAF;
+	margin-left: 10px;
+	border-width: 2px;
+	border-style: solid;
 	cursor: pointer;
+	text-align: center;
 }
+
 
 .Cells:hover {
 	border-style: dotted;
+}
+p :hover{
+	cursor: pointer;
+}
+
+.ImageActivite{
+    width: 100%;
+    height: auto;
+	object-fit: cover;
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
 #saveButton {
@@ -73,4 +86,8 @@
 
 #saveButton:hover {
     background-color: #333;
+}
+
+#createButton {
+	
 }
