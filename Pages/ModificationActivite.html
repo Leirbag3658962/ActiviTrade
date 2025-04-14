@@ -5,11 +5,11 @@
 <link rel="stylesheet" href="../Style/CreationActivite.css">
 <link rel="stylesheet" href="../Style/Navbar.css">
 <link rel="stylesheet" href="../Style/Footer.css">
-<title>Créer une nouvelle activité</title>
+<title>Modifier une activité</title>
 </head>
 <body>
 <header id="navbar" class="navbar"></header>
-<h1 id="titrecreation">Création d'une nouvelle activité</h1>
+<h1 id="titrecreation">Modification de ton activité</h1>
 <div class="conteneurForm">
 	<div class="gauche">
 	<form>
@@ -52,34 +52,20 @@
 		
 		<label for="labDescription">Description de l'activité </label>
 		<br>
-		<textarea type="text" id="inputDescription" name="inputDescription"></textarea><br>
+		<textarea type="text" id="inputDescription" name="inputDescription"rows="6" cols="80"></textarea><br>
 	</div>
 </div>
 <br><br>
 <label id="labPicture" for="labPhoto">Déposer 3 images pour introduire l'activité (300*224)</label> 
 <br><br>
 <div class="conteneurImage">
-	<div class="Cells">
-		<p class="Paragraph"><label for="ImageInput">Déposez ou cliquez pour parcourir</label></p>
-        <input type="file" class="ImageInput" accept="image/*" hidden>
-        <img class="ImageActivite" src="" alt="" style="display: none;">
-	</div>
-	<div class="Cells">
-		<p class="Paragraph"><label for="ImageInput">Déposez ou cliquez pour parcourir</label></p>
-        <input type="file" class="ImageInput" accept="image/*" hidden>
-        <img class="ImageActivite" src="" alt="" style="display: none;">
-	</div>
-	<div class="Cells">
-		<p class="Paragraph"><label for="ImageInput">Déposez ou cliquez pour parcourir</label></p>
-        <input type="file" class="ImageInput" accept="image/*" hidden>
-        <img class="ImageActivite" src="" alt="" style="display: none;">
-	</div>
+	<div class="Cells"></div>
+	<div class="Cells"></div>
+	<div class="Cells"></div>
 </div>
-<br>
-<button id="createButton">Créer</button>
-<br><br>
-
+<br><br><br>
 <footer id="footer" class="footer"></footer>
+<button id="saveButton">Enregistrer</button>
 </body>
 
 <script src="../Components/Navbar.js"></script>
@@ -87,6 +73,5 @@
 	document.getElementById("navbar").innerHTML = Navbar();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer.js"></script>
 </html>
