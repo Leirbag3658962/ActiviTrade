@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Messagerie Multi-Contacts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+
+    /* Animation de rotation du bouton */
+    @keyframes rotateButton {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .open-chat-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .chat-overlay {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 350px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 998;
+      border: 2px solid #007bff;
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .chat-body {
+      display: flex;
+    }
+
+    .contact-list {
+      width: 100px;
+      padding: 10px;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #f1f1f1;
+    }
+
+    .contact {
+      background-color: #ffffff;
+      color: #333;
+      padding: 8px;
+      border-radius: 20px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      border: 1px solid #ccc;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .contact:hover {
+      background-color: #007bff;
+      color: white;
+      transform: scale(1.03);
+    }
+
+    .active-contact {
+      background-color: #007bff;
+      color: white;
+      border: 2px solid #0056b3;
+    }
+
+    .chat-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .messages {
+      height: 250px;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      padding: 8px 12px;
+      margin: 6px 0;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.4;
+      max-width: 80%;
+    }
+
+    .me {
+      align-self: flex-end;
+      background-color: #007bff;
+      color: white;
+    }
+
+    .other {
+      align-self: flex-start;
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    .input-container {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    .input-container input {
+      flex: 1;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .input-container button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      margin-left: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="open-chat-btn" onclick="toggleChat()">💬</button>
+
+  <div class="chat-overlay" id="chatBox">
+    <div class="chat-header">
+      Messagerie
+      <span class="close-btn" onclick="toggleChat()">✖</span>
+    </div>
+    <div class="chat-body">
+      <div class="contact-list">
+        <div class="contact" onclick="openChat('Alice')">Alice</div>
+        <div class="contact" onclick="openChat('Bob')">Bob</div>
+        <div class="contact" onclick="openChat('Charlie')">Charlie</div>
+      </div>
+      <div class="chat-content">
+        <div class="messages" id="messages"></div>
+        <div class="input-container">
+          <input type="text" id="messageInput" placeholder="Écrire un message..." disabled>
+          <button id="sendBtn" onclick="sendMessage()" disabled>Envoyer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const conversations = {
+      "Alice": [
+        { sender: "Alice", text: "Salut ! Tu as fini le devoir ?" },
+        { sender: "Moi", text: "Pas encore 😅 mais j’y travaille." }
+      ],
+      "Bob": [
+        { sender: "Bob", text: "Yo ! T’as vu le match hier ?" }
+      ],
+      "Charlie": [
+        { sender: "Charlie", text: "On se retrouve à quelle heure ?" },
+        { sender: "Moi", text: "Vers 14h ça te va ?" }
+      ]
+    };
+
+    let currentContact = null;
+
+    function toggleChat() {
+      const chatBox = document.getElementById("chatBox");
+      const openChatBtn = document.querySelector(".open-chat-btn");
+
+      // Appliquer l'animation de rotation à chaque clic
+      openChatBtn.style.animation = "rotateButton 0.5s ease-in-out";
+      openChatBtn.addEventListener("animationend", () => {
+        openChatBtn.style.animation = ""; // Réinitialiser l'animation après qu'elle se termine
+      });
+
+      if (chatBox.style.display === "flex") {
+        chatBox.style.display = "none";
+        currentContact = null;
+
+        document.getElementById("messageInput").value = "";
+        document.getElementById("messageInput").disabled = true;
+        document.getElementById("sendBtn").disabled = true;
+        document.getElementById("messages").innerHTML = "";
+        clearActiveContact();
+      } else {
+        chatBox.style.display = "flex";
+      }
+    }
+
+    function openChat(contactName) {
+      currentContact = contactName;
+      document.getElementById("messageInput").disabled = false;
+      document.getElementById("sendBtn").disabled = false;
+
+      clearActiveContact();
+      document.querySelectorAll(".contact").forEach(el => {
+        if (el.textContent === contactName) {
+          el.classList.add("active-contact");
+        }
+      });
+
+      displayMessages();
+    }
+
+    function clearActiveContact() {
+      document.querySelectorAll(".contact").forEach(el => {
+        el.classList.remove("active-contact");
+      });
+    }
+
+    function displayMessages() {
+      const messageBox = document.getElementById("messages");
+      messageBox.innerHTML = "";
+
+      const msgs = conversations[currentContact] || [];
+      msgs.forEach(msg => {
+        const div = document.createElement("div");
+        div.classList.add("message", msg.sender === "Moi" ? "me" : "other");
+        div.textContent = msg.text;
+        messageBox.appendChild(div);
+      });
+
+      messageBox.scrollTop = messageBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("messageInput");
+      const text = input.value.trim();
+      if (text === "") return;
+
+      conversations[currentContact].push({ sender: "Moi", text });
+      input.value = "";
+      displayMessages();
+    }
+
+    document.getElementById("messageInput").addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
