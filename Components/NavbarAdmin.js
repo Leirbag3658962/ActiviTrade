@@ -13,10 +13,11 @@ function NavbarAdmin() {
             </button>
             <div class="navlinks-container">
             <a href="#" aria-current="page">Accueil</a>
-            <a href="#">Activités</a>
-            <a href="#">Création</a>
-            <a href="#">Mon compte</a>
-            <a href="#">Contact</a>
+            <a href="#">Utilisateurs</a>
+            <a href="#">Activit&eacute;s</a>
+            <a href="#">R&eacute;servations</a>
+            <a href="#">Discussion</a>
+            <a href="#">Faq</a>
             </div>
         </div>
 
