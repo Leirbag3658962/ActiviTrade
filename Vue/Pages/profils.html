@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ma première page</title>
     <link rel="stylesheet" href="../Style/Profil.css.css">
-</head>
-<body>
-
-    <!-- Barre de navigation -->
-    <header>
-        <nav class="navbar">
             <ul>
                 <li>
                     <a href="https://www.isep.fr/"> 
@@ -30,49 +24,183 @@
             </ul>
         </nav>
     </header>
+	
 
-    <!-- Conteneur principal -->
-    <div class="conteneur">
-        <div class="slider-wrapper">
-            <div class="image-slider">
-                <img src="https://cdn.campus-lyon.org/wp-content/uploads/sites/3/2020/03/image-1.jpg" alt="Image 1" class="active">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image 2">
+    </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+
+   <h1> Profil</h1>
+	
+<div class="conteneur-boites">
+    <!-- Conteneur à gauche pour les informations personnelles et l'activité réservée -->
+    <div class="gauche">
+        <!-- Boîte des informations personnelles -->
+        <div class="boite-info">
+            <h4>Informations personnelles</h4>
+            <p><strong>Nom :</strong> [Ton Nom]</p>
+            <p><strong>Prénom :</strong> [Ton Prénom]</p>
+            <p><strong>Numéro :</strong> [Ton Numéro]</p>
+            <p><strong>Email :</strong> [Ton Email]</p>
+            <p><strong>Date de naissance :</strong> [Ta Date de naissance]</p>
+        </div>
+
+       <!-- Activité réservé -->
+<div class="boite-info">
+    <h4>Activité réservé</h4>
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="slide">
+                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+				<p>Description de l'activité précédente 3</p>
+            </div>
+            <div class="slide">
+                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+				<p>Description de l'activité précédente 3</p>
+            </div>
+            <div class="slide">
+                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+				<p>Description de l'activité précédente 3</p>
+            </div>
+            <div class="slide">
+                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+				<p>Description de l'activité précédente 3</p>
+            </div>
+            <div class="slide">
+                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+				<p>Description de l'activité précédente 3</p>
+            </div>
+        </div>
+        <div class="carousel-indicators">
+            <span class="indicator active" onclick="moveSlide(0)"></span>
+            <span class="indicator" onclick="moveSlide(1)"></span>
+            <span class="indicator" onclick="moveSlide(2)"></span>
+            <span class="indicator" onclick="moveSlide(3)"></span>
+            <span class="indicator" onclick="moveSlide(4)"></span>
+        </div>
+    </div>
+</div>
+<script>
+  document.querySelectorAll('.carousel').forEach((carousel) => {
+    const carouselInner = carousel.querySelector('.carousel-inner');
+    const indicators = carousel.querySelectorAll('.indicator');
+    const slides = carousel.querySelectorAll('.slide');
+    const slideWidth = slides[0].clientWidth;
+
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            carouselInner.style.transform = `translateX(${-index * slideWidth}px)`;
+
+            // Mettre à jour l'indicateur actif
+            indicators.forEach(ind => ind.classList.remove('active'));
+            indicator.classList.add('active');
+        });
+    });
+});
+
+
+</script>
+    </div>
+
+    <!-- Conteneur à droite pour l'activité dans la liste d'attente -->
+    <div class="droite">
+        <div class="boite-info">
+            <h4>Activité dans la liste d'attente</h4>
+            <div class="liste-activites">
+                <div class="activite">
+                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <p>Activité 1 - Description ici</p>
+                </div>
+                <div class="activite">
+                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <p>Activité 2 - Description ici</p>
+                </div>
+                <div class="activite">
+                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <p>Activité 3 - Description ici</p>
+                </div>
+                <div class="activite">
+                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <p>Activité 4 - Description ici</p>
+                </div>
+                <div class="activite">
+                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <p>Activité 5 - Description ici</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Conteneur des carrousels -->
+<div class="conteneur-activites-bas">
+    <!-- Activité créée -->
+    <div class="boite-info">
+        <h4>Activité créée</h4>
+        <div class="carousel" id="carousel-creee">
+            <div class="carousel-inner">
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+            </div>
+            <div class="carousel-indicators">
+                <span class="indicator active" data-index="0"></span>
+                <span class="indicator" data-index="1"></span>
+                <span class="indicator" data-index="2"></span>
+                <span class="indicator" data-index="3"></span>
+                <span class="indicator" data-index="4"></span>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script>
-        const images = document.querySelectorAll('.image-slider img');
-        let currentIndex = 0;
-
-        setInterval(() => {
-            images[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].classList.add('active');
-        }, 5000);
-    </script>
-
-    <!-- Contenu supplémentaire -->
-    <div>
-        <p>Ma première page avec du texte (sans style)</p>
+    <!-- Activité précédente -->
+    <div class="boite-info">
+        <h4>Activité précédente</h4>
+        <div class="carousel" id="carousel-precedente">
+            <div class="carousel-inner">
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+            </div>
+            <div class="carousel-indicators">
+                <span class="indicator active" data-index="0"></span>
+                <span class="indicator" data-index="1"></span>
+                <span class="indicator" data-index="2"></span>
+                <span class="indicator" data-index="3"></span>
+                <span class="indicator" data-index="4"></span>
+            </div>
+        </div>
     </div>
+</div>
 
-    <h1>Ceci est un grand titre</h1>
-    <h2>Ceci est un titre plus petit</h2>
-    <p>Ceci est un paragraphe</p>
+<!-- JavaScript -->
+<script>
+    function setupCarousel(carouselId) {
+        const carousel = document.getElementById(carouselId);
+        const inner = carousel.querySelector('.carousel-inner');
+        const indicators = carousel.querySelectorAll('.indicator');
+        const slides = carousel.querySelectorAll('.slide');
+        const slideWidth = slides[0].clientWidth;
 
-    <a href="https://www.isep.fr/"> 
-        <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
-    </a>
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', () => {
+                const index = indicator.getAttribute('data-index');
+                inner.style.transform = `translateX(${-index * slideWidth}px)`;
 
-    <p>Les parcours de formation de l'ISEP sont :</p>
-    <ol>
-        <li>Le parcours ingénieur logiciel</li>
-        <li>Le parcours architecte des informations</li>
-        <li>Le parcours sécurité numérique et réseau</li>
-    </ol>
+                indicators.forEach(ind => ind.classList.remove('active'));
+                indicator.classList.add('active');
+            });
+        });
+    }
 
+    // Initialiser les deux carrousels
+    setupCarousel('carousel-creee');
+    setupCarousel('carousel-precedente');
+</script>
+
+
+   
     <!-- JavaScript -->
     <script>
         const images = document.querySelectorAll('.image-slider img');
@@ -84,6 +212,7 @@
             images[currentIndex].classList.add('active');
         }, 2000);
     </script>
+	
 
 </body>
 </html>
