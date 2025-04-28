@@ -64,6 +64,10 @@ html, body {
     border: 2px solid #355e3b;;
 }
 
+.tabledata:hover{
+  cursor: pointer;
+}
+
 .titretableau{
     background-color:#355e3b;
 }
@@ -79,6 +83,10 @@ html, body {
     align-items: center;
     border: 2px solid #355e3b;
 }
+
+.ligneimpaire:hover, .lignepaire:hover{
+  background-color: red;
+} 
 
 .case{
     text-align: center;

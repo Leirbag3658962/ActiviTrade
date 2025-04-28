@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 formData.append('table', nomTable);
 
                 
-                fetch('AdminGetTable.php', {
+                fetch('../Pages/AdminGetTable.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     formData.append('pkValue', pkValue);
 
                     
-                    fetch('AdminDeleteRow.php', { 
+                    fetch('../Pages/AdminDeleteRow.php', { 
                         method: 'POST',
                         body: formData
                     })
@@ -160,7 +160,7 @@ function chargerTable(nomTable, containerElement) {
     const formData = new FormData();
     formData.append('table', nomTable);
 
-    fetch('AdminGetTable.php', { 
+    fetch('../Pages/AdminGetTable.php', { 
         method: 'POST',
         body: formData
     })
@@ -197,7 +197,7 @@ function displayAddForm(tableName) {
     const formData = new FormData();
     formData.append('table', tableName);
 
-    fetch('AdminGetForm.php', { method: 'POST', body: formData })
+    fetch('../Pages/AdminGetForm.php', { method: 'POST', body: formData })
         .then(response => {
             if (!response.ok) { throw new Error('Erreur réseau formulaire: ' + response.statusText); }
             return response.text();
@@ -225,7 +225,7 @@ function handleFormSubmit(formElement) {
     formData.append('table', tableName); 
 
 
-    fetch('AdminInsertion.php', { method: 'POST', body: formData })
+    fetch('../Pages/AdminInsertion.php', { method: 'POST', body: formData })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -261,7 +261,7 @@ function handleRowDelete(clickedRow) {
          formData.append('table', tableName);
          formData.append('pkValue', pkValue);
 
-         fetch('AdminDeleteRow.php', { 
+         fetch('../Pages/AdminDeleteRow.php', { 
              method: 'POST',
              body: formData
          })

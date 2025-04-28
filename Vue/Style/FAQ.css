@@ -50,9 +50,9 @@
     content: "";
     position: absolute;
     top: 50%;
-    right: -25px;
+    right: -12px;
     
-    border-width: 15px;
+    border-width: 7px;
     border-style: solid;
     border-color: transparent transparent transparent #afd9b6;
 }

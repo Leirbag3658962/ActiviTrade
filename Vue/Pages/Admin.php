@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Administrateur</title>
-    <link rel="stylesheet" href="Admin.css"/>
-    <script src="AdminPagination.js"></script>
+    <link rel="stylesheet" href="../Style/Admin.css"/>
+    <script src="../Components/AdminPagination.js"></script>
 </head>
 <body class>
 <?php
