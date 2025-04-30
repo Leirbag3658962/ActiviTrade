@@ -1,16 +1,8 @@
 <?php
 header('Content-Type: application/json');
 
-//En cas d'erreur
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-$host = 'localhost';
-$dbname = 'activitrade';
-$username = 'root';
-$password = '';
+require_once "../../ModeleB/LienPDO.php";
+$pdo = lienPDO();
 
 
 if (!isset($_POST['table']) || empty($_POST['table']) || !isset($_POST['pkValue']) || $_POST['pkValue'] === '') {
@@ -23,14 +15,7 @@ $valeurPk = $_POST['pkValue'];
 $response = ['success' => false]; 
 
 
-try {
-    $pdo = new PDO("mysql:host=$host;port=3307;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    $response['message'] = 'Erreur de connexion à la base de données: ' . $e->getMessage();
-    echo json_encode($response);
-    exit;
-}
+
 
 try {
     

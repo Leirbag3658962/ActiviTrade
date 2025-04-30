@@ -1,13 +1,7 @@
 <?php
-// Pour erreur
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-$host = 'localhost';
-$dbname = 'activitrade';
-$username = 'root';
-$password = '';
+require_once "../../ModeleB/LienPDO.php";
+$pdo = lienPDO();
 
 // Validation POST
 if (!isset($_POST['table']) || empty($_POST['table'])) {
@@ -15,14 +9,6 @@ if (!isset($_POST['table']) || empty($_POST['table'])) {
     exit;
 }
 $nomTableDemande = $_POST['table'];
-
-try {
-    $pdo = new PDO("mysql:host=$host;port=3307;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo '<p style="color:red;">Erreur de connexion DB: ' . htmlspecialchars($e->getMessage()) . '</p>';
-    exit;
-}
 
 // Validation existence table
 try {
