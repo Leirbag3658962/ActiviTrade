@@ -2,7 +2,7 @@ function Navbar() {
     return `
     <nav class="navbar">
         <a href="#" class="nav-icon" aria-label="homepage" aria-current="page">
-            <img src="../img/logo.png" alt="Activitrade logo" />
+            <img src="../img/logo_blanc.png" alt="Activitrade logo" />
         </a>
 
         <div class="main-navlinks">

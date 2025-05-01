@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(isset($_SESSION['user'])) {
+    header('Location: ../../index.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,7 +21,7 @@
     <div class="boxform">
         <h1>Connexion</h1>
         <br>
-        <form method="post">
+        <form method="post" action="../../Controlleur/Connexion.php">
             <label for="email">Email</label><br>
             <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required></input><br>
             <label for="password">Mot de passe</label><br>
