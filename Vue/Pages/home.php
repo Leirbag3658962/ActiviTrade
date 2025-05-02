@@ -2,7 +2,7 @@
 // Connexion à la base de données
 $host = 'localhost';
 $port = '3306'; 
-$dbname = 'activitrade_demo';
+$dbname = 'activitrade_demo2';
 $user = 'root';
 $password = 'hello'; 
 
@@ -22,12 +22,14 @@ $activites = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/home.css">
+    <link rel="stylesheet" href="../style/home.css">
+    <link rel="stylesheet" href="../style/navbar2.css">
+    <link rel="stylesheet" href="../style/footer2.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ActiviTrade</title>
 </head>
 <body>
-    <header></header>
+    <header id="navbar" class="navbar"></header>
 
     <div class="banner">
         <h1>ActiviTrade</h1>
@@ -91,5 +93,14 @@ $activites = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <button class="cta-button">Créer votre événement</button>
         </div>
     </div>
+    <footer id="footer" class="footer"></footer>
 </body>
+<script src="../Components/navbar2.js"></script>
+<script>
+    document.getElementById("navbar").innerHTML = Navbar2();
+</script>
+<script src="../Components/footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>
