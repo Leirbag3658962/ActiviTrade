@@ -1,3 +1,8 @@
+html, body {
+    font-family: Arial, sans-serif; 
+    text-align: center;
+}
+
 #titrecreation{
 	text-align:center;
 }
@@ -89,5 +94,17 @@ p :hover{
 }
 
 #createButton {
-	
+    bottom: 20px;
+    right: 20px;
+    background-color: #355e3b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#createButton:hover {
+    background-color: #afd9b6;
 }
