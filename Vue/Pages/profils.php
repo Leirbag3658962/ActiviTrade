@@ -172,7 +172,49 @@ $user = $result->fetch_assoc();
         </div>
     </div>
 </div>
+
+
+
+
+<iframe id="messagerieFrame" src="messagerie.php" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  height: 500px;
+  border: none;
+  border-radius: 10px;
+  z-index: 1000;
+  display: none;
+"></iframe>
+
+
+
+<button onclick="ouvrirMessagerie()" style="
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  background-color: #355e3b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 999;
+">💬</button>
+
+
 </body>
+<script>
+  function ouvrirMessagerie() {
+    document.getElementById("messagerieFrame").style.display = "block";
+    const iframe = document.getElementById("messagerieFrame");
+    iframe.contentWindow.postMessage("ouvrir-messagerie", "*");
+    
+  }
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -206,6 +248,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2000);
     }
 });
+window.addEventListener("message", function(event) {
+  if (event.data === "fermer-messagerie") {
+    const frame = document.getElementById("messagerieFrame");
+    if (frame) {
+      frame.style.display = "none";
+    }
+  }
+});
+
 </script>
 <script src="../Components/Navbar.js"></script>
 <script>

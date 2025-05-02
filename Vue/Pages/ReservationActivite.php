@@ -1,3 +1,28 @@
+<?php
+session_start();
+require_once "../../ModeleB/LienPDO.php";
+$pdo = lienPDO();  
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $lastname = htmlspecialchars($_POST['lastname']);
+    $firstname = htmlspecialchars($_POST['firstname']);
+    $age = htmlspecialchars($_POST['age']);
+
+    if (!empty($lastname) && !empty($firstname) && !empty($age)) {
+        $stmt = $pdo->prepare("INSERT INTO participant (lastname, firstname, age) VALUES (:lastname, :firstname, :age)");
+        $stmt->execute([
+            ':lastname' => $lastname,
+            ':firstname' => $firstname,
+            ':age' => $age
+        ]);
+    }
+}
+
+$stmt = $pdo->query("SELECT * FROM participant ORDER BY created_at DESC");
+$participants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$participant_count = count($participants);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,25 +49,24 @@
             <input type="text" id="firstname" name="firstname" placeholder="David" required><br>
             <label for="age">Age</label><br>
             <input type="text" id="age" name="age" placeholder="" required><br><br>
-            <button id="Button">Ajouter un participant</button>
+            <button id="Button" type="submit">Ajouter un participant</button>
         </form>
     </div>
     <table class="info-table">
         <tr>
-            <th>Nombre de participants: </th>
+            <th>Nombre de participants: <?php echo $participant_count; ?></th>
         </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
+        <?php if ($participant_count > 0): ?>
+            <?php foreach ($participants as $p): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($p['lastname'] . ' ' . $p['firstname'] . ' (' . $p['age'] . ' ans)'); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td>Aucun participant pour le moment.</td>
+            </tr>
+        <?php endif; ?>
         <tr>
             <td></td>
         </tr>
