@@ -1,7 +1,3 @@
-/**
- * 
- * @param {string} replyId - 
- */
 function toggleReplyForm(replyId) {
     const form = document.getElementById('reply-form-' + replyId);
     if (form) {
