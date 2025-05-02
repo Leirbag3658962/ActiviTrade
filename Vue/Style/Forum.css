@@ -12,6 +12,21 @@
     text-align: center;
 }
 
+.createforum-container {
+    width: 600px;
+    text-align: center;
+    background-color: #E5E4E2; 
+    padding: 20px; 
+    margin: 50px auto; 
+    border-radius: 8px; 
+}
+
+label {
+    text-align: left; 
+    display: block; 
+    margin-bottom: 3px;
+}
+
 .forum-box {
     width: 100%;
     max-height: 350px; 
@@ -20,26 +35,6 @@
     border-radius: 10px;
     overflow-y: auto; 
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.question {
-    background-color: white;
-    padding: 30px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    text-align: left; 
-    display: block; 
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-}
-
-.answer {
-    margin-top: 10px;
-    background-color: #f0f0f0; 
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-    display: none; 
 }
 
 .toggle-arrow {
@@ -52,4 +47,66 @@
 
 .toggle-arrow:hover {
     color: #505050; 
+}
+
+#title {
+    width: 100%; 
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px; 
+}
+
+
+#context {
+    width: 100%; 
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px; 
+    resize: vertical;
+}
+
+#Button {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: #343434;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#Button:hover {
+    background-color: #1B1B1B; 
+}
+
+.context-title {
+    font-size: 20px;  
+    font-weight: bold;
+    position: relative;  
+    margin-bottom: 30px;
+}
+
+.context-title a {
+    text-decoration: none;
+    color: #333;
+}
+
+.context-title a:hover {
+    text-decoration: underline;
+}
+
+.post-info {
+    font-size: 14px; 
+    color: #777;
+    text-align: left;  
+}
+
+.post-info p {
+    margin: 0; 
 }

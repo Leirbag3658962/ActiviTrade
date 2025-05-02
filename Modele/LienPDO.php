@@ -25,6 +25,13 @@ function lienPDO(){
     }
 }
 
+function testValidationForm($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = strip_tags($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
 
 function recuperationTable($pdo){
@@ -71,6 +78,33 @@ function afficheFaq($pdo){
     } catch (PDOException $e) {
         echo "<a> Erreur BDD lors de l'affichage de la FAQ: " . htmlspecialchars($e->getMessage()) . "</a>";
    }
+}
+
+function traitementFormActivite(){
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (!empty($_POST['inputNom']) && !empty($_POST['inputDate']) && !empty($_POST['inputDuree']) && !empty($_POST['inputCategorie']) 
+        && !empty($_POST['inputNbrParticipant']) && !empty($_POST['Groupe']) && !empty($_POST['inputDescription'])) {
+            $nom = testValidationForm($_POST['inputNom']);
+            $date = testValidationForm($_POST['inputDate']);
+            $duree = testValidationForm($_POST['inputDuree']);
+            $categorie = testValidationForm($_POST['inputCategorie']);
+            $nbrParticipant = testValidationForm($_POST['inputNbrParticipant']);
+            $groupe = testValidationForm($_POST['Groupe']);
+            $descrption = testValidationForm($_POST['inputDescrption']);
+    
+            $sql = "INSERT INTO activite (nom, DateDeNaissance, Num) VALUES (:nom, :datetest, :numTel)";
+            $stmt = $pdo->prepare($sql);
+    
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':datetest', $date);
+            $stmt->bindParam(':numTel', $numTel);
+            
+            $stmt->execute();
+            
+        } else {
+            echo "Veuillez remplir tous les champs.";
+        }
+    }
 }
 
 ?>

@@ -1,3 +1,5 @@
 .gitignore
 .git
 /Vue/Test
+/Controlleur/Connexion.php
+/Controlleur/Inscription.php
