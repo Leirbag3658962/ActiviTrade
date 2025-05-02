@@ -251,6 +251,7 @@ if ($check->rowCount() == 0) {
       </div>
     </div>
   </div>
+  
 
   <script>
   let currentContact = null;
@@ -260,11 +261,20 @@ function toggleChat() {
   if (chatBox.style.display === "flex") {
     chatBox.style.display = "none";
     clearChat();
+    window.parent.postMessage("fermer-messagerie", "*");
+
+    
+
   } else {
     chatBox.style.display = "flex";
   }
+  closeChat();
 }
-
+function closeChat() {
+    window.parent.postMessage("close-messagerie", "*");
+    
+    
+  }
 function openChat(contactName) {
   currentContact = contactName;
   document.getElementById("messageInput").disabled = false;
@@ -328,6 +338,12 @@ document.getElementById("messageInput").addEventListener("keypress", function (e
   if (e.key === "Enter") {
     e.preventDefault();
     sendMessage();
+  }
+});
+window.addEventListener("message", function(event) {
+  if (event.data === "ouvrir-messagerie") {
+    
+    toggleChat();
   }
 });
 
