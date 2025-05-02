@@ -32,20 +32,8 @@ if(isset($_SESSION['user'])) {
             <label for="birthdate">Date de naissance</label><br>
             <input type="date" id="birthdate" name="birthdate" required><br>
 
-            <label for="numeroRue">Num&eacute;ro de rue</label><br>
-            <input type="text" id="numeroRue" name="numeroRue" placeholder="1" required><br>
-
-            <label for="nomRue">Nom de la rue</label><br>
-            <input type="text" id="nomRue" name="nomRue" placeholder="Avenue des Champs-Élysées" required><br>
-
-            <label for="codePostal">Code postal</label><br>
-            <input type="text" id="codePostal" name="codePostal" placeholder="75001" required><br>
-
             <label for="ville">Ville</label><br>
             <input type="text" id="ville" name="ville" placeholder="Paris" required><br>
-
-            <label for="pays">Pays</label><br>
-            <input type="text" id="pays" name="pays" placeholder="France" required><br>
 
             <label for="indicatif">Indicatif t&eacute;l&eacute;phonique</label><br>
             <input type="text" id="indicatif" name="indicatif" placeholder="+33" required><br>
