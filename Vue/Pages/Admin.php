@@ -12,7 +12,7 @@
         <div id="divGauche">
             <h2 id="titreBarre">Base de données</h2>
             <?php
-                require_once "../../ModeleB/LienPDO.php";
+                require_once "../../Modele/LienPDO.php";
                 $pdo = lienPDO();
                 recuperationTable($pdo); 
             ?>

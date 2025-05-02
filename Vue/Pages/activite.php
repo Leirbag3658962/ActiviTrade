@@ -1,12 +1,8 @@
-<link rel="stylesheet" href="style/navbar.css">
-<link rel="stylesheet" href="style/activite.css">
-<link rel="stylesheet" href="style/footer.css">
-
 <?php
 // Connexion à la base de données
 $host = 'localhost';
 $port = '3306'; 
-$dbname = 'activitrade_demo';
+$dbname = 'activitrade_demo2';
 $user = 'root';
 $password = 'hello'; 
 
@@ -16,7 +12,7 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
-// Vérifie qu'un ID est passé dans l'URL ex: activite.php?id=1
+// Vérifie qu'un ID est passé dans l'URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Aucune activité spécifiée.");
 }
@@ -39,9 +35,9 @@ if (!$activite) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/activite.css">
-    <link rel="stylesheet" href="style/navbar.css">
-    <link rel="stylesheet" href="style/footer.css">
+    <link rel="stylesheet" href="../style/activite.css">
+    <link rel="stylesheet" href="../style/navbar2.css">
+    <link rel="stylesheet" href="../style/footer2.css">
     <title><?= htmlspecialchars($activite['nomActivite']) ?></title>
 </head>
 <body>
@@ -59,42 +55,41 @@ if (!$activite) {
             <img src="img/activity.jpeg" alt="">
             <img src="img/activity.jpeg" alt="">
         </div>
-
         <div class="details1">
             <div class="details-item">
-                <p><b>Date : </b><?= htmlspecialchars($activite['date']) ?></p>
-                <p><b>Durée : </b><?= htmlspecialchars($activite['duree']) ?></p>
+                <p><b>Date : </b><?= isset($activite['date']) ? htmlspecialchars($activite['date']) : '' ?></p>
+                <p><b>Durée : </b><?= isset($activite['duree']) ? htmlspecialchars($activite['duree']) : '' ?></p>
             </div>
             <div class="details-item">
-                <p><b>Accessibilité : </b><?= htmlspecialchars($activite['accessibilite']) ?></p>
-                <p><b>Nombre max de membres : </b><?= htmlspecialchars($activite['nbMaxParticipants']) ?></p>
+                <p><b>Accessibilité : </b><?= isset($activite['accessibilite']) ? htmlspecialchars($activite['accessibilite']) : '' ?></p>
+                <p><b>Nombre max de membres : </b><?= isset($activite['nbMaxParticipants']) ? htmlspecialchars($activite['nbMaxParticipants']) : '' ?></p>
             </div>
             <div class="details-item">
-                <p><b>Contact : </b><?= htmlspecialchars($activite['contact']) ?></p>
-                <p><b>Adresse : </b><?= htmlspecialchars($activite['adresse']) ?></p>
+                <p><b>Contact : </b><?= isset($activite['contact']) ? htmlspecialchars($activite['contact']) : '' ?></p>
+                <p><b>Adresse : </b><?= isset($activite['adresse']) ? htmlspecialchars($activite['adresse']) : '' ?></p>
             </div>
         </div>
 
         <div class="details2">
             <div class="details-item">
-                <p><b>Description : </b><?= nl2br(htmlspecialchars($activite['description'])) ?></p>
+                <p><b>Description : </b><?= isset($activite['description']) ? nl2br(htmlspecialchars($activite['description'])) : '' ?></p>
             </div>
             <div class="details-item">
-                <p><b>Commentaires : </b><?= nl2br(htmlspecialchars($activite['commentaires'])) ?></p>
+                <p><b>Commentaires : </b><?= isset($activite['commentaires']) ? nl2br(htmlspecialchars($activite['commentaires'])) : '' ?></p>
             </div>
         </div>
     </div>
 
     <footer id="footer" class="footer"></footer>
 
-   
+    <!-- Navbar & Footer -->
+    
 </body>
- <!-- Navbar & Footer -->
- <script src="../style/navbar.js"></script>
+<script src="../Components/navbar2.js"></script>
     <script>
         document.getElementById("navbar").innerHTML = Navbar2();
     </script>
-    <script src="../style/footer.js"></script>
+    <script src="../Components/footer2.js"></script>
     <script>
         document.getElementById("footer").innerHTML = Footer2();
     </script>
