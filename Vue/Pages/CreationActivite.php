@@ -10,9 +10,14 @@
 <body>
 <header id="navbar" class="navbar"></header>
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
+
+<form method="post">
+	<?php
+        require_once "../../Modele/LienPDO.php";
+        $pdo = lienPDO(); 
+    ?>
 <div class="conteneurForm">
 	<div class="gauche">
-	<form method="post">
 		<label for="labNomActivite">Nom d'activité </label>
 		<br>
 		<input class="input" type="text" id="inputNom" name="inputNom"><br>
@@ -44,11 +49,7 @@
 		<label for="labNbrParticipant">Nombre de participants </label>
 		<br>
 		<input class="input" type="text" id="inputNbrParticipant" name="inputNbrParticipant"><br>
-		<?php
-                require_once "../../ModeleB/LienPDO.php";
-                $pdo = lienPDO(); 
-            ?>
-	</form>
+	
 	</div>
 	<div class="droite">
 		<label for="labType">Type</label>
@@ -85,7 +86,8 @@
 	</div>
 </div>
 <br>
-<button id="createButton">Créer</button>
+<button type="submit" id="createButton">Créer</button>
+</form>
 <br><br>
 
 <footer id="footer" class="footer"></footer>
