@@ -66,13 +66,18 @@ try {
         if ($valeurClePrimaire !== null) {
             $dataAttributes = ' data-pk-value="' . htmlspecialchars($valeurClePrimaire) . '"';
             $dataAttributes .= ' data-table="' . htmlspecialchars($nomTableDemande) . '"';
+            $dataAttributes .= ' data-pk-name="' . htmlspecialchars($nomClePrimaire) . '"';
         }
 
         $html .= '<tr class="' . $classeLigne . '" id="row_' . htmlspecialchars($nomTableDemande) . '_' . htmlspecialchars($compteur) . '"' . $dataAttributes . '>';
-        foreach ($row as $value) {
-            $html .= "<td class=\"case\">" . htmlspecialchars($value ?? '') . "</td>";
+        foreach ($row as $columnName => $value) {
+            $isPkColumn = ($columnName === $nomClePrimaire);
+            
+            $tdClass = 'case' . ($isPkColumn ? ' pk-cell' : ' editable-cell');
+            $html .= "<td class=\"" . $tdClass . "\" data-column-name=\"" . htmlspecialchars($columnName) . "\">" 
+            . htmlspecialchars($value ?? '') . "</td>";
         }
-        $html .= "</tr>"; // Fermer la ligne de données
+        $html .= "</tr>"; 
         $compteur++;
     }
 
@@ -87,6 +92,7 @@ try {
 
 } catch (PDOException $e) {
     //En cas d'erreur
-    echo '<p style="color:red;">Erreur lors de la génération de la table "' . htmlspecialchars($nomTableDemande) . '": ' . htmlspecialchars($e->getMessage()) . '</p>';
+    echo '<p style="color:red;">Erreur lors de la génération de la table "' . htmlspecialchars($nomTableDemande) . '": ' 
+    . htmlspecialchars($e->getMessage()) . '</p>';
 }
 ?>

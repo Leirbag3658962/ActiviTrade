@@ -1,3 +1,5 @@
+let currentlyEditingCell = null;
+
 document.addEventListener('DOMContentLoaded', function() {
     
     const divGauche = document.getElementById('divGauche');
@@ -48,8 +50,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (barreDroite) {
         barreDroite.addEventListener('click', function(event) {
-            const clickedRow = event.target.closest('tr[data-pk-value]');
+            const target = event.target;
+            
+            if (target && target.matches('td.editable-cell')) {
+                // Éviter ré-éditer
+                if (target.querySelector('input.inline-edit-input')) {
+                    return;
+                }
+                // Gérer si édition en cours
+                 if(currentlyEditingCell && currentlyEditingCell.inputElement) {
+                    currentlyEditingCell.inputElement.blur(); 
+                    if (document.body.contains(currentlyEditingCell.inputElement)) return; 
+                 }
+                 makeCellEditable(target); 
+                return; 
+            }
 
+            if (target && target.matches('#BoutonAjouter')) {
+                const tableName = target.dataset.table;
+                if (tableName) { displayAddForm(tableName); }
+                else { console.error("data-table manquant sur #BoutonAjouter."); }
+                return;
+            }
+
+            const clickedRow = target.closest('tr[data-pk-value]');
             if (clickedRow) {
 
                 handleRowDelete(clickedRow); 
@@ -146,15 +170,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    
-
 }); 
 
 
 
 function chargerTable(nomTable, containerElement) {
-    // Affiche un indicateur de chargement (optionnel)
     containerElement.innerHTML = '<p>Chargement des données pour la table "' + nomTable + '"...</p>';
 
     const formData = new FormData();
@@ -280,7 +300,107 @@ function handleRowDelete(clickedRow) {
              alert('Erreur communication suppression.');
              console.error('Erreur fetch suppression:', error);
          });
-     } else {
+    } else {
          console.log('Suppression annulée.');
-     }
+    }
+}
+function makeCellEditable(cellElement) {
+    if (!cellElement || (currentlyEditingCell && currentlyEditingCell.cell === cellElement)) return;
+    if(currentlyEditingCell && currentlyEditingCell.inputElement) {
+        currentlyEditingCell.inputElement.blur();
+        if (document.body.contains(currentlyEditingCell.inputElement)) return;
+    }
+
+    const originalValue = cellElement.textContent.trim();
+    const columnName = cellElement.dataset.columnName;
+    if (!columnName) { console.error("data-column-name manquant", cellElement); return; }
+
+    const inputElement = document.createElement('input');
+    inputElement.type = 'text'; // Adapter type si besoin (date, number...)
+    inputElement.value = originalValue;
+    inputElement.classList.add('inline-edit-input'); // Pour CSS
+
+    cellElement.innerHTML = '';
+    cellElement.appendChild(inputElement);
+    inputElement.focus();
+    inputElement.select();
+
+    currentlyEditingCell = { cell: cellElement, inputElement: inputElement, originalValue: originalValue, columnName: columnName };
+    inputElement.addEventListener('blur', handleEditBlur);
+    inputElement.addEventListener('keydown', handleEditKeyDown);
+}
+
+function handleEditBlur(event) {
+    setTimeout(() => { 
+        if (currentlyEditingCell && event.target === currentlyEditingCell.inputElement) {
+            saveCellUpdate();
+        }
+    }, 150);
+}
+
+function handleEditKeyDown(event) {
+    if (!currentlyEditingCell || event.target !== currentlyEditingCell.inputElement) return;
+    if (event.key === 'Enter') { event.preventDefault(); saveCellUpdate(); }
+    else if (event.key === 'Escape') { revertCell(currentlyEditingCell.originalValue); }
+}
+
+function saveCellUpdate() {
+    if (!currentlyEditingCell) return;
+
+    const cell = currentlyEditingCell.cell;
+    const inputElement = currentlyEditingCell.inputElement;
+    const newValue = inputElement.value.trim();
+    const originalValue = currentlyEditingCell.originalValue;
+    const columnName = currentlyEditingCell.columnName;
+    const rowElement = cell.closest('tr[data-pk-value]');
+    const pkValue = rowElement ? rowElement.dataset.pkValue : null;
+    const tableName = rowElement ? rowElement.dataset.table : null;
+
+    const editingInfo = { cell, inputElement, originalValue };
+    currentlyEditingCell = null; 
+    inputElement.disabled = true; 
+
+    if (!pkValue || !tableName || !columnName) {
+        alert("Erreur: Infos manquantes pour sauvegarde.");
+        revertCell(originalValue, editingInfo.cell, editingInfo.inputElement); return;
+    }
+    if (newValue === originalValue) {
+        revertCell(originalValue, editingInfo.cell, editingInfo.inputElement); return;
+    }
+
+    const formData = new FormData();
+    formData.append('table', tableName);
+    formData.append('pkValue', pkValue);
+    formData.append('column', columnName);
+    formData.append('value', newValue);
+
+    fetch('../Pages/AdminUpdateRow.php', { method: 'POST', body: formData }) 
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                editingInfo.cell.innerHTML = '';
+                editingInfo.cell.textContent = data.newValue ?? newValue;
+                 // Feedback visuel optionnel
+                editingInfo.cell.classList.add('update-success');
+                setTimeout(() => editingInfo.cell.classList.remove('update-success'), 1500);
+            } else {
+                alert('Erreur mise à jour: ' + (data.message || 'Inconnue.'));
+                revertCell(originalValue, editingInfo.cell, editingInfo.inputElement);
+            }
+        })
+        .catch(error => {
+            alert('Erreur communication mise à jour.');
+            console.error('Erreur fetch update:', error);
+            revertCell(originalValue, editingInfo.cell, editingInfo.inputElement);
+        });
+}
+
+function revertCell(originalValue, cell = currentlyEditingCell?.cell, input = currentlyEditingCell?.inputElement) {
+    if (cell) {
+        cell.innerHTML = '';
+        cell.textContent = originalValue;
+    }
+    if (currentlyEditingCell && currentlyEditingCell.cell === cell) {
+        currentlyEditingCell = null; 
+    }
 }
