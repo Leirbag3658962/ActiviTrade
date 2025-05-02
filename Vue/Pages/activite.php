@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="style/navbar.css">
 <link rel="stylesheet" href="style/activite.css">
 <link rel="stylesheet" href="style/footer.css">
-
 <?php
 // Connexion à la base de données
 $host = 'localhost';
@@ -16,7 +15,7 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
-// Vérifie qu'un ID est passé dans l'URL ex: activite.php?id=1
+// Vérifie qu'un ID est passé dans l'URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Aucune activité spécifiée.");
 }
@@ -87,15 +86,14 @@ if (!$activite) {
 
     <footer id="footer" class="footer"></footer>
 
-   
-</body>
- <!-- Navbar & Footer -->
- <script src="../style/navbar.js"></script>
+    <!-- Navbar & Footer -->
+    <script src="../vue/templates/navbar.js"></script>
     <script>
         document.getElementById("navbar").innerHTML = Navbar2();
     </script>
-    <script src="../style/footer.js"></script>
+    <script src="../vue/templates/footer.js"></script>
     <script>
         document.getElementById("footer").innerHTML = Footer2();
     </script>
+</body>
 </html>

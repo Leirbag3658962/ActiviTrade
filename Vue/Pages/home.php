@@ -1,15 +1,10 @@
-<link rel="stylesheet" href="style/navbar.css">
-<link rel="stylesheet" href="style/footer.css">
-<link rel="stylesheet" href="style/home.css">
-
-
 <?php
 // Connexion à la base de données
 $host = 'localhost';
-$port = '3306'; // important ! 3306 probably
+$port = '3306'; 
 $dbname = 'activitrade_demo';
 $user = 'root';
-$password = 'hello'; // change selon ta config locale
+$password = 'hello'; 
 
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
