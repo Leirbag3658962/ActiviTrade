@@ -12,7 +12,7 @@
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
 <div class="conteneurForm">
 	<div class="gauche">
-	<form>
+	<form method="post">
 		<label for="labNomActivite">Nom d'activité </label>
 		<br>
 		<input class="input" type="text" id="inputNom" name="inputNom"><br>
@@ -20,6 +20,14 @@
 		<label for="labDate">Date </label>
 		<br>
 		<input class="input" type="date" id="inputDate" name="inputDate"><br>
+		<br>
+		<label for="labAdresse">Adresse </label>
+		<br>
+		<input class="input" type="text" id="inputAdresse" name="inputAdresse"><br>
+		<br>
+		<label for="labVille">Ville </label>
+		<br>
+		<input class="input" type="text" id="inputVille" name="inputVille"><br>
 		<br>
 		<label for="labDuree">Durée </label>
 		<br>
@@ -32,13 +40,14 @@
 			<option value="test2">Test2</option>
 		</select><br>
 		<br>
-		<label for="labAdresse">Adresse </label>
-		<br>
-		<input class="input" type="text" id="inputAdresse" name="inputAdresse"><br>
-		<br>
+		
 		<label for="labNbrParticipant">Nombre de participants </label>
 		<br>
 		<input class="input" type="text" id="inputNbrParticipant" name="inputNbrParticipant"><br>
+		<?php
+                require_once "../../ModeleB/LienPDO.php";
+                $pdo = lienPDO(); 
+            ?>
 	</form>
 	</div>
 	<div class="droite">
