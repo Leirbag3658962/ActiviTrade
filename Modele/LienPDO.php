@@ -84,12 +84,15 @@ function traitementFormActivite(){
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!empty($_POST['inputNom']) && !empty($_POST['inputDate']) && !empty($_POST['inputDuree']) && !empty($_POST['inputCategorie']) 
         && !empty($_POST['inputNbrParticipant']) && !empty($_POST['Groupe']) && !empty($_POST['inputDescription'])) {
-            $nom = $_POST['Nom'];
-            $date = $_POST['Date'];
-            $numTel = $_POST['NumTel'];
-            echo"<p>Bienvenue $nom</p>";
+            $nom = testValidationForm($_POST['inputNom']);
+            $date = testValidationForm($_POST['inputDate']);
+            $duree = testValidationForm($_POST['inputDuree']);
+            $categorie = testValidationForm($_POST['inputCategorie']);
+            $nbrParticipant = testValidationForm($_POST['inputNbrParticipant']);
+            $groupe = testValidationForm($_POST['Groupe']);
+            $descrption = testValidationForm($_POST['inputDescrption']);
     
-            $sql = "INSERT INTO user (nom, DateDeNaissance, Num) VALUES (:nom, :datetest, :numTel)";
+            $sql = "INSERT INTO activite (nom, DateDeNaissance, Num) VALUES (:nom, :datetest, :numTel)";
             $stmt = $pdo->prepare($sql);
     
             $stmt->bindParam(':nom', $nom);
