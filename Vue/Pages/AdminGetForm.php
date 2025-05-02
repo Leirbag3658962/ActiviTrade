@@ -1,6 +1,6 @@
 <?php
 
-require_once "../../ModeleB/LienPDO.php";
+require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
 // Validation POST

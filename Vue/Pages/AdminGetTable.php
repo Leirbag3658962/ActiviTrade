@@ -1,5 +1,5 @@
 <?php
-require_once "../../ModeleB/LienPDO.php";
+require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
 //En cas d'erreur
