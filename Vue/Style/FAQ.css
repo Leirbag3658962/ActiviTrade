@@ -5,11 +5,13 @@
 
 .box {
 	width: 400px; 
-    height: 500px; 
+    height: flex; 
+	max-height: 600px;
+	overflow-y: auto;
     border: 2px solid white; 
     background-color: white; 
     border-radius: 10px; 
-    padding: 20px; 
+    padding: 20px;
     margin: 20px auto;
 	box-shadow: 0 1px 2px 0 rgba(103, 110, 144, .1), 0 2px 2px 0 rgba(103, 110, 144, .05), 0 4px 4px 0 rgba(103, 110, 144, .08), 0 8px 8px 0 rgba(103, 110, 144, .05), 0 16px 40px 1px rgba(103, 110, 144, .15);
 }
@@ -17,7 +19,7 @@
 .bulle-sms{
 
 	position: relative;
-	border: 2px solid #355e3b;
+	border: 2px solid #afd9b6;
 	background-color: #afd9b6;
 	padding: 5px;
 	border-radius: 4px;
@@ -50,9 +52,9 @@
     content: "";
     position: absolute;
     top: 50%;
-    right: -25px;
+    right: -12px;
     
-    border-width: 15px;
+    border-width: 7px;
     border-style: solid;
     border-color: transparent transparent transparent #afd9b6;
 }
