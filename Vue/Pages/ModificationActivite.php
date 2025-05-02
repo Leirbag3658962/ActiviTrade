@@ -1,3 +1,31 @@
+<?php
+session_start();
+require_once "../../ModeleB/LienPDO.php";
+$pdo = lienPDO();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$nom = htmlspecialchars($_POST['inputNom']);
+	$date = htmlspecialchars($_POST['inputDate']);
+	$duree = htmlspecialchars($_POST['inputDuree']);
+	$categorie = htmlspecialchars($_POST['inputCategorie']);
+	$adresse = htmlspecialchars($_POST['inputAdresse']);
+	$participants = htmlspecialchars($_POST['inputNbrParticipant']);
+	$type = isset($_POST['Groupe']) ? htmlspecialchars($_POST['Groupe']) : 'Non spécifié';
+	$description = htmlspecialchars($_POST['inputDescription']);
+
+	echo "<div style='color:green;'><strong>Activité modifiée avec succès !</strong></div>";
+	echo "<div><strong>Détails reçus :</strong><br>";
+	echo "Nom : $nom<br>";
+	echo "Date : $date<br>";
+	echo "Durée : $duree<br>";
+	echo "Catégorie : $categorie<br>";
+	echo "Adresse : $adresse<br>";
+	echo "Participants : $participants<br>";
+	echo "Type : $type<br>";
+	echo "Description : $description<br></div>";
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +40,7 @@
 <h1 id="titrecreation">Modification de ton activité</h1>
 <div class="conteneurForm">
 	<div class="gauche">
-	<form>
+	<form method="POST" action="modifier_activite.php">
 		<label for="labNomActivite">Nom d'activité </label>
 		<br>
 		<input class="input" type="text" id="inputNom" name="inputNom"><br>
