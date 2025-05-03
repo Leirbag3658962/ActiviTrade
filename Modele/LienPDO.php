@@ -51,10 +51,8 @@ function recuperationTable($pdo){
         }
     } catch (PDOException $e) {
         echo "<a> Erreur BDD lors de la récupération des tables: " . htmlspecialchars($e->getMessage()) . "</a>";
-    }
-    
+    }  
 }
-
 
 function afficheFaq($pdo){
     if(!$pdo){
@@ -80,6 +78,30 @@ function afficheFaq($pdo){
    }
 }
 
+function afficherMentions($pdo){
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+
+    try{
+        $sqlmention = "SELECT titreparagraphe, description FROM mentionlegale ORDER BY numero ASC";
+	    $stmtmention = $pdo->query($sqlmention); 
+	    if($stmtmention){
+            echo "<div id=\"box\">";
+		    while ($row = $stmtmention->fetch(PDO::FETCH_ASSOC)){
+                echo"<h2 class=\"titre2\">" . htmlspecialchars($row['titreparagraphe']) . "</h2>";
+
+                echo"<p>" . $row['description'] . "</p>";
+                echo"<br>";
+		    }
+            echo "</div>";
+	    }
+    } catch (PDOException $e) {
+        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+   }
+
+}
+
 function traitementFormActivite(){
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!empty($_POST['inputNom']) && !empty($_POST['inputDate']) && !empty($_POST['inputDuree']) && !empty($_POST['inputCategorie']) 
@@ -92,7 +114,7 @@ function traitementFormActivite(){
             $groupe = testValidationForm($_POST['Groupe']);
             $descrption = testValidationForm($_POST['inputDescrption']);
     
-            $sql = "INSERT INTO activite (nom, DateDeNaissance, Num) VALUES (:nom, :datetest, :numTel)";
+            $sql = "INSERT INTO activite (idActivite, nomActivite, Num) VALUES (:nom, :datetest, :numTel)";
             $stmt = $pdo->prepare($sql);
     
             $stmt->bindParam(':nom', $nom);
