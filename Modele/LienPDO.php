@@ -51,10 +51,8 @@ function recuperationTable($pdo){
         }
     } catch (PDOException $e) {
         echo "<a> Erreur BDD lors de la récupération des tables: " . htmlspecialchars($e->getMessage()) . "</a>";
-    }
-    
+    }  
 }
-
 
 function afficheFaq($pdo){
     if(!$pdo){
@@ -80,30 +78,86 @@ function afficheFaq($pdo){
    }
 }
 
+function afficherMentions($pdo){
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+
+    try{
+        $sqlmention = "SELECT titreparagraphe, description FROM mentionlegale ORDER BY numero ASC";
+	    $stmtmention = $pdo->query($sqlmention); 
+	    if($stmtmention){
+            echo "<div id=\"box\">";
+		    while ($row = $stmtmention->fetch(PDO::FETCH_ASSOC)){
+                echo"<h2 class=\"titre2\">" . htmlspecialchars($row['titreparagraphe']) . "</h2>";
+
+                echo"<p>" . $row['description'] . "</p>";
+                echo"<br>";
+		    }
+            echo "</div>";
+	    }
+    } catch (PDOException $e) {
+        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+   }
+
+}
+
+function listeCategorie($pdo){
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+
+    try{
+        $sqlcategorie = "SELECT theme FROM theme";
+	    $stmtcategorie = $pdo->query($sqlcategorie); 
+	    if($stmtcategorie){
+            
+		    while ($row = $stmtcategorie->fetch(PDO::FETCH_ASSOC)){
+                echo "<option value=\"".$row['theme']."\">".$row['theme']."</option>";
+		    }
+        } 
+    }catch (PDOException $e) {
+        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+        }
+}
+
 function traitementFormActivite(){
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if (!empty($_POST['inputNom']) && !empty($_POST['inputDate']) && !empty($_POST['inputDuree']) && !empty($_POST['inputCategorie']) 
-        && !empty($_POST['inputNbrParticipant']) && !empty($_POST['Groupe']) && !empty($_POST['inputDescription'])) {
-            $nom = testValidationForm($_POST['inputNom']);
-            $date = testValidationForm($_POST['inputDate']);
-            $duree = testValidationForm($_POST['inputDuree']);
-            $categorie = testValidationForm($_POST['inputCategorie']);
-            $nbrParticipant = testValidationForm($_POST['inputNbrParticipant']);
-            $groupe = testValidationForm($_POST['Groupe']);
-            $descrption = testValidationForm($_POST['inputDescrption']);
+    //     if (!empty($_POST['inputNom']) && !empty($_POST['inputDate']) && !empty($_POST['inputDuree']) && !empty($_POST['inputCategorie']) 
+    //     && !empty($_POST['inputNbrParticipant']) && !empty($_POST['Groupe']) && !empty($_POST['inputDescription'])) {
+    //         $nom = testValidationForm($_POST['inputNom']);
+    //         $date = testValidationForm($_POST['inputDate']);
+    //         $duree = testValidationForm($_POST['inputDuree']);
+    //         $adresse = testValidationForm($_POST['inputAdresse']);
+    //         $ville = testValidationForm($_POST['inputVille']);
+    //         $categorie = testValidationForm($_POST['inputCategorie']);
+    //         $nbrParticipant = testValidationForm($_POST['inputNbrParticipant']);
+    //         $groupe = testValidationForm($_POST['Groupe']);
+    //         $descrption = testValidationForm($_POST['inputDescrption']);
+
+    //         if (empty($nomActivite) || empty($dateActivite) || empty($adresse) || empty($ville) || empty($duree) || empty($categorie) 
+    //         || empty($nbrParticipants) || empty($typeGroupe) || empty($description)) {
+    //             exit("Remplissez tous les champs!");
+    //         }
+    //         if($nbrParticipant <= 0){
+    //             exit("Le nombre de participants doit être supérieur à 0!");
+    //         }
     
-            $sql = "INSERT INTO activite (nom, DateDeNaissance, Num) VALUES (:nom, :datetest, :numTel)";
-            $stmt = $pdo->prepare($sql);
+    //         $sql = "INSERT INTO activite (idActivite, nomActivite, adresse, ville, prix, nbrParticipantMax, description, duree, IsPublic, idCreateur) 
+    //         VALUES (:nom1, :adresse1, :ville1, :prix1, :nbrParticipantMax1, :description1, :groupe1, :idCreateur1)";
+    //         $stmt = $pdo->prepare($sql);
     
-            $stmt->bindParam(':nom', $nom);
-            $stmt->bindParam(':datetest', $date);
-            $stmt->bindParam(':numTel', $numTel);
+    //         $stmt->bindParam(':nom', $nom);
+    //         $stmt->bindParam(':datetest', $date);
+    //         $stmt->bindParam(':numTel', $numTel);
             
-            $stmt->execute();
+    //         $stmt->execute();
+
+    //         $sqldate = "INSERT INTO activite-date (IdActivite, idD)"
             
-        } else {
-            echo "Veuillez remplir tous les champs.";
-        }
+    //     } else {
+    //         echo "Veuillez remplir tous les champs.";
+    //     }
     }
 }
 
