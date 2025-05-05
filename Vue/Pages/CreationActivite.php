@@ -92,7 +92,9 @@
 </div>
 <br>
 <button type="submit" id="createButton">Créer</button>
-
+	<?php
+		traitementFormActivite($pdo);
+	?>
 </form>
 <br><br>
 
