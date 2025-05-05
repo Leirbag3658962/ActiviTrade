@@ -1,28 +1,3 @@
-<?php
-
-session_start();
-require_once "../../Modele/LienPDO.php";
-$pdo = lienPDO();
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$note = htmlspecialchars($_POST['inputNote']);
-	$commentaire = htmlspecialchars($_POST['inputCommentaire']);
-
-	
-	if (is_numeric($note) && $note >= 0 && $note <= 5) {
-		echo "<div class='result'>";
-		echo "<h3>Merci pour votre avis !</h3>";
-		echo "<p><strong>Note :</strong> " . $note . "</p>";
-		echo "<p><strong>Commentaire :</strong> " . nl2br($commentaire) . "</p>";
-		echo "</div>";
-	} else {
-		echo "<p style='color:red;'>Veuillez saisir une note valide entre 0 et 5.</p>";
-	}
-}
-?>
-    
-
-
 <!DOCTYPE html>
 <html>
 <head>
