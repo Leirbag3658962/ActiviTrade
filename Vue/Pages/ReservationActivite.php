@@ -3,24 +3,31 @@ session_start();
 require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();  
 
+$participants = [];
+$participant_count = 0;
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $lastname = htmlspecialchars($_POST['lastname']);
     $firstname = htmlspecialchars($_POST['firstname']);
     $age = htmlspecialchars($_POST['age']);
+    $user_id = $_SESSION['idUtilisateur'];  
+    $idActivite = $_POST['idActivite'];    
 
-    if (!empty($lastname) && !empty($firstname) && !empty($age)) {
-        $stmt = $pdo->prepare("INSERT INTO participant (lastname, firstname, age) VALUES (:lastname, :firstname, :age)");
+    if (!empty($lastname) && !empty($firstname) && !empty($age) && !empty($idActivite)) {
+        $stmt = $pdo->prepare("INSERT INTO reservation (lastname, firstname, age, user_id, idActivite) VALUES (:lastname, :firstname, :age, :user_id, :idActivite)");
         $stmt->execute([
             ':lastname' => $lastname,
             ':firstname' => $firstname,
-            ':age' => $age
+            ':age' => $age,
+            ':user_id' => $user_id,  
+            ':idActivite' => $idActivite  
         ]);
     }
 }
 
-$stmt = $pdo->query("SELECT * FROM participant ORDER BY created_at DESC");
-$participants = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$participant_count = count($participants);
+$stmt = $pdo->query("SELECT * FROM reservation ORDER BY date DESC");
+$reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$reservation_count = count($reservations);
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +61,7 @@ $participant_count = count($participants);
     </div>
     <table class="info-table">
         <tr>
-            <th>Nombre de participants: <?php echo $participant_count; ?></th>
+        <th>Nombre de participants: <?php echo isset($participant_count) ? $participant_count : '0'; ?></th>
         </tr>
         <?php if ($participant_count > 0): ?>
             <?php foreach ($participants as $p): ?>
