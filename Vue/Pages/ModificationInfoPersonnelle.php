@@ -7,16 +7,16 @@ $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id = $_SESSION['user_id']; 
-    $lastname = htmlspecialchars($_POST['lastname']);
-    $firstname = htmlspecialchars($_POST['firstname']);
+    $lastname = htmlspecialchars($_POST['nom']);
+    $firstname = htmlspecialchars($_POST['prenom']);
     $email = htmlspecialchars($_POST['email']);
-    $birthdate = $_POST['birthdate'];
+    $birthdate = $_POST['dateNaissance'];
     $address = htmlspecialchars($_POST['address']);
 
-    if (!empty($lastname) && !empty($firstname) && !empty($email) && !empty($birthdate) && !empty($address)) {
+    if (!empty($nom) && !empty($prenom) && !empty($email) && !empty($dateNaissance) && !empty($address)) {
         try {
-            $stmt = $pdo->prepare("UPDATE utilisateurs SET lastname = ?, firstname = ?, email = ?, birthdate = ?, address = ? WHERE id = ?");
-            $stmt->execute([$lastname, $firstname, $email, $birthdate, $address, $id]);
+            $stmt = $pdo->prepare("UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, dateNaissance = ?, address = ? WHERE idUtilisateur = ?");
+            $stmt->execute([$nom, $prenom, $email, $dateNaissance, $address, $idUtilisateur]);
             $message = "Informations mises à jour avec succès !";
         } catch (PDOException $e) {
             $message = "Erreur lors de la mise à jour : " . $e->getMessage();
@@ -73,3 +73,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer.js"></script>
 </html>
+
