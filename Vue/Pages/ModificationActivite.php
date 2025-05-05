@@ -1,28 +1,32 @@
+
 <?php
 session_start();
 require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$nom = htmlspecialchars($_POST['inputNom']);
-	$date = htmlspecialchars($_POST['inputDate']);
-	$duree = htmlspecialchars($_POST['inputDuree']);
-	$categorie = htmlspecialchars($_POST['inputCategorie']);
-	$adresse = htmlspecialchars($_POST['inputAdresse']);
-	$participants = htmlspecialchars($_POST['inputNbrParticipant']);
-	$type = isset($_POST['Groupe']) ? htmlspecialchars($_POST['Groupe']) : 'Non spécifié';
-	$description = htmlspecialchars($_POST['inputDescription']);
+    $id = (int) $_POST['idActivite'];
+    $nom = $_POST['inputNom'] ?? '';
+    $adresse = $_POST['inputAdresse'] ?? '';
+    $duree = $_POST['inputDuree'] ?? '';
+    $nbrParticipant = (int) ($_POST['inputNbrParticipant'] ?? 0);
+    $description = $_POST['inputDescription'] ?? '';
+    $isPublic = ($_POST['Groupe'] === 'Public') ? 1 : 0;
 
-	echo "<div style='color:green;'><strong>Activité modifiée avec succès !</strong></div>";
-	echo "<div><strong>Détails reçus :</strong><br>";
-	echo "Nom : $nom<br>";
-	echo "Date : $date<br>";
-	echo "Durée : $duree<br>";
-	echo "Catégorie : $categorie<br>";
-	echo "Adresse : $adresse<br>";
-	echo "Participants : $participants<br>";
-	echo "Type : $type<br>";
-	echo "Description : $description<br></div>";
+    $sql = "UPDATE activite 
+            SET nomActivite = ?, adresse = ?, duree = ?, nbrParticipantMax = ?, description = ?, IsPublic = ?
+            WHERE idActivite = ?";
+    $stmt = $pdo->prepare($sql);
+    $success = $stmt->execute([$nom, $adresse, $duree, $nbrParticipant, $description, $isPublic, $id]);
+
+    if ($success) {
+        header("Location: confirmation.php"); 
+        exit;
+    } else {
+        echo "La mise à jour a échoué.";
+    }
+} else {
+    echo "Demande illégale.";
 }
 ?>
 
@@ -103,3 +107,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer.js"></script>
 </html>
+
