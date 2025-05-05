@@ -1,22 +1,27 @@
 <?php
+
 session_start();
 require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $_POST['title'];
-    $context = $_POST['context'];
-    $user_id = $_SESSION['user_id'];
-    $date_added = date("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO threads (title, context, user_id, date_added) 
-            VALUES (:title, :context, :user_id, :date_added)";
-    
+    $theme = htmlspecialchars($_POST['theme']);
+    $contenu = htmlspecialchars($_POST['contenu']);
+    $idUser = $_SESSION['idUser']; 
+    $date = date("Y-m-d H:i:s");
+
+    $sql = "INSERT INTO forum (theme, date, contenu, idUser, idParent) 
+            VALUES (:theme, :date, :contenu, :idUser, :idParent)";
+
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':title', $title);
-    $stmt->bindParam(':context', $context);
-    $stmt->bindParam(':user_id', $user_id);
-    $stmt->bindParam(':date_added', $date_added);
+
+    $stmt->bindParam(':theme', $theme);
+    $stmt->bindParam(':date', $date_added);
+    $stmt->bindParam(':contenu', $contenu);
+    $stmt->bindParam(':idUser', $user_id);
+    $idParent = NULL;
+    $stmt->bindParam(':idParent', $idParent);
 
     if ($stmt->execute()) {
         echo "Le sujet a été créé avec succès.";
@@ -41,14 +46,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <header id="navbar" class="navbar"></header>
 
 <div class="main-content">
-    <h1>Créer un nouveau sujet</h1>
+    <h1>Création d'un Nouveau Sujet</h1>
     <div class="createforum-container">
-        
+
         <form action="create-thread.php" method="POST">
-            <label for="title">Titre:</label>
+            <label for="title">Thème:</label>
             <input type="text" id="title" name="title" required><br>
 
-            <label for="context">Context:</label>
+            <label for="context">Description:</label>
             <textarea id="context" name="context" rows="4" cols="50" required></textarea><br>
 
             <button id="Button" type="submit">Confirmer</button>
