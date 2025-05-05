@@ -3,13 +3,13 @@ session_start();
 require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
-$sql = "SELECT threads.id, threads.title, threads.date_added, users.username 
-        FROM threads 
-        JOIN users ON threads.user_id = users.id
-        ORDER BY threads.date_added DESC";  
+$sql = "SELECT forum.idForum, forum.theme, forum.date, utilisateur.username 
+        FROM forum 
+        JOIN utilisateur ON forum.idUser = utilisateur.idUtilisateur
+        ORDER BY forum.date DESC";  
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-$threads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
