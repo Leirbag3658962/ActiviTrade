@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../ModeleB/LienPDO.php";
+require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
 $sql = "SELECT threads.id, threads.title, threads.date_added, users.username 
