@@ -2,8 +2,8 @@
 <html>
 <head>
 <link rel="stylesheet" href="../Style/FAQ.css">
-<link rel="stylesheet" href="../Style/Navbar.css">
-<link rel="stylesheet" href="../Style/Footer.css">
+<link rel="stylesheet" href="../Style/navbar2.css">
+<link rel="stylesheet" href="../Style/footer2.css">
 <title>FAQ</title>
 </head>
 <body>
@@ -19,10 +19,14 @@
 </div>
 <footer id="footer" class="footer"></footer>
 </body>
-<script src="../Components/Navbar.js"></script>
+<script src="../Components/Navbar2.js"></script>
 <script>
-	document.getElementById("navbar").innerHTML = Navbar();
+	document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/DragAndDrop.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+	document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>

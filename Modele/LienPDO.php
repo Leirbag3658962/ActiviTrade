@@ -121,44 +121,60 @@ function listeCategorie($pdo){
         }
 }
 
-function traitementFormActivite(){
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+function traitementFormActivite($pdo){
+    // try{
+    //     if ($_SERVER["REQUEST_METHOD"] === "POST") {
     //     if (!empty($_POST['inputNom']) && !empty($_POST['inputDate']) && !empty($_POST['inputDuree']) && !empty($_POST['inputCategorie']) 
     //     && !empty($_POST['inputNbrParticipant']) && !empty($_POST['Groupe']) && !empty($_POST['inputDescription'])) {
-    //         $nom = testValidationForm($_POST['inputNom']);
-    //         $date = testValidationForm($_POST['inputDate']);
+    //         $nomActivite = testValidationForm($_POST['inputNom']);
+    //         $dateActivite = testValidationForm($_POST['inputDate']);
     //         $duree = testValidationForm($_POST['inputDuree']);
     //         $adresse = testValidationForm($_POST['inputAdresse']);
     //         $ville = testValidationForm($_POST['inputVille']);
     //         $categorie = testValidationForm($_POST['inputCategorie']);
     //         $nbrParticipant = testValidationForm($_POST['inputNbrParticipant']);
     //         $groupe = testValidationForm($_POST['Groupe']);
-    //         $descrption = testValidationForm($_POST['inputDescrption']);
+    //         $prix = testValidationForm($_POST['inputPrix']);
+    //         $descriptionact = testValidationForm($_POST['inputDescrption']);
+    //         $idCreator = $_SESSION['user']['id'];
+            
 
     //         if (empty($nomActivite) || empty($dateActivite) || empty($adresse) || empty($ville) || empty($duree) || empty($categorie) 
-    //         || empty($nbrParticipants) || empty($typeGroupe) || empty($description)) {
+    //         || empty($nbrParticipants) || empty($groupe) || empty($descriptionact) || empty($prix)) {
     //             exit("Remplissez tous les champs!");
     //         }
     //         if($nbrParticipant <= 0){
     //             exit("Le nombre de participants doit être supérieur à 0!");
     //         }
+    //         if($prix <= 0){
+    //             exit("Mettre votre prix à 0 si votre activité est gratuite!");
+    //         }
     
-    //         $sql = "INSERT INTO activite (idActivite, nomActivite, adresse, ville, prix, nbrParticipantMax, description, duree, IsPublic, idCreateur) 
-    //         VALUES (:nom1, :adresse1, :ville1, :prix1, :nbrParticipantMax1, :description1, :groupe1, :idCreateur1)";
+    //         $sql = "INSERT INTO activite (nomActivite, adresse, ville, prix, nbrParticipantMax, description, duree, IsPublic, idCreateur) 
+    //         VALUES (:nom1, :adresse1, :ville1, :prix1, :nbrParticipantMax1, :description1, :duree, :groupe1, :idCreateur1)";
     //         $stmt = $pdo->prepare($sql);
     
-    //         $stmt->bindParam(':nom', $nom);
-    //         $stmt->bindParam(':datetest', $date);
-    //         $stmt->bindParam(':numTel', $numTel);
-            
+    //         $stmt->bindParam(':nom1', $nomActivite);
+    //         $stmt->bindParam(':adresse1', $adresse);
+    //         $stmt->bindParam(':ville1', $ville);
+    //         $stmt->bindParam(':prix1', $prix);
+    //         $stmt->bindParam(':nbrParticipantMax1', $nbrParticipant);
+    //         $stmt->bindParam(':description1', $descriptionact);
+    //         $stmt->bindParam(':duree', $duree);
+    //         $stmt->bindParam(':groupe1', $groupe);
+    //         $stmt->bindParam(':idCreateur1', $idCreator);
+
     //         $stmt->execute();
 
-    //         $sqldate = "INSERT INTO activite-date (IdActivite, idD)"
+
             
-    //     } else {
+    //     }else{
     //         echo "Veuillez remplir tous les champs.";
     //     }
-    }
+    // }
+    // } catch (PDOException $e) {
+    //     echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+    // }
+    
 }
-
 ?>
