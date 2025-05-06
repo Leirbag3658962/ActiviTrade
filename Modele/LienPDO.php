@@ -102,6 +102,29 @@ function afficherMentions($pdo){
 
 }
 
+function afficherCgu($pdo){
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+
+    try{
+        $sqlcgu = "SELECT titreCgu, description FROM cgu ORDER BY numero ASC";
+	    $stmtcgu = $pdo->query($sqlcgu); 
+	    if($stmtcgu){
+            echo "<div id=\"box\">";
+		    while ($row = $stmtcgu->fetch(PDO::FETCH_ASSOC)){
+                echo"<h2 class=\"titre2\">" . htmlspecialchars($row['titreCgu']) . "</h2>";
+
+                echo"<p>" . $row['description'] . "</p>";
+                echo"<br>";
+		    }
+            echo "</div>";
+	    }
+    } catch (PDOException $e) {
+        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+   }
+}
+
 function listeCategorie($pdo){
     if(!$pdo){
         echo "<a> Erreur: Connexion BDD non fournie.</a>";

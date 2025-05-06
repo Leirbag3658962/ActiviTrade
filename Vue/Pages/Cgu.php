@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../Style/MentionLegale.css"/>
+<link rel="stylesheet" href="../Style/Cgu.css"/>
 <link rel="stylesheet" href="../Style/navbar2.css">
 <link rel="stylesheet" href="../Style/footer2.css">
-<title>MentionsLégales</title>
+<title>CGU</title>
 </head>
 <body>
 <header id="navbar" class="navbar"></header>
 
-<h1>Mentions Légales</h1>
+<h1>Conditions Générales d'Utilisation</h1>
 <?php
     require_once "../../Modele/LienPDO.php";
     $pdo = lienPDO();
-    afficherMentions($pdo);
+    afficherCgu($pdo);
     ?>
 
 
