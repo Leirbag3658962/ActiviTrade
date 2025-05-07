@@ -3,6 +3,13 @@ session_start();
 $_SESSION['idUser'] = 1;
 $_SESSION['idActivite'] = 1;
 
+//$idUser = $_SESSION['idUser'];
+//if (isset($_GET['idActivite'])) {
+//    $_SESSION['idActivite'] = (int)$_GET['idActivite'];
+//}
+
+//$idActivite = $_SESSION['idActivite'];
+
 require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();  
 
