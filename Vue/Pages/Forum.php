@@ -5,6 +5,13 @@ $_SESSION['idUser'] = 1;
 require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
+if (isset($_SESSION['idUser'])) {
+    $idUser = $_SESSION['idUser'];
+} else {
+    header("Location: LogIn.php");
+    exit;
+}
+
 $sql = "SELECT forum.idForum, forum.theme, forum.date, utilisateur.nom, utilisateur.prenom 
         FROM forum 
         JOIN utilisateur ON forum.idUser = utilisateur.idUtilisateur
