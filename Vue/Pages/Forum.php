@@ -1,11 +1,14 @@
 <?php
 session_start();
+$_SESSION['idUser'] = 1;
+
 require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
-$sql = "SELECT forum.idForum, forum.theme, forum.date, utilisateur.username 
+$sql = "SELECT forum.idForum, forum.theme, forum.date, utilisateur.nom, utilisateur.prenom 
         FROM forum 
         JOIN utilisateur ON forum.idUser = utilisateur.idUtilisateur
+        WHERE forum.idParent IS NULL
         ORDER BY forum.date DESC";  
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
@@ -31,15 +34,16 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <br>
         <h1>Forum</h1><br>
         <div class="forum-box">
-            <?php foreach ($threads as $thread): ?>
+            <?php foreach ($forums as $forum): ?>
                 <div class="context">
                     <div class="context-title">
-                        <a href=>Pour les clubs de lecture, faut-il ramener du matériel ?</a>
-                        <a href="thread-detail.php?id=<?php echo $thread['id']; ?>"><?php echo htmlspecialchars($thread['title']); ?></a>
+                        <a href="ForumDetail.php?id=<?php echo $forum['idForum']; ?>">
+                            <?php echo htmlspecialchars($forum['theme']); ?>
+                        </a>
                     </div>
                     <div class="post-info">
-                        <p><strong>Par:</strong> <?php echo htmlspecialchars($thread['username']); ?></p>
-                        <p><strong>Le:</strong> <?php echo htmlspecialchars($thread['date_added']); ?></p>
+                        <p><strong>Par:</strong> <?php echo htmlspecialchars($forum['prenom'] . ' ' . $forum['nom']); ?></p>
+                        <p><strong>Date:</strong> <?php echo htmlspecialchars($forum['date']); ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -58,3 +62,4 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script src="../Components/Footer.js"></script>
 </body>
 </html>
+
