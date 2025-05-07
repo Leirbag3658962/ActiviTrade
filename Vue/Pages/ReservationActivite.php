@@ -1,5 +1,8 @@
 <?php
 session_start();
+$_SESSION['idUser'] = 1;
+$_SESSION['idActivite'] = 1;
+
 require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();  
 
@@ -7,27 +10,29 @@ $participants = [];
 $participant_count = 0;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $lastname = htmlspecialchars($_POST['lastname']);
-    $firstname = htmlspecialchars($_POST['firstname']);
+    $nom = htmlspecialchars($_POST['nom']);
+    $prenom = htmlspecialchars($_POST['prenom']);
     $age = htmlspecialchars($_POST['age']);
-    $user_id = $_SESSION['idUtilisateur'];  
-    $idActivite = $_POST['idActivite'];    
+    $idUser = $_SESSION['idUser'];  
+    $idActivite = $_SESSION['idActivite'];
 
-    if (!empty($lastname) && !empty($firstname) && !empty($age) && !empty($idActivite)) {
-        $stmt = $pdo->prepare("INSERT INTO reservation (lastname, firstname, age, user_id, idActivite) VALUES (:lastname, :firstname, :age, :user_id, :idActivite)");
+    if (!empty($nom) && !empty($prenom) && !empty($age) && !empty($idActivite)) {
+        $stmt = $pdo->prepare("INSERT INTO reservation (nom, prenom, age, idUser, idActivite) VALUES (:nom, :prenom, :age, :idUser, :idActivite)");
         $stmt->execute([
-            ':lastname' => $lastname,
-            ':firstname' => $firstname,
+            ':nom' => $nom,
+            ':prenom' => $prenom,
             ':age' => $age,
-            ':user_id' => $user_id,  
+            ':idUser' => $idUser,  
             ':idActivite' => $idActivite  
         ]);
     }
+    
 }
 
+$idActivite = $_SESSION['idActivite']; 
 $stmt = $pdo->query("SELECT * FROM reservation ORDER BY date DESC");
-$reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$reservation_count = count($reservations);
+$participants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$participant_count = count($participants);
 ?>
 
 <!DOCTYPE html>
@@ -50,12 +55,12 @@ $reservation_count = count($reservations);
     <div class="boxform">
         <h2>Participant</h2><br>
         <form method="post">
-            <label for="lastname">Nom</label><br>
-            <input type="text" id="lastname" name="lastname" placeholder="Smith" required><br>
-            <label for="firstname">Prénom</label><br>
-            <input type="text" id="firstname" name="firstname" placeholder="David" required><br>
+            <label for="nom">Nom</label><br>
+            <input type="text" id="nom" name="nom" placeholder="Smith" required><br>
+            <label for="prenom">Prénom</label><br>
+            <input type="text" id="prenom" name="prenom" placeholder="David" required><br>
             <label for="age">Age</label><br>
-            <input type="text" id="age" name="age" placeholder="" required><br><br>
+            <input type="int" id="age" name="age" placeholder="" required><br><br>
             <button id="Button" type="submit">Ajouter un participant</button>
         </form>
     </div>
@@ -66,7 +71,7 @@ $reservation_count = count($reservations);
         <?php if ($participant_count > 0): ?>
             <?php foreach ($participants as $p): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($p['lastname'] . ' ' . $p['firstname'] . ' (' . $p['age'] . ' ans)'); ?></td>
+                    <td><?php echo htmlspecialchars($p['nom'] . ' ' . $p['prenom'] . ' (' . $p['age'] . ' ans)'); ?></td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
