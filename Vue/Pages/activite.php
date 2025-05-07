@@ -81,16 +81,13 @@ if (!$activite) {
     </div>
 
     <footer id="footer" class="footer"></footer>
-
-    <!-- Navbar & Footer -->
-    
 </body>
 <script src="../Components/navbar2.js"></script>
-    <script>
-        document.getElementById("navbar").innerHTML = Navbar2();
-    </script>
-    <script src="../Components/footer2.js"></script>
-    <script>
-        document.getElementById("footer").innerHTML = Footer2();
-    </script>
+<script>
+    document.getElementById("navbar").innerHTML = Navbar2();
+</script>
+<script src="../Components/footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>
