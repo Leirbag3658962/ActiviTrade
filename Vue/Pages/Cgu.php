@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../Style/FAQ.css">
+<link rel="stylesheet" href="../Style/Cgu.css"/>
 <link rel="stylesheet" href="../Style/navbar2.css">
 <link rel="stylesheet" href="../Style/footer2.css">
-<title>FAQ</title>
+<title>CGU</title>
 </head>
 <body>
 <header id="navbar" class="navbar"></header>
-<h1 id="titrefaq"> FAQ </h1>
-<div class="box">
-	<?php
-	require_once "../../Modele/LienPDO.php";
-	$pdo = lienPDO();
-	afficheFaq($pdo);
-	
-	?>
-</div>
+
+<h1>Conditions Générales d'Utilisation</h1>
+<?php
+    require_once "../../Modele/LienPDO.php";
+    $pdo = lienPDO();
+    afficherCgu($pdo);
+    ?>
+
+
 <footer id="footer" class="footer"></footer>
 </body>
 <script src="../Components/Navbar2.js"></script>

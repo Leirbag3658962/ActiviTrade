@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../Style/CreationActivite.css">
-<link rel="stylesheet" href="../Style/Navbar.css">
-<link rel="stylesheet" href="../Style/Footer.css">
+<link rel="stylesheet" href="../Style/navbar2.css">
+<link rel="stylesheet" href="../Style/footer2.css">
 <title>Créer une nouvelle activité</title>
 </head>
 <body>
 <header id="navbar" class="navbar"></header>
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 	<?php
         require_once "../../Modele/LienPDO.php";
         $pdo = lienPDO(); 
@@ -36,22 +36,27 @@
 		<br>
 		<label for="labDuree">Durée </label>
 		<br>
-		<input class="input" type="text" id="inputDuree" name="inputDuree"><br>
+		<input class="input" type="time" id="inputDuree" name="inputDuree"><br>
 		<br>
 		<label for="labCategorie">Catégorie </label>
 		<br>
 		<select class="input" id="inputCategorie" name="inputCategorie">
-			<option value="test1">Test1</option>
-			<option value="test2">Test2</option>
+			<?php
+				listeCategorie($pdo);
+			?>
 		</select><br>
 		<br>
 		
 		<label for="labNbrParticipant">Nombre de participants </label>
 		<br>
-		<input class="input" type="text" id="inputNbrParticipant" name="inputNbrParticipant"><br>
+		<input class="input" type="number" id="inputNbrParticipant" name="inputNbrParticipant"><br>
 	
 	</div>
 	<div class="droite">
+		<label for="labPrix">Prix </label>
+		<br>
+		<input class="input" type="number" id="inputPrix" name="inputPrix"><br>
+		<br>
 		<label for="labType">Type</label>
 		<br><br>
 		<input type="radio" id="Public" name="Groupe" value="Public">
@@ -70,34 +75,40 @@
 <br><br>
 <div class="conteneurImage">
 	<div class="Cells">
-		<p class="Paragraph"><label for="ImageInput">Déposez ou cliquez pour parcourir</label></p>
-        <input type="file" class="ImageInput" accept="image/*" hidden>
+		<p class="Paragraph"><label for="ImageInput1">Déposez ou cliquez pour parcourir</label></p>
+        <input type="file" name="ImageInput1" class="ImageInput" accept="image/*" hidden>
         <img class="ImageActivite" src="" alt="" style="display: none;">
 	</div>
 	<div class="Cells">
-		<p class="Paragraph"><label for="ImageInput">Déposez ou cliquez pour parcourir</label></p>
-        <input type="file" class="ImageInput" accept="image/*" hidden>
+		<p class="Paragraph"><label for="ImageInput2">Déposez ou cliquez pour parcourir</label></p>
+        <input type="file" name="ImageInput2" class="ImageInput" accept="image/*" hidden>
         <img class="ImageActivite" src="" alt="" style="display: none;">
 	</div>
 	<div class="Cells">
-		<p class="Paragraph"><label for="ImageInput">Déposez ou cliquez pour parcourir</label></p>
-        <input type="file" class="ImageInput" accept="image/*" hidden>
+		<p class="Paragraph"><label for="ImageInput3">Déposez ou cliquez pour parcourir</label></p>
+        <input type="file" name="ImageInput3" class="ImageInput" accept="image/*" hidden>
         <img class="ImageActivite" src="" alt="" style="display: none;">
 	</div>
 </div>
 <br>
 <button type="submit" id="createButton">Créer</button>
+	<?php
+		traitementFormActivite($pdo);
+	?>
 </form>
 <br><br>
 
 <footer id="footer" class="footer"></footer>
 </body>
 
-<script src="../Components/Navbar.js"></script>
+<script src="../Components/Navbar2.js"></script>
 <script>
-	document.getElementById("navbar").innerHTML = Navbar();
+	document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+	document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>
