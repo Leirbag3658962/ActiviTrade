@@ -44,7 +44,7 @@ function handleFile(file, previewElement, textElement, zone) {
       previewElement.src = e.target.result;
       previewElement.style.display = "block";
       previewElement.style.width = "100%";
-      previewElement.style.height = "150px";
+      previewElement.style.height = "100%";
       textElement.style.display = "none";
       zone.style.border = "none";
     };
