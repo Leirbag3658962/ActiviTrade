@@ -7,9 +7,13 @@ $pdo = lienPDO();
 
 $message = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $idUser = $_SESSION['idUser']; 
+if (!isset($_SESSION['idUser'])) {
+    header("Location: LogIn.php");
+    exit;
+}
+$idUser = $_SESSION['idUser']; 
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
     $email = htmlspecialchars($_POST['email']);
