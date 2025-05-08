@@ -9,7 +9,7 @@ const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
 
 form.addEventListener('submit', e => {
-    e.preventDefault();
+    // e.preventDefault();
 
     validateInputs();
 });
@@ -116,3 +116,38 @@ const validateInputs = () => {
         setSuccess(password2);
     }
 };
+
+const validatorText = document.getElementById('password');
+showHide = document.getElementById('showHide');
+const passwordCheck = document.querySelectorAll('.password-check img');
+validatorText.focus();
+
+showHide.addEventListener("click", function(e) {
+    validatorText.type = validatorText.type === "text" ? "password" : "text";
+    e.target.src = e.target.src.endsWith("Hide.svg") ? "../img/Show.svg" : "../img/Hide.svg";
+});
+
+const combinations = [
+    {regex: /.{8}/, key: 0},
+    {regex: /[A-Z]/, key: 1},
+    {regex: /[a-z]/, key: 2},
+    {regex: /[0-9]/, key: 3},
+    {regex: /[^A-Za-z0-9]/, key: 4}
+];
+
+validatorText.addEventListener("keyup", function(e) {
+    combinations.forEach((item)=>{
+        const isValid = item.regex.test(e.target.value);
+        let checkItem = passwordCheck[item.key];
+
+        if (isValid){
+            checkItem.src = "../img/check.svg";
+            checkItem.parentElement.style.color = "green";
+
+        }else {
+            checkItem.src = "../img/close.svg";
+            checkItem.parentElement.style.color = "red";
+
+        }
+    })
+});
