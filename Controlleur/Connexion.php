@@ -16,21 +16,8 @@ if(!empty($_POST)) {
             echo "L'email n'est pas valide.";
             exit;
         }
-
-        // BDD Connexion
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "activitrade";
-        $db = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $sql = "SELECT * FROM `utilisateur` WHERE `email` = :email";
-        $query = $db->prepare($sql);
-        $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
-        $query->execute();
-
-        $user = $query->fetch();
+        
+        $user = User::getUserByEmail($_POST['email']);
         
         if(!$user) {
             echo "Email ou mot de passe incorrect";
@@ -43,8 +30,6 @@ if(!empty($_POST)) {
         }
 
         //les 2 sont correctes
-        
-
         //Stockage dans $_SESSION les infos
         $_SESSION["user"] = [
             'id' => $user['idUtilisateur'],
@@ -57,8 +42,7 @@ if(!empty($_POST)) {
         ];
 
         //Redirection vers la page d'accueil
-        header('Location: ../../index.php');
-
+        header('Location: ../../Vue/Pages/home.php');
         
     } else { // Si un champ est vide
         echo "Veuillez remplir tous les champs.";

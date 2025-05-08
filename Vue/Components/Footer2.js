@@ -1,6 +1,6 @@
 function Footer2(){
     return `
-        <footer>
+        <footer class="footer">
             <div class="footer-content">
                 <div class="contact-section">
                     <h2>Contactez nous</h2>
@@ -13,15 +13,19 @@ function Footer2(){
                     </div>
                 </div>
                 <div class="contact-form">
-                    <input type="text" placeholder="Nom">
-                    <input type="email" placeholder="Adresse e-mail">
-                    <textarea placeholder="Description"></textarea>
-                    <button type="submit">Envoyer</button>
+                    <form id="contactForm" method="post">
+                        <input type="text" name="name" placeholder="Nom" required>
+                        <input type="email" name="email" placeholder="Adresse e-mail" required>
+                        <textarea name="message" placeholder="Description" required></textarea>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                    <div id="messageStatus" style="display:none; color: white; margin-top: 10px;"></div>
                 </div>
             </div>
             <div class="copyright">
-                Copyright ©2025 Tous droits réservés
+                <a href="MentionLegale.php">Mentions Légales</a>
+                <p>Copyright ©2025 Tous droits réservés</p>
             </div>
         </footer>
-    `
+    `;
 }
