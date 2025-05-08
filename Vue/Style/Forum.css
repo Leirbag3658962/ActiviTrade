@@ -53,7 +53,7 @@ label {
 
 
 /*forum*/
-#theme {
+#title {
     width: 100%; 
     padding: 8px;
     font-size: 16px;
@@ -62,7 +62,7 @@ label {
     margin-bottom: 20px; 
 }
 
-#contenu {
+#context {
     width: 100%; 
     padding: 8px;
     font-size: 16px;
@@ -76,7 +76,7 @@ label {
     font-family: 'Arial', sans-serif;
     font-size: 14px;
     font-weight: bold;
-    color: white;
+    color: #ffffff;
     background-color: #343434;
     padding: 8px 16px;
     border: none;
@@ -133,7 +133,7 @@ label {
     margin: 0; 
 }
 
-.floating-button {
+/* .floating-button {
     position: fixed;
     bottom: 30px;
     left: 20px;
@@ -157,7 +157,7 @@ label {
 .floating-button:hover {
     background-color: #4f674f;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
+} */
 
 
 /*forumdetail*/
@@ -166,10 +166,13 @@ label {
     flex-direction: row;
     margin-bottom: 20px;
     padding: 20px;
-    width: 100%; 
+/*     width: 100%; 
     max-width: 1000px; 
 }
 
+
+ */
+}
 
 
 .post-info-container {
@@ -190,11 +193,14 @@ label {
 
 .title-context-container {
     flex-grow: 1; 
-    min-width: 850px; 
+/*     min-width: 850px; 
     background-color: #f0f0f0;
     padding: 20px; 
     border-radius: 8px;
-    box-sizing: border-box; 
+    box-sizing: border-box;  */
+    background-color: #f0f0f0;
+    padding: 20px; 
+    border-radius: 8px;
 }
 
 .title-container h2 {
@@ -211,23 +217,60 @@ label {
 }
 
 
-.replies {
+/* .replies {
     margin-top: 30px;
     padding: 20px; 
     border-radius: 8px; 
+} */
+.post-info-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-right: 20px;
 }
+
+.post-info {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    width: 200px;
+}
+
+.post-info-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.post-info {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    width: 200px; 
+}
+
+.replies {
+    margin-top: 30px;
+}
+
 .reply {
     display: flex;
     align-items: flex-start; 
     margin-bottom: 20px;
-    padding: 20px;
+
+/*     padding: 20px;
     width: 100%; 
-    max-width: 1000px;
+    max-width: 1000px; */
 }
 
 .reply .thread-context {
     font-size: 16px;
     color: #555;
+    width: 650px;
     padding-top: 5px; 
     margin-top: 0; 
 }
@@ -236,7 +279,7 @@ label {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #343434;
-    color: white;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -262,14 +305,10 @@ label {
     margin-top: 10px;
     padding: 10px 20px;
     background-color: #343434;
-    color: white;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.reply-form button:hover {
-    background-color: #1b1b1b;
 }
 
 .reply-form button:hover {

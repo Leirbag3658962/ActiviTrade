@@ -1,4 +1,4 @@
-.boxform {
+/* .boxform {
 	width: 50%; 
     border: 2px solid lightblue; 
     background-color: lightblue; 
@@ -7,6 +7,118 @@
     margin: 20px auto;
     text-align: center;
     max-width: 450px;
+} */
+@font-face {
+    font-family: 'League_Spartan';
+    src: url('/Fonts/League_Spartan/static/LeagueSpartan-Regular.ttf');
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/Fonts/Montserrat/static/Montserrat-Regular.ttf');
+}
+body {
+    background-color: linear-gradient(to right, #00c6ff, #0072ff, #00c6ff);
+}
+
+#form {
+    width: 300px;
+    margin: 5vh auto 0 auto;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+#form h1 {
+    color: black;
+    text-align: center;
+    font-family: 'League_Spartan', sans-serif;
+}
+
+#form button {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 4px;
+}
+
+#form label {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.input-control {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.input-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-size: 12px;
+    padding: 10px;
+    width: 100%;
+}
+
+.input-control input:focus {
+    outline: 0;
+}
+
+.input-control.success input {
+    border-color: #09c372;
+}
+
+.input-control.error input {
+    border-color: #ff3860;
+}
+
+.input-control .error {
+    color: #ff3860;
+    font-size: 9px;
+    height: 13px;
+}
+
+.password-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 4px;
+    padding-left: 10px;
+    margin-bottom: 25px;
+}
+
+.password-input input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 10px 0;
+    font-size: 12px;
+    /* color: #fff; */
+}
+
+.password-input img {
+    cursor: pointer;
+    margin-right: 5px;
+    /* background: greenyellow; */
+    border-radius: 4px;
+}
+
+.password-check img{
+    height: 15px;
+}
+
+.password-check div{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    padding-left: 0px;
+    color: red;
 }
 
 .checkboxdiv {
@@ -15,7 +127,11 @@
     margin-left: 25%;
 }
 
-input[type=text] {
+button {
+    cursor: pointer;
+}
+
+/* input[type=text] {
     background: transparent;
     border-radius: 5px;
     border: 2px solid;
@@ -30,6 +146,13 @@ input[type=email] {
 }
 
 input[type=date] {
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid;
+    width: 200px;
+}
+
+input[type=tel] {
     background: transparent;
     border-radius: 5px;
     border: 2px solid;
@@ -55,7 +178,7 @@ input[type=submit] {
 form input{
     height: 25px;
     margin-bottom: 15px;
-}
+} */
 
 @media screen and (max-width: 500px) {
     .boxform {

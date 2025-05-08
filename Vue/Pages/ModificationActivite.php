@@ -1,3 +1,35 @@
+
+<?php
+session_start();
+require_once "../../Modele/LienPDO.php";
+$pdo = lienPDO();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = (int) $_POST['idActivite'];
+    $nom = $_POST['inputNom'] ?? '';
+    $adresse = $_POST['inputAdresse'] ?? '';
+    $duree = $_POST['inputDuree'] ?? '';
+    $nbrParticipant = (int) ($_POST['inputNbrParticipant'] ?? 0);
+    $description = $_POST['inputDescription'] ?? '';
+    $isPublic = ($_POST['Groupe'] === 'Public') ? 1 : 0;
+
+    $sql = "UPDATE activite 
+            SET nomActivite = ?, adresse = ?, duree = ?, nbrParticipantMax = ?, description = ?, IsPublic = ?
+            WHERE idActivite = ?";
+    $stmt = $pdo->prepare($sql);
+    $success = $stmt->execute([$nom, $adresse, $duree, $nbrParticipant, $description, $isPublic, $id]);
+
+    if ($success) {
+        header("Location: confirmation.php"); 
+        exit;
+    } else {
+        echo "La mise à jour a échoué.";
+    }
+} else {
+    echo "Demande illégale.";
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +44,7 @@
 <h1 id="titrecreation">Modification de ton activité</h1>
 <div class="conteneurForm">
 	<div class="gauche">
-	<form>
+	<form method="POST" action="modifier_activite.php">
 		<label for="labNomActivite">Nom d'activité </label>
 		<br>
 		<input class="input" type="text" id="inputNom" name="inputNom"><br>
@@ -75,3 +107,4 @@
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer.js"></script>
 </html>
+

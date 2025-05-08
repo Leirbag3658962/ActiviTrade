@@ -29,7 +29,7 @@ if(isset($_SESSION['user'])) {
             <br>
             <input type="submit" value="Se connecter">
         </form>
-        <p>Vous n'avez pas encore de compte? Inscrivez-vous <a href="SignIn.html">ici</a></p>
+        <p>Vous n'avez pas encore de compte? Inscrivez-vous <a href="SignIn.php">ici</a></p>
     </div>
     <footer id="footer" class="footer"></footer>
 </body>
