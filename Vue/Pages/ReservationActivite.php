@@ -17,8 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
     $age = htmlspecialchars($_POST['age']);
-    $idUser = $_SESSION['idUser'];  
-    $idActivite = $_SESSION['idActivite'];
 
     if (!empty($nom) && !empty($prenom) && !empty($age) && !empty($idActivite)) {
         $stmt = $pdo->prepare("INSERT INTO reservation (nom, prenom, age, idUser, idActivite) VALUES (:nom, :prenom, :age, :idUser, :idActivite)");
@@ -34,9 +32,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 $idActivite = $_SESSION['idActivite']; 
-$stmt = $pdo->query("SELECT * FROM reservation ORDER BY date DESC");
+$idUser = $_SESSION['idUser']; 
+
+$stmt = $pdo->prepare("SELECT * FROM reservation WHERE idUser = :idUser AND idActivite = :idActivite ORDER BY date DESC");
+$stmt->execute([
+    ':idUser' => $idUser,
+    ':idActivite' => $idActivite
+]);
 $participants = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $participant_count = count($participants);
+
 ?>
 
 <!DOCTYPE html>
