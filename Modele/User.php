@@ -32,18 +32,20 @@ class User {
     public static function getUserById($id) {
         $pdo = getPDO();
         $stmt = $pdo->prepare("
-            SELECT * FROM utilisateur WHERE idUtilisateur = ?
+            SELECT * FROM utilisateur WHERE idUtilisateur = :idUtilisateur
         ");
-        $stmt->execute([$id]);
+        $stmt->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
     public static function getUserByEmail($email) {
         $pdo = getPDO();
         $stmt = $pdo->prepare("
-            SELECT * FROM utilisateur WHERE email = ?
+            SELECT * FROM utilisateur WHERE email = :email
         ");
-        $stmt->execute([$email]);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

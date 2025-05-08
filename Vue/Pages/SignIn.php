@@ -55,16 +55,38 @@ if(isset($_SESSION['user'])) {
             </div>
 
             <div class="input-control">
-                <label for="telephone">Num&eacute;ro de t&eacute;l&eacute;phone</label><br>
-                <input type="tel" id="telephone" name="telephone" placeholder="612345678" ><br>
+                <label for="telephone">Num&eacute;ro de t&eacute;l&eacute;phone</label>
+                <input type="tel" id="telephone" name="telephone" placeholder="612345678" >
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
-                <label for="password">Mot de passe</label><br>
-                <input type="password" id="password" name="password" placeholder="Votre mot de passe" ><br>
-                <div class="error"></div>
+                <label for="password">Mot de passe</label>
+                <div class="password-input">
+                    <input type="password" id="password" name="password" placeholder="Votre mot de passe" >
+                    <img src="../img/Hide.svg" id="showHide" >
+                    <!-- <span class="toggle-password" onclick="togglePasswordVisibility('password')"></span> -->
+                    <div class="error"></div>
+                </div>
+                <div class="password-check">
+                    <div class="check-length">
+                        <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 8 caract&egrave;res
+                    </div>
+                    <div class="check-uppercase">
+                        <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 1 lettre majuscule
+                    </div>
+                    <div class="check-lowercase">
+                        <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 1 lettre minuscule
+                    </div>
+                    <div class="check-number">
+                        <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 1 chiffre
+                    </div>
+                    <div class="check-special">
+                        <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 1 caract&egrave;re sp&eacute;cial
+                    </div>
+                </div>
             </div>
+
 
             <div class="input-control">
                 <label for="password">Confirmer le mot de passe</label><br>
