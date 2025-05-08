@@ -127,6 +127,16 @@ showHide.addEventListener("click", function(e) {
     e.target.src = e.target.src.endsWith("Hide.svg") ? "../img/Show.svg" : "../img/Hide.svg";
 });
 
+const confirmPasswordInput = document.getElementById("password2");
+const toggleIconConfirm = document.getElementById("showHideConfirm");
+
+toggleIconConfirm.addEventListener("click", function () {
+    const type = confirmPasswordInput.getAttribute("type") === "password" ? "text" : "password";
+    confirmPasswordInput.setAttribute("type", type);
+    toggleIconConfirm.src = type === "password" ? "../img/Hide.svg" : "../img/Show.svg";
+});
+
+
 const combinations = [
     {regex: /.{8}/, key: 0},
     {regex: /[A-Z]/, key: 1},

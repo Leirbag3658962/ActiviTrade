@@ -92,8 +92,15 @@ if(!empty($_POST)) {
             'isbanned' => 0
         ];
 
+        $destinataire = $_POST['email'];
+        $sujet = "Bienvenue sur notre site !";
+        $message = "Bonjour $firstname,\n\nMerci de vous être inscrit sur ActiviTrade !\n\nCordialement,\nL'équipe d'ActiviTrade";
+        $headers = "From: vincentgab78@gmail.com";
+        mail($destinataire, $sujet, $message, $headers);
+
+
         //Redirection vers la page d'accueil
-        header('Location: ../../index.php');
+        header('Location: ../../Vue/Pages/home.php');
 
     } else { // Si un champ est vide
         echo "Veuillez remplir tous les champs.";

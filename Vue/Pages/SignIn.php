@@ -89,10 +89,14 @@ if(isset($_SESSION['user'])) {
 
 
             <div class="input-control">
-                <label for="password">Confirmer le mot de passe</label><br>
-                <input type="password" id="password2" name="password2" placeholder="Confirmez votre mot de passe" ><br>
+                <label for="password2">Confirmer le mot de passe</label>
+                <div class="password-input">
+                    <input type="password" id="password2" name="password2" placeholder="Confirmez votre mot de passe">
+                    <img src="../img/Hide.svg" id="showHideConfirm">
+                </div>
                 <div class="error"></div>
             </div>
+
 
             <div id="checkboxdiv" class="checkboxdiv">
                 <input type="checkbox" id="cgu" value="CGU" name="condition[]" required>

@@ -15,13 +15,21 @@ session_start();
 <body>
     <header id="navbar" class="navbar"></header>
     <div class="boxform">
-        <h1>Mot de passe oubli&eacute;</h1>
-        <p class="instructions">Nous vous enverrons un email de r&eacute;cup&eacute;ration afin de r&eacute;initialiser votre mot de passe.</p>
         <form id="resetForm" method="post">
-            <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required><br><br>
-            <input type="submit" id="sendButton" value="Envoyer">
+            <h1>Mot de passe oubli&eacute;</h1>
+            <p class="instructions">Nous vous enverrons un email de r&eacute;cup&eacute;ration afin de r&eacute;initialiser votre mot de passe.</p>
+            
+            <div class="input-control">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required>
+                <div class="error"></div>
+            </div>
+            <p>Vous n'avez pas encore de compte ? <a href="SignIn.html">Inscrivez-vous</a></p>
+        <p>Vous avez d&eacute;j&agrave; un compte ? <a href="LogIn.html">Connectez-vous</a></p>
+
+            <button type="submit" id="sendButton">Envoyer</button>
         </form>
+
         <div id="codeInputs" style="display: none;">
             <p>Entrez le code que vous avez re&ccedil;u par email :</p>
             <div class="code-container">
@@ -33,13 +41,14 @@ session_start();
                 <input type="text" maxlength="1" class="code-input">
             </div>
             <br>
-            <input type="submit" value="V&eacute;rifier">
+            <button type="submit">V&eacute;rifier</button>
         </div>
-        <p>Vous n'avez pas encore de compte ? <a href="SignIn.html">Inscrivez-vous</a></p>
-        <p>Vous avez d&eacute;j&agrave; un compte ? <a href="LogIn.html">Connectez-vous</a></p>
+
+        
     </div>
     <footer id="footer" class="footer"></footer>
 </body>
+
 <script src="../Components/Navbar2.js"></script>
 <script src="../Components/CodePassword.js"></script>
 <script>

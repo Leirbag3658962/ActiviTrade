@@ -16,23 +16,35 @@ if(isset($_SESSION['user'])) {
     <title>Inscription</title>
 </head>
 <body>
-    <header id="navbar" class="navbar">
-    </header>
+    <header id="navbar" class="navbar"></header>
+
     <div class="boxform">
-        <h1>Connexion</h1>
-        <br>
-        <form method="post" action="../../Controlleur/Connexion.php">
-            <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required></input><br>
-            <label for="password">Mot de passe</label><br>
-            <input type="password" id="password" name="password" placeholder="" required><br>
-            <br>
-            <input type="submit" value="Se connecter">
+        <form id="form" method="post" action="../../Controlleur/Connexion.php">
+            <h1>Connexion</h1>
+
+            <div class="input-control">
+                <label for="email">Email</label><br>
+                <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required><br>
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="password">Mot de passe</label>
+                <div class="password-input">
+                    <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
+                    <img src="../img/Hide.svg" id="showHide">
+                </div>
+                <div class="error"></div>
+            </div>
+            <p>Mot de passe oublié ? Cliquez <a href="ResetPassword.php">ici</a></p>
+            <button type="submit">Se connecter</button>
+            <p>Vous n'avez pas encore de compte ? Inscrivez-vous <a href="SignIn.php">ici</a></p>
         </form>
-        <p>Vous n'avez pas encore de compte? Inscrivez-vous <a href="SignIn.php">ici</a></p>
     </div>
+
     <footer id="footer" class="footer"></footer>
 </body>
+<script src="../Components/LogIn.js"></script>
 <script src="../Components/Navbar2.js"></script>
 <script>
     document.getElementById("navbar").innerHTML = Navbar2();
