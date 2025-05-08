@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../Style/CreationActivite.css">
-<link rel="stylesheet" href="../Style/Navbar.css">
-<link rel="stylesheet" href="../Style/Footer.css">
+<link rel="stylesheet" href="../Style/navbar2.css">
+<link rel="stylesheet" href="../Style/footer2.css">
 <title>Créer une nouvelle activité</title>
 </head>
 <body>
@@ -92,18 +92,23 @@
 </div>
 <br>
 <button type="submit" id="createButton">Créer</button>
-
+	<?php
+		traitementFormActivite($pdo);
+	?>
 </form>
 <br><br>
 
 <footer id="footer" class="footer"></footer>
 </body>
 
-<script src="../Components/Navbar.js"></script>
+<script src="../Components/Navbar2.js"></script>
 <script>
-	document.getElementById("navbar").innerHTML = Navbar();
+	document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+	document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>
