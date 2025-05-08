@@ -5,6 +5,11 @@ $_SESSION['idUser'] = 1;
 require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
+if (!isset($_SESSION['idUser'])) {
+    header("Location: LogIn.php");
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $theme = htmlspecialchars($_POST['theme']);
