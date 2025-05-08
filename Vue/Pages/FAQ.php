@@ -11,6 +11,7 @@
 <h1 id="titrefaq"> FAQ </h1>
 <div class="box">
 	<?php
+	session_start();
 	require_once "../../Modele/LienPDO.php";
 	$pdo = lienPDO();
 	afficheFaq($pdo);

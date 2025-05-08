@@ -1,6 +1,7 @@
 <?php
-$pdo = new PDO('mysql:host=localhost;dbname=activititrade', 'root', '');
-
+session_start();
+require_once(__DIR__ . '../../../Modele/Database.php');
+$pdo = getPDO();
 // Création des utilisateurs s'ils n'existent pas
 $users = [
     1 => 'user@example.com',

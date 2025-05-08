@@ -1,16 +1,19 @@
 <?php
-// Connexion à la base de données
-$host = 'localhost';
-$port = '3306'; 
-$dbname = 'activitrade_demo2';
-$user = 'root';
-$password = 'hello'; 
+// // Connexion à la base de données
+// $host = 'localhost';
+// $port = '3306'; 
+// $dbname = 'activitrade_demo2';
+// $user = 'root';
+// $password = 'hello'; 
 
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+// try {
+//     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
+// } catch (PDOException $e) {
+//     die("Erreur de connexion : " . $e->getMessage());
+// }
+session_start();
+require_once(__DIR__ . '../../../Modele/Database.php');
+$pdo = getPDO();
 
 // Récupérer les activités
 $sql = "SELECT * FROM activite";
@@ -51,7 +54,7 @@ if ($activeFilter == 'Nouveau') {
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/Vue/Style/Home.css">
-    <link rel="stylesheet" href="/Vue/Style/navbar2.css">
+    <link rel="stylesheet" href="/Vue/Style/Navbar2.css">
     <link rel="stylesheet" href="/Vue/Style/footer2.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ActiviTrade</title>

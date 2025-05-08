@@ -15,8 +15,8 @@ if(isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/SignIn.css">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/Navbar2.css">
+    <link rel="stylesheet" href="../Style/Footer2.css">
     <title>Inscription</title>
 </head>
 <body>
@@ -94,10 +94,10 @@ if(isset($_SESSION['user'])) {
                 <div class="error"></div>
             </div>
 
-            <!-- <div id="checkboxdiv" class="checkboxdiv">
-                <input type="checkbox" id="cgu" value="CGU" name="condition[]" >
-                <label for="cgu">J'ai lu et j'accepte les <a href="">Conditions Générales d'Utilisation</a></label><br>
-            </div> -->
+            <div id="checkboxdiv" class="checkboxdiv">
+                <input type="checkbox" id="cgu" value="CGU" name="condition[]" required>
+                <label for="cgu">J'ai lu et j'accepte les <a href="MentionLegale.php">Conditions Générales d'Utilisation</a></label><br>
+            </div>
             <br>
             <button type="submit">S'inscrire</button>
             <p>Vous avez d&eacute;j&agrave; un compte ? Connectez-vous <a href="LogIn.php">ici</a></p>
@@ -107,10 +107,13 @@ if(isset($_SESSION['user'])) {
     <footer id="footer" class="footer"></footer>
 </body>
 <script src="../Components/InscriptionValidation.js"></script>
-<script src="../Components/Navbar.js"></script>
+<script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
+    document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>

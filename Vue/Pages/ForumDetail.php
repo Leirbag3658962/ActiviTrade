@@ -70,8 +70,8 @@ if ($thread_id > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/Forum.css">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/Navbar2.css">
+    <link rel="stylesheet" href="../Style/Footer2.css">
     <title>Détails du sujet</title>
 </head>
 <body>
@@ -177,9 +177,9 @@ if ($thread_id > 0) {
 
 <footer id="footer" class="footer"></footer>
 
-<script src="../Components/Navbar.js"></script>
+<script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
+    document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <!-- <<<<<<< Jingjing
 <script src="../Components/ForumAnswer.js"></script>
@@ -187,6 +187,9 @@ if ($thread_id > 0) {
 <script src="../Components/Forum.js"></script>
 <!-- >>>>>>> main -->
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </body>
 </html>

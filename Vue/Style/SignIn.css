@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+    padding: 0;
+}
 /* .boxform {
 	width: 50%; 
     border: 2px solid lightblue; 
@@ -124,7 +128,7 @@ body {
 .checkboxdiv {
     width: 200px;
     text-align: left;
-    margin-left: 25%;
+    /* margin-left: 25%; */
 }
 
 button {

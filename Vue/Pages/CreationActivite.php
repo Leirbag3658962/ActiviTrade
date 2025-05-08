@@ -1,3 +1,10 @@
+<?php
+session_start();
+// require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../../Modele/LienPDO.php');
+// $pdo = getPDO();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +20,8 @@
 
 <form method="post" enctype="multipart/form-data">
 	<?php
-        require_once "../../Modele/LienPDO.php";
-        $pdo = lienPDO(); 
+        // require_once "../../Modele/LienPDO.php";
+        // $pdo = lienPDO(); 
     ?>
 <div class="conteneurForm">
 	<div class="gauche">

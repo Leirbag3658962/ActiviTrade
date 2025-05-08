@@ -11,6 +11,7 @@
 
 <h1>Conditions Générales d'Utilisation</h1>
 <?php
+    session_start();
     require_once "../../Modele/LienPDO.php";
     $pdo = lienPDO();
     afficherCgu($pdo);

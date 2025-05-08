@@ -24,6 +24,8 @@ function Footer2(){
             </div>
             <div class="copyright">
                 <a href="MentionLegale.php">Mentions Légales</a>
+                <a href="Cgu.php">Conditions générales d'utilisation</a>
+
                 <p>Copyright ©2025 Tous droits réservés</p>
             </div>
         </footer>
