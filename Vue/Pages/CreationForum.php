@@ -74,15 +74,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <footer id="footer" class="footer"></footer>
 
-</body>
-<!-- <script src="../Components/Navbar2.js"></script>
+
+</body>             
+script src="../Components/Navbar2.js"></script>
 <script>
 	document.getElementById("navbar").innerHTML = Navbar2();
-</script> -->
+</script>
+
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>
 	document.getElementById("footer").innerHTML = Footer2();
 </script>
+
 </html>

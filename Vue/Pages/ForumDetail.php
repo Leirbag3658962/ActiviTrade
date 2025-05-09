@@ -121,11 +121,6 @@ if ($idForumPost > 0 && !empty($contenu)) {
 <footer id="footer" class="footer"></footer>
 
 </body>
-
-<!-- <script src="../Components/Navbar2.js"></script>
-<script>
-	document.getElementById("navbar").innerHTML = Navbar2();
-</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
