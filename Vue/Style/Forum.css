@@ -53,7 +53,7 @@ label {
 
 
 /*forum*/
-#title {
+#theme {
     width: 100%; 
     padding: 8px;
     font-size: 16px;
@@ -62,7 +62,7 @@ label {
     margin-bottom: 20px; 
 }
 
-#context {
+#contenu {
     width: 100%; 
     padding: 8px;
     font-size: 16px;
@@ -76,7 +76,7 @@ label {
     font-family: 'Arial', sans-serif;
     font-size: 14px;
     font-weight: bold;
-    color: #ffffff;
+    color: white;
     background-color: #343434;
     padding: 8px 16px;
     border: none;
@@ -98,9 +98,9 @@ label {
 .context { 
     background-color: #d5e2d5;
     padding: 20px;
-    margin-bottom: 20px; 
-    border-radius: 8px;  
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* 每个框之间的间距 */
+    border-radius: 8px;  /* 圆角边框 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
 }
 
 .context-title a {
@@ -113,13 +113,13 @@ label {
 }
 
 .context .post-info{
-    margin-top: 5px;  
+    margin-top: 5px;  /* 创建人和日期之间添加一些间距 */
     font-size: 14px;
 }
 
 .context .post-info p{
-    margin: 0; 
-    padding-bottom: 5px; 
+    margin: 0;  /* 去掉p标签的默认外边距 */
+    padding-bottom: 5px;  /* 每一行之间加点间距 */
 }
 
 
@@ -133,7 +133,7 @@ label {
     margin: 0; 
 }
 
-/* .floating-button {
+.floating-button {
     position: fixed;
     bottom: 30px;
     left: 20px;
@@ -157,7 +157,7 @@ label {
 .floating-button:hover {
     background-color: #4f674f;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-} */
+}
 
 
 /*forumdetail*/
@@ -166,13 +166,10 @@ label {
     flex-direction: row;
     margin-bottom: 20px;
     padding: 20px;
-/*     width: 100%; 
-    max-width: 1000px; 
+    width: 100%; /* 👈 撑满父容器 */
+    max-width: 1000px; /* 可选：控制最大宽度 */
 }
 
-
- */
-}
 
 
 .post-info-container {
@@ -193,14 +190,11 @@ label {
 
 .title-context-container {
     flex-grow: 1; 
-/*     min-width: 850px; 
+    min-width: 850px; 
     background-color: #f0f0f0;
     padding: 20px; 
     border-radius: 8px;
-    box-sizing: border-box;  */
-    background-color: #f0f0f0;
-    padding: 20px; 
-    border-radius: 8px;
+    box-sizing: border-box; 
 }
 
 .title-container h2 {
@@ -217,60 +211,23 @@ label {
 }
 
 
-/* .replies {
+.replies {
     margin-top: 30px;
     padding: 20px; 
     border-radius: 8px; 
-} */
-.post-info-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-right: 20px;
 }
-
-.post-info {
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #333;
-    width: 200px;
-}
-
-.post-info-container {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 20px;
-}
-
-.post-info {
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #333;
-    width: 200px; 
-}
-
-.replies {
-    margin-top: 30px;
-}
-
 .reply {
     display: flex;
     align-items: flex-start; 
     margin-bottom: 20px;
-
-/*     padding: 20px;
+    padding: 20px;
     width: 100%; 
-    max-width: 1000px; */
+    max-width: 1000px;
 }
 
 .reply .thread-context {
     font-size: 16px;
     color: #555;
-    width: 650px;
     padding-top: 5px; 
     margin-top: 0; 
 }
@@ -279,7 +236,7 @@ label {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #343434;
-    color: #ffffff;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -305,7 +262,7 @@ label {
     margin-top: 10px;
     padding: 10px 20px;
     background-color: #343434;
-    color: #ffffff;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -314,3 +271,4 @@ label {
 .reply-form button:hover {
     background-color: #1b1b1b;
 }
+
