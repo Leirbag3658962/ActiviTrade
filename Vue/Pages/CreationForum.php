@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Création d'un Nouveau Sujet</h1>
     <div class="createforum-container">
         
-        <form action="create-thread.php" method="POST">
+        <form action="CreationActivite.php" method="POST">
             <label for="title">Titre:</label>
             <input type="text" id="title" name="title" required><br>
 
