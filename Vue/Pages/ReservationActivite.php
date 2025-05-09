@@ -107,3 +107,4 @@ $participant_count = count($participants);
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer.js"></script>
 </html>
+
