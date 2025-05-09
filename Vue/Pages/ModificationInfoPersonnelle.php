@@ -14,6 +14,7 @@ if (!isset($_SESSION['idUser'])) {
 $idUser = $_SESSION['idUser']; 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
     $email = htmlspecialchars($_POST['email']);
