@@ -1,47 +1,102 @@
-/* Conteneur */
+body {
+    padding: 0;
+    margin: 0;
+}
+/* Barre de navigation */
+/* .navbar {
+    background-color: #333;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+} */
+
+/* Menu de navigation */
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar ul li {
+    display: flex;
+    align-items: center;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.navbar ul li img {
+    height: 80px;
+    width: auto;
+    max-width: 150px;
+    border-radius: 5px;
+}
+
+/* Conteneur pour compenser la navbar */
 .conteneur {
     background-color: blue;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding-top: 110px; /* Hauteur de la navbar */
     box-sizing: border-box;
 }
 
 /* Slider */
 .image-slider {
     width: 100%;
-    max-width: 1200px;
-    height: 100vh;
+    max-width: 1200px; /* Largeur max pour éviter l'énorme étirement */
+    height: calc(100vh - 110px); /* Prend le reste de la page sans la navbar */
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Images */
 .image-slider img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Remplit le conteneur sans déformation */
     display: none;
 }
 
+/* Affiche l'image active */
 .image-slider img.active {
     display: block;
 }
 
 h1 {
-    text-align: center;
+    margin-top: 100px; /* Espace pour éviter qu'il passe sous la navbar */
+    text-align: center; /* Centrage horizontal */
 }
 
-/* Conteneur des boîtes */
+/* Conteneur principal des boîtes */
 .conteneur-boites {
     display: flex;
     justify-content: space-between;
     gap: 30px;
     max-width: 1200px;
     margin: 50px auto;
-    align-items: stretch;
+    align-items: stretch; /* Étire les colonnes pour avoir la même hauteur */
 }
 
 /* Colonnes */
@@ -50,10 +105,10 @@ h1 {
     max-width: 48%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; /* Aligne les boîtes en haut et en bas */
 }
 
-/* Boîtes info */
+/* Boîtes d'information */
 .boite-info {
     background-color: white;
     padding: 30px;
@@ -64,11 +119,12 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Boîte d'informations personnelles pour prendre toute la largeur */
 .boite-info:first-child {
-    flex-grow: 1;
+    flex-grow: 1; /* Étend cette boîte pour occuper l'espace restant */
 }
 
-/* Activité */
+/* Activité réservé */
 .carousel {
     overflow: hidden;
     position: relative;
@@ -112,16 +168,17 @@ h1 {
     background-color: #333;
 }
 
-/* Liste d'activités */
+/* Liste des activités avec alignement */
 .liste-activites {
     max-height: 400px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-start; /* Contenu aligné en haut */
     gap: 15px;
 }
 
+/* Activité dans la liste d'attente */
 .activite {
     display: flex;
     align-items: center;
@@ -131,7 +188,7 @@ h1 {
     border-radius: 8px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     min-height: 150px;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Empêche les boîtes de rapetisser */
 }
 
 .activite img {
@@ -146,21 +203,21 @@ h1 {
     color: #333;
     margin: 0;
 }
-
-/* Activités du bas */
+/* Conteneur principal pour le bas */
 .conteneur-activites-bas {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 30px; /* Même espacement que le haut */
     width: 100%;
-    max-width: 1200px;
-    margin: 50px auto;
+    max-width: 1200px; /* Aligné avec le haut */
+    margin: 50px auto; /* Centrage */
     box-sizing: border-box;
 }
 
+/* Colonnes pour les activités du bas */
 .conteneur-activites-bas .boite-info {
     flex: 1;
-    width: calc(50% - 15px);
+    width: calc(50% - 15px); /* Pour tenir compte du gap */
     background-color: white;
     padding: 30px;
     border-radius: 10px;
@@ -170,12 +227,14 @@ h1 {
     box-sizing: border-box;
 }
 
+/* Titres */
 .conteneur-activites-bas h4 {
     font-size: 1.5em;
     color: #333;
     margin-bottom: 20px;
 }
 
+/* Carrousel */
 .conteneur-activites-bas .carousel {
     overflow: hidden;
     width: 100%;
@@ -199,6 +258,7 @@ h1 {
     border-radius: 8px;
 }
 
+/* Indicateurs */
 .conteneur-activites-bas .carousel-indicators {
     display: flex;
     justify-content: center;
@@ -217,3 +277,6 @@ h1 {
 .conteneur-activites-bas .indicator.active {
     background-color: #333;
 }
+
+
+
