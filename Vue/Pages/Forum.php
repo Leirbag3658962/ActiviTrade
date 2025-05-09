@@ -57,14 +57,11 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
-
 <a href="CreationForum.php" class="floating-button">
     <i class="fas fa-plus"></i> Créer un sujet
 </a>
 <br><br>
-    
 <footer id="footer" class="footer"></footer>
-</body>
 
 <script src="../Components/Navbar2.js"></script>
 <script>
@@ -76,5 +73,5 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script>
 	document.getElementById("footer").innerHTML = Footer2();
 </script>
+</body>
 </html>
-
