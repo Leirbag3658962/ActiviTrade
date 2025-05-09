@@ -3,6 +3,7 @@ session_start();
 $_SESSION['idUser'] = 1;
 
 require_once "../../Modele/LienPDO.php";
+require_once "../Components/Navbar2.php";
 $pdo = lienPDO();
 
 if (!isset($_SESSION['idUser'])) {
@@ -51,7 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Créer un Forum</title>
 </head>
 <body>
-<header id="navbar" class="navbar"></header>
+<header id="navbar" class="navbar">
+    <?php echo Navbar2(); ?>
+</header>
 
 <div class="main-content">
     <h1>Création d'un Nouveau Sujet</h1>
@@ -71,15 +74,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <footer id="footer" class="footer"></footer>
 
+
+</body>             
 script src="../Components/Navbar2.js"></script>
 <script>
 	document.getElementById("navbar").innerHTML = Navbar2();
 </script>
+
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>
 	document.getElementById("footer").innerHTML = Footer2();
 </script>
-</body>
+
 </html>

@@ -9,9 +9,9 @@ error_reporting(E_ALL);
 // Connexion à la base de données
 $host = 'localhost';
 $port = '3306'; 
-$dbname = 'activitrade_demo2';
+$dbname = 'activitrade';
 $user = 'root';
-$password = 'hello';
+$password = '';
 
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
