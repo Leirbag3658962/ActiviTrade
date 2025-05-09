@@ -45,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/Forum.css">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/navbar2.css">
+    <link rel="stylesheet" href="../Style/footer2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Créer un Forum</title>
 </head>
@@ -71,11 +71,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <footer id="footer" class="footer"></footer>
 
-<script src="../Components/Navbar.js"></script>
+</body>
+<script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
+	document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
-</body>
+<script src="../Components/DragAndDrop.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+	document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>
