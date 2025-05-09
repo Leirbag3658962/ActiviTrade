@@ -52,13 +52,12 @@ footer {
     background-color: white;
     border-radius: 5px;
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .contact-form textarea {
     height: 120px;
     resize: vertical;
-    margin-top: 5px;
 }
 
 .contact-form button {
@@ -69,7 +68,6 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 5px;
-    margin-top: 10px;
 }
 
 .contact-form button:hover {

@@ -12,8 +12,11 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
-// Récupérer les activités
-$sql = "SELECT * FROM activite";
+// Récupérer les activités avec leurs thèmes
+$sql = "SELECT a.*, GROUP_CONCAT(at.idTheme) as themes 
+        FROM activite a 
+        LEFT JOIN activite_theme at ON a.idActivite = at.idActivite 
+        GROUP BY a.idActivite";
 $stmt = $pdo->query($sql);
 $activites = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -38,7 +41,7 @@ if ($activeFilter == 'Nouveau') {
     $filteredActivites = $activites;
 } else {
     foreach ($activites as $activite) {
-        if (isset($activite['categorie']) && $activite['categorie'] == $activeFilter) {
+        if (isset($activite['themes']) && strpos($activite['themes'], $activeFilter) !== false) {
             $filteredActivites[] = $activite;
         }
     }
@@ -173,7 +176,9 @@ if ($activeFilter == 'Nouveau') {
         document.getElementById("navbar").innerHTML = Navbar2();
     </script>
     <script src="../Components/footer2.js"></script>
-
+    <script>
+        document.getElementById("footer").innerHTML = Footer2();
+    </script>
     <!--! carousel de la bannière -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {

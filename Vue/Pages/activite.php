@@ -19,7 +19,6 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $id = (int) $_GET['id'];
 
-// Requête SQL pour récupérer les infos de l’activité
 $sql = "SELECT * FROM activite WHERE idActivite = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);
@@ -81,7 +80,9 @@ if (!$activite) {
     </div>
 
     <footer id="footer" class="footer"></footer>
+
 </body>
+
 <script src="../Components/navbar2.js"></script>
 <script>
     document.getElementById("navbar").innerHTML = Navbar2();
@@ -90,4 +91,5 @@ if (!$activite) {
 <script>
     document.getElementById("footer").innerHTML = Footer2();
 </script>
+
 </html>
