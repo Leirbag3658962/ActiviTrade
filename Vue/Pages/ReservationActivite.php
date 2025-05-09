@@ -17,9 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
     $age = htmlspecialchars($_POST['age']);
-    $idActivite = $_SESSION['idActivite']; 
-    $idUser = $_SESSION['idUser']; 
-    
+
     if (!empty($nom) && !empty($prenom) && !empty($age) && !empty($idActivite)) {
         $stmt = $pdo->prepare("INSERT INTO reservation (nom, prenom, age, idUser, idActivite) VALUES (:nom, :prenom, :age, :idUser, :idActivite)");
         $stmt->execute([
@@ -33,7 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
 }
 
-
+$idActivite = $_SESSION['idActivite']; 
+$idUser = $_SESSION['idUser']; 
 
 $stmt = $pdo->prepare("SELECT * FROM reservation WHERE idUser = :idUser AND idActivite = :idActivite ORDER BY date DESC");
 $stmt->execute([

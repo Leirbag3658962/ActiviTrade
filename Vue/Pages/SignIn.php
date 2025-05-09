@@ -5,9 +5,10 @@ $messageErreur = $_SESSION["erreur"] ?? "";
 unset($_SESSION["erreur"]);
 
 if(isset($_SESSION['user'])) {
-    header('Location: ../../index.php');
+    header('Location: home.php');
     exit;
 }
+require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,7 +21,9 @@ if(isset($_SESSION['user'])) {
     <title>Inscription</title>
 </head>
 <body>
-    <header id="navbar" class="navbar"></header>
+    <header id="navbar" class="navbar">
+        <?php echo Navbar2(); ?>
+    </header>
     <div class="boxform">
         <form id="form" method="post" action="../../Controlleur/Inscription.php">
             <h1>Inscription</h1>
@@ -111,10 +114,10 @@ if(isset($_SESSION['user'])) {
     <footer id="footer" class="footer"></footer>
 </body>
 <script src="../Components/InscriptionValidation.js"></script>
-<script src="../Components/Navbar2.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
     document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>

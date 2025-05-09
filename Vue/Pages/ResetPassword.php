@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,9 @@ session_start();
     <title>Mot de passe oubli&eacute;</title>
 </head>
 <body>
-    <header id="navbar" class="navbar"></header>
+    <header id="navbar" class="navbar">
+        <?php echo Navbar2(); ?>
+    </header>
     <div class="boxform">
         <form id="resetForm" method="post">
             <h1>Mot de passe oubli&eacute;</h1>
@@ -49,10 +52,10 @@ session_start();
     <footer id="footer" class="footer"></footer>
 </body>
 
-<script src="../Components/Navbar2.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script> -->
 <script src="../Components/CodePassword.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar2();
+    // document.getElementById("navbar").innerHTML = Navbar2();
     document.getElementById("sendButton").addEventListener("click", CodePassword);
 </script>
 <script src="../Components/NavbarAnim.js"></script>

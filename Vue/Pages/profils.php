@@ -12,23 +12,31 @@ if ($conn->connect_error) {
 session_start();
 // require_once(__DIR__ . '../../../Modele/Database.php');
 // $conn = getPDO();
+require_once(__DIR__ . '../../../Modele/User.php');
 
 // Récupère un utilisateur
+// Vérifie si l'utilisateur est connecté
+if (!isset($_SESSION['user'])){
+    header('Location: ../Pages/LogIn.php');
+    exit();
+}
 $sql = "SELECT * FROM utilisateur LIMIT 1";
 $result = $conn->query($sql);
 
 // Si aucun utilisateur n'existe, on en insère un par défaut
-if ($result->num_rows === 0) {
-    $insert = "INSERT INTO utilisateur 
-    (nom, prenom, email, dateNaissance, numeroRue, nomRue, codePostal, ville, pays, indicatif, telephone, role, password, photoprofil, isbanned)
-    VALUES 
-    ('Dupont', 'Jean', 'jean.dupont@example.com', '1990-01-01', '12', 'Rue des Lilas', '75000', 'Paris', 'France', '+33', '0612345678', 'utilisateur', 'pass123', '', 0)";
+// if ($result->num_rows === 0) {
+//     $insert = "INSERT INTO utilisateur 
+//     (nom, prenom, email, dateNaissance, numeroRue, nomRue, codePostal, ville, pays, indicatif, telephone, role, password, photoprofil, isbanned)
+//     VALUES 
+//     ('Dupont', 'Jean', 'jean.dupont@example.com', '1990-01-01', '12', 'Rue des Lilas', '75000', 'Paris', 'France', '+33', '0612345678', 'utilisateur', 'pass123', '', 0)";
     
-    $conn->query($insert);
-    $result = $conn->query($sql); // Refaire la requête après insertion
-}
+//     $conn->query($insert);
+//     $result = $conn->query($sql); // Refaire la requête après insertion
+// }
 
-$user = $result->fetch_assoc();
+// $user = $result->fetch_assoc();
+$user = User::getUserById($_SESSION['user']['id']);
+require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>
 
 
@@ -45,6 +53,7 @@ $user = $result->fetch_assoc();
     </head>
 
     <header id="navbar" class="navbar">
+        <?php echo Navbar2(); ?>
     </header>
 	
 <body>
@@ -261,10 +270,10 @@ window.addEventListener("message", function(event) {
 });
 
 </script>
-<script src="../Components/navbar2.js"></script>
+<!-- <script src="../Components/navbar2.js"></script>
 <script>
     document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>
