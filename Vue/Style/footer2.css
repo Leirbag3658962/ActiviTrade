@@ -85,6 +85,7 @@ footer {
 .copyright p, .copyright a{
     color: white;
     margin-top: 10px;
+    margin-right: 10px;
 }
 #messageStatus {
     display: none;

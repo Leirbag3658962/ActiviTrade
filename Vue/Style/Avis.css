@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .boxform {
     width: 50%;
     border: 2px solid #E5E4E2;

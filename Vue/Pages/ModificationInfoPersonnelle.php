@@ -45,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/Navbar2.css">
+    <link rel="stylesheet" href="../Style/Footer2.css">
     <link rel="stylesheet" href="../Style/ModificationInfoPersonnelle.css">
     <title>ModificationInfo</title>
 </head>
@@ -86,10 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </div>
 <footer id="footer" class="footer"></footer>
 </body>
-<script src="../Components/Navbar.js"></script>
+<script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
+    document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../../Modele/LienPDO.php";
+require_once "../Components/Navbar2.php";
 $pdo = lienPDO();
 
 $idForum = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -50,12 +51,14 @@ if ($idForumPost > 0 && !empty($contenu)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/Forum.css">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/navbar2.css">
+    <link rel="stylesheet" href="../Style/footer2.css">
     <title>Détails du sujet</title>
 </head>
 <body>
-<header id="navbar" class="navbar"></header>
+<header id="navbar" class="navbar">
+    <?php echo Navbar2(); ?>
+</header>
 
 <div class="main-content">
     <?php if ($forum): ?>
@@ -117,12 +120,11 @@ if ($idForumPost > 0 && !empty($contenu)) {
 
 <footer id="footer" class="footer"></footer>
 
-<script src="../Components/Navbar.js"></script>
-<script>
-    document.getElementById("navbar").innerHTML = Navbar();
-</script>
-<script src="../Components/ForumAnswer.js"></script>
-<script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
 </body>
+<script src="../Components/NavbarAnim.js"></script>
+<script src="../Components/DragAndDrop.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+	document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>

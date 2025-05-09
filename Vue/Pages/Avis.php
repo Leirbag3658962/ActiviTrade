@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../Style/Avis.css">
-<link rel="stylesheet" href="../Style/Navbar.css">
-<link rel="stylesheet" href="../Style/Footer.css">
+<link rel="stylesheet" href="../Style/Navbar2.css">
+<link rel="stylesheet" href="../Style/Footer2.css">
 <title>Avis</title>
 </head>
 <body>
@@ -75,10 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <footer id="footer" class="footer"></footer>
 
 </body>
-<script src="../Components/Navbar.js"></script>
+<script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
+    document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>

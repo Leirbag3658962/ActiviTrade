@@ -8,6 +8,7 @@ $_SESSION['idActivite'] = 1;
 //}
 
 require_once "../../Modele/LienPDO.php";
+require_once "../Components/Navbar2.php";
 $pdo = lienPDO();  
 
 $participants = [];
@@ -49,14 +50,15 @@ $participant_count = count($participants);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/Navbar2.css">
+    <link rel="stylesheet" href="../Style/Footer2.css">
     <link rel="stylesheet" href="../Style/ReservationActivite.css">
     <title>ReservationActivite</title>
 </head>
 
 <body>
 <header id="navbar" class="navbar">
+    <?php echo Navbar2(); ?>
 </header>
 <br><br>
 <h1>Réservation: Club de lecture</h1>
@@ -95,15 +97,19 @@ $participant_count = count($participants);
 </div>
 <div class="button-confirmer">
     <div class="button-container">
-        <button id="confirmer">Comfirmer</button>
+        <button id="confirmer">Confirmer</button>
     </div>
 </div>
 <footer id="footer" class="footer"></footer>
 </body>
-<script src="../Components/Navbar.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
-</script>
+    document.getElementById("navbar").innerHTML = Navbar2();
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>
+
