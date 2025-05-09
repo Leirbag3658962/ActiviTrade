@@ -5,6 +5,7 @@ if(isset($_SESSION['user'])) {
     header('Location: ../../index.php');
     exit;
 }
+require_once(__DIR__ . '/../Modele/User.php');
 //formulaire envoyé
 if(!empty($_POST)) {
     // Vérification des champs

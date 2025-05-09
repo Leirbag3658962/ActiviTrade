@@ -13,6 +13,7 @@
 // }
 session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
 $pdo = getPDO();
 
 // Récupérer les activités
@@ -60,7 +61,9 @@ if ($activeFilter == 'Nouveau') {
     <title>ActiviTrade</title>
 </head>
 <body>
-    <header id="navbar" class="navbar">    </header>
+    <header id="navbar" class="navbar">
+        <?php echo Navbar2(); ?>
+    </header>
 
     <div class="banner">
         <div class="carousel">
@@ -171,10 +174,10 @@ if ($activeFilter == 'Nouveau') {
     <footer id="footer" class="footer"></footer>
 
     <!--! navbar et footer -->
-    <script src="../Components/Navbar2.js"></script>
+    <!-- <script src="../Components/Navbar2.js"></script>
     <script>
         document.getElementById("navbar").innerHTML = Navbar2();
-    </script>
+    </script> -->
     <script src="../Components/footer2.js"></script>
 
     <!--! carousel de la bannière -->

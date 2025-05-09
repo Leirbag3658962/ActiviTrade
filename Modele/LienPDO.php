@@ -25,13 +25,13 @@ function lienPDO(){
     }
 }
 
-// function testValidationForm($data){
-//     $data = trim($data);
-//     $data = stripslashes($data);
-//     $data = strip_tags($data);
-//     $data = htmlspecialchars($data);
-//     return $data;
-// }
+function testValidationForm2($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = strip_tags($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
 
 function recuperationTable($pdo){
@@ -149,16 +149,16 @@ function traitementFormActivite($pdo){
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!empty($_POST['inputNom']) && !empty($_POST['inputDate']) && !empty($_POST['inputDuree']) && !empty($_POST['inputCategorie']) 
         && !empty($_POST['inputNbrParticipant']) && !empty($_POST['Groupe']) && !empty($_POST['inputDescription'])) {
-            $nomActivite = testValidationForm($_POST['inputNom']);
-            $dateActivite = testValidationForm($_POST['inputDate']);
-            $duree = testValidationForm($_POST['inputDuree']);
-            $adresse = testValidationForm($_POST['inputAdresse']);
-            $ville = testValidationForm($_POST['inputVille']);
-            $categorie = testValidationForm($_POST['inputCategorie']);
-            $nbrParticipant = testValidationForm($_POST['inputNbrParticipant']);
-            $groupe = testValidationForm($_POST['Groupe']);
-            $prix = testValidationForm($_POST['inputPrix']);
-            $descriptionact = testValidationForm($_POST['inputDescrption']);
+            $nomActivite = testValidationForm2($_POST['inputNom']);
+            $dateActivite = testValidationForm2($_POST['inputDate']);
+            $duree = testValidationForm2($_POST['inputDuree']);
+            $adresse = testValidationForm2($_POST['inputAdresse']);
+            $ville = testValidationForm2($_POST['inputVille']);
+            $categorie = testValidationForm2($_POST['inputCategorie']);
+            $nbrParticipant = testValidationForm2($_POST['inputNbrParticipant']);
+            $groupe = testValidationForm2($_POST['Groupe']);
+            $prix = testValidationForm2($_POST['inputPrix']);
+            $descriptionact = testValidationForm2($_POST['inputDescription']);
             $idCreator = $_SESSION['user']['id'];
             
 
