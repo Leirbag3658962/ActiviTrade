@@ -2,7 +2,7 @@
 //Demarrage session PHP
 session_start();
 if(isset($_SESSION['user'])) {
-    header('Location: ../../index.php');
+    header('Location: home.php');
     exit;
 }
 require_once(__DIR__ . '/../Modele/User.php');

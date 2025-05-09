@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once(__DIR__ . '../../Components/Navbar2.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +11,12 @@
 <title>FAQ</title>
 </head>
 <body>
-<header id="navbar" class="navbar"></header>
+<header id="navbar" class="navbar">
+	<?php echo Navbar2(); ?>
+</header>
 <h1 id="titrefaq"> FAQ </h1>
 <div class="box">
 	<?php
-	session_start();
 	require_once "../../Modele/LienPDO.php";
 	$pdo = lienPDO();
 	afficheFaq($pdo);
@@ -20,10 +25,10 @@
 </div>
 <footer id="footer" class="footer"></footer>
 </body>
-<script src="../Components/Navbar2.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
 	document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/BackgroundImageChanges.js"></script>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['user'])) {
-    header('Location: ../../index.php');
+    header('Location: home.php');
     exit;
 }
 require_once(__DIR__ . '../../Components/Navbar2.php');
