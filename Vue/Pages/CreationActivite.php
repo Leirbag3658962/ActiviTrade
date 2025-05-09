@@ -2,6 +2,7 @@
 session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../../Modele/LienPDO.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
 $pdo = getPDO();
 ?>
 
@@ -15,7 +16,9 @@ $pdo = getPDO();
 <title>Créer une nouvelle activité</title>
 </head>
 <body>
-<header id="navbar" class="navbar"></header>
+<header id="navbar" class="navbar">
+	<?php echo Navbar2(); ?>
+</header>
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
 
 <form method="post" enctype="multipart/form-data">
@@ -108,10 +111,10 @@ $pdo = getPDO();
 <footer id="footer" class="footer"></footer>
 </body>
 
-<script src="../Components/Navbar2.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
 	document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>

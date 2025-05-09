@@ -4,6 +4,7 @@ if(isset($_SESSION['user'])) {
     header('Location: ../../index.php');
     exit;
 }
+require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,7 +17,9 @@ if(isset($_SESSION['user'])) {
     <title>Inscription</title>
 </head>
 <body>
-    <header id="navbar" class="navbar"></header>
+    <header id="navbar" class="navbar">
+        <?php echo Navbar2(); ?>
+    </header>
 
     <div class="boxform">
         <form id="form" method="post" action="../../Controlleur/Connexion.php">
@@ -45,10 +48,10 @@ if(isset($_SESSION['user'])) {
     <footer id="footer" class="footer"></footer>
 </body>
 <script src="../Components/LogIn.js"></script>
-<script src="../Components/Navbar2.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
     document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>
