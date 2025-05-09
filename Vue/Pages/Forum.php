@@ -3,6 +3,7 @@ session_start();
 $_SESSION['idUser'] = 1;
 
 require_once "../../Modele/LienPDO.php";
+require_once "../Components/Navbar2.php";
 $pdo = lienPDO();
 
 if (isset($_SESSION['idUser'])) {
@@ -28,13 +29,15 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/Forum.css">
-    <link rel="stylesheet" href="../Style/Navbar2.css">
-    <link rel="stylesheet" href="../Style/Footer2.css">
+    <link rel="stylesheet" href="../Style/navbar2.css">
+    <link rel="stylesheet" href="../Style/footer2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Forum</title>
 </head>
 <body>
-<header id="navbar" class="navbar"></header>
+<header id="navbar" class="navbar">
+    <?php echo Navbar2(); ?>
+</header>
 
 <div class="main-content">
     <div class="forum-container">
@@ -57,23 +60,21 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
-
 <a href="CreationForum.php" class="floating-button">
     <i class="fas fa-plus"></i> Créer un sujet
 </a>
 <br><br>
-    
 <footer id="footer" class="footer"></footer>
+</body>
 
-<script src="../Components/Navbar2.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+	document.getElementById("navbar").innerHTML = Navbar2();
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
+<script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>
-    document.getElementById("footer").innerHTML = Footer2();
+	document.getElementById("footer").innerHTML = Footer2();
 </script>
-</body>
 </html>
-

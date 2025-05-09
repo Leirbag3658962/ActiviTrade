@@ -13,7 +13,7 @@ function Footer2(){
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="contactForm" method="post">
+                    <form id="contactForm" method="post" action="../Components/processContact.php">
                         <input type="text" name="name" placeholder="Nom" required>
                         <input type="email" name="email" placeholder="Adresse e-mail" required>
                         <textarea name="message" placeholder="Description" required></textarea>
