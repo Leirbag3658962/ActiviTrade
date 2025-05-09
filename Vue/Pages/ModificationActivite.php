@@ -53,8 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../Style/CreationActivite.css">
-<link rel="stylesheet" href="../Style/Navbar.css">
-<link rel="stylesheet" href="../Style/Footer.css">
+<link rel="stylesheet" href="../Style/Navbar2.css">
+<link rel="stylesheet" href="../Style/Footer2.css">
 <title>Modifier une activité</title>
 </head>
 <body>
@@ -106,9 +106,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 
-<script src="../Components/Navbar.js"></script>
+<script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
+	document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer.js"></script>
