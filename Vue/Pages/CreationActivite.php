@@ -1,8 +1,8 @@
 <?php
 session_start();
-// require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../../Modele/LienPDO.php');
-// $pdo = getPDO();
+$pdo = getPDO();
 ?>
 
 <!DOCTYPE html>

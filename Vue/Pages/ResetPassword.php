@@ -24,8 +24,8 @@ session_start();
                 <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required>
                 <div class="error"></div>
             </div>
-            <p>Vous n'avez pas encore de compte ? <a href="SignIn.html">Inscrivez-vous</a></p>
-        <p>Vous avez d&eacute;j&agrave; un compte ? <a href="LogIn.html">Connectez-vous</a></p>
+            <p>Vous n'avez pas encore de compte ? <a href="SignIn.php">Inscrivez-vous</a></p>
+        <p>Vous avez d&eacute;j&agrave; un compte ? <a href="LogIn.php">Connectez-vous</a></p>
 
             <button type="submit" id="sendButton">Envoyer</button>
         </form>

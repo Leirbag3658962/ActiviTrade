@@ -60,7 +60,7 @@ if ($activeFilter == 'Nouveau') {
     <title>ActiviTrade</title>
 </head>
 <body>
-    <header id="navbar" class="navbar"></header>
+    <header id="navbar" class="navbar">    </header>
 
     <div class="banner">
         <div class="carousel">
@@ -171,7 +171,7 @@ if ($activeFilter == 'Nouveau') {
     <footer id="footer" class="footer"></footer>
 
     <!--! navbar et footer -->
-    <script src="../Components/navbar2.js"></script>
+    <script src="../Components/Navbar2.js"></script>
     <script>
         document.getElementById("navbar").innerHTML = Navbar2();
     </script>
