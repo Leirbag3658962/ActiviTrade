@@ -112,3 +112,4 @@ $participant_count = count($participants);
     document.getElementById("footer").innerHTML = Footer2();
 </script>
 </html>
+

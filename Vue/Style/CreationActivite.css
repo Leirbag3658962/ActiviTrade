@@ -99,6 +99,7 @@ p :hover{
 
 #saveButton:hover {
     background-color: #333;
+    z-index: 9999; 
 }
 
 #createButton {
