@@ -31,7 +31,7 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
 </script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
-<script src="../Components/BackgroundImageChanges.js"></script>
+<!-- <script src="../Components/BackgroundImageChanges.js"></script> -->
 <script src="../Components/Footer2.js"></script>
 <script>
 	document.getElementById("footer").innerHTML = Footer2();

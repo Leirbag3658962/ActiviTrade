@@ -8,6 +8,7 @@ $_SESSION['idActivite'] = 1;
 //}
 
 require_once "../../Modele/LienPDO.php";
+require_once "../Components/Navbar2.php";
 $pdo = lienPDO();  
 
 $participants = [];
@@ -57,6 +58,7 @@ $participant_count = count($participants);
 
 <body>
 <header id="navbar" class="navbar">
+    <?php echo Navbar2(); ?>
 </header>
 <br><br>
 <h1>Réservation: Club de lecture</h1>
@@ -95,15 +97,15 @@ $participant_count = count($participants);
 </div>
 <div class="button-confirmer">
     <div class="button-container">
-        <button id="confirmer">Comfirmer</button>
+        <button id="confirmer">Confirmer</button>
     </div>
 </div>
 <footer id="footer" class="footer"></footer>
 </body>
-<script src="../Components/Navbar2.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
     document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>

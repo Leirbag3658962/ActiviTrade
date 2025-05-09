@@ -3,7 +3,7 @@ function Footer2(){
         <footer class="footer">
             <div class="footer-content">
                 <div class="contact-section">
-                    <h2>Contactez nous</h2>
+                    <h2>Contactez-nous</h2>
                     <p>Si vous avez des suggestions de modifications à apporter à notre site Web, veuillez nous contacter.</p>
                     <div class="social-icons">
                         <a href="#" class="social-icon">X</a>

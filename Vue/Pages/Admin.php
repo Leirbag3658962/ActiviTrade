@@ -1,15 +1,20 @@
 <?php
 session_start();
+require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Administrateur</title>
     <link rel="stylesheet" href="../Style/Admin.css"/>
+    <link rel="stylesheet" href="../Style/navbar2.css"/>
     <script src="../Components/AdminPagination.js"></script>
 </head>
 <body class>
 <div id="conteneur">
+    <header id="navbar" class="navbar">
+        <?php echo Navbar2(); ?>
+    </header>
     <!--Barre à gauche-->
     <div class="barreGauche">
         <div id="divGauche">
