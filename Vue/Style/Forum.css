@@ -98,9 +98,9 @@ label {
 .context { 
     background-color: #d5e2d5;
     padding: 20px;
-    margin-bottom: 20px; /* 每个框之间的间距 */
-    border-radius: 8px;  /* 圆角边框 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    margin-bottom: 20px; 
+    border-radius: 8px;  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 .context-title a {
@@ -113,13 +113,13 @@ label {
 }
 
 .context .post-info{
-    margin-top: 5px;  /* 创建人和日期之间添加一些间距 */
+    margin-top: 5px;  
     font-size: 14px;
 }
 
 .context .post-info p{
-    margin: 0;  /* 去掉p标签的默认外边距 */
-    padding-bottom: 5px;  /* 每一行之间加点间距 */
+    margin: 0;  
+    padding-bottom: 5px; 
 }
 
 
@@ -166,8 +166,8 @@ label {
     flex-direction: row;
     margin-bottom: 20px;
     padding: 20px;
-    width: 100%; /* 👈 撑满父容器 */
-    max-width: 1000px; /* 可选：控制最大宽度 */
+    width: 100%; 
+    max-width: 1000px;
 }
 
 
