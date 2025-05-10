@@ -15,7 +15,7 @@ function lienPDO(){
     $pageActuelle = "utilisateur";
 
     try {
-        $pdo = new PDO("mysql:host=$host;port=3306;dbname=$dbname;charset=utf8", $username, $password);
+        $pdo = new PDO("mysql:host=$host;port=3307;dbname=$dbname;charset=utf8", $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
 
@@ -144,60 +144,28 @@ function listeCategorie($pdo){
         }
 }
 
-function traitementFormActivite($pdo){
+function categorieActivite($idAct, $theme){
+    $pdo = lienPDO();
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+
     try{
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if (!empty($_POST['inputNom']) && !empty($_POST['inputDate']) && !empty($_POST['inputDuree']) && !empty($_POST['inputCategorie']) 
-        && !empty($_POST['inputNbrParticipant']) && !empty($_POST['Groupe']) && !empty($_POST['inputDescription'])) {
-            $nomActivite = testValidationForm2($_POST['inputNom']);
-            $dateActivite = testValidationForm2($_POST['inputDate']);
-            $duree = testValidationForm2($_POST['inputDuree']);
-            $adresse = testValidationForm2($_POST['inputAdresse']);
-            $ville = testValidationForm2($_POST['inputVille']);
-            $categorie = testValidationForm2($_POST['inputCategorie']);
-            $nbrParticipant = testValidationForm2($_POST['inputNbrParticipant']);
-            $groupe = testValidationForm2($_POST['Groupe']);
-            $prix = testValidationForm2($_POST['inputPrix']);
-            $descriptionact = testValidationForm2($_POST['inputDescription']);
-            $idCreator = $_SESSION['user']['id'];
+        $sqlcategorie = "SELECT idTheme FROM theme WHERE theme = :theme";
+	    $stmtcategorie = $pdo->prepare($sqlcategorie);
+        $stmtcategorie ->execute(['theme' => $theme]);
+	    if($stmtcategorie){
             
-
-            if (empty($nomActivite) || empty($dateActivite) || empty($adresse) || empty($ville) || empty($duree) || empty($categorie) 
-            || empty($nbrParticipants) || empty($groupe) || empty($descriptionact) || empty($prix)) {
-                exit("Remplissez tous les champs!");
-            }
-            if($nbrParticipant <= 0){
-                exit("Le nombre de participants doit être supérieur à 0!");
-            }
-            if($prix <= 0){
-                exit("Mettre votre prix à 0 si votre activité est gratuite!");
-            }
-    
-            $sql = "INSERT INTO activite (nomActivite, adresse, ville, prix, nbrParticipantMax, description, duree, IsPublic, idCreateur) 
-            VALUES (:nom1, :adresse1, :ville1, :prix1, :nbrParticipantMax1, :description1, :duree, :groupe1, :idCreateur1)";
-            $stmt = $pdo->prepare($sql);
-    
-            $stmt->bindParam(':nom1', $nomActivite);
-            $stmt->bindParam(':adresse1', $adresse);
-            $stmt->bindParam(':ville1', $ville);
-            $stmt->bindParam(':prix1', $prix);
-            $stmt->bindParam(':nbrParticipantMax1', $nbrParticipant);
-            $stmt->bindParam(':description1', $descriptionact);
-            $stmt->bindParam(':duree', $duree);
-            $stmt->bindParam(':groupe1', $groupe);
-            $stmt->bindParam(':idCreateur1', $idCreator);
-
-            $stmt->execute();
-
-
+		    $row = $stmtcategorie->fetch(PDO::FETCH_ASSOC);
+            $sqltheme = $pdo->prepare(" INSERT INTO `activite_theme`(`idActivite`, `idTheme`) VALUES (:idactivite, :idtheme)");
             
-        }else{
-            echo "Veuillez remplir tous les champs.";
-        }
-    }
-    } catch (PDOException $e) {
+            $sqltheme->bindValue(':idactivite', $idAct, PDO::PARAM_STR);
+            $sqltheme->bindValue(':idtheme', $row['theme'], PDO::PARAM_STR);
+
+            $sqltheme->execute();
+        } 
+    }catch (PDOException $e) {
         echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
-    }
-    
+        }
 }
 ?>

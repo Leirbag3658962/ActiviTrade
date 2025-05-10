@@ -4,7 +4,7 @@ function getPDO() {
         $username = "root";
         $password = "";
         $dbname = "activitrade";
-        $db = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+        $db = new PDO("mysql:host=$servername;port=3307;dbname=$dbname;charset=utf8", $username, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $db;
 }

@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once(__DIR__ . '../../../Modele/Database.php');
-require_once(__DIR__ . '../../../Modele/LienPDO.php');
-require_once(__DIR__ . '../../Components/Navbar2.php');
-require_once(__DIR__ . '../../../Controller/ActiviteController.php');
+require_once(__DIR__ . '/../../Modele/Database.php');
+require_once(__DIR__ . '/../../Modele/LienPDO.php');
+require_once(__DIR__ . '/../Components/Navbar2.php');
+// require_once "../../../Controller/ActiviteController.php";
 $pdo = getPDO();
 ?>
 
@@ -22,7 +22,7 @@ $pdo = getPDO();
 </header>
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
 
-<form method="post" enctype="multipart/form-data">
+<form action="../../../Controller/ActiviteController.php" method="post" enctype="multipart/form-data">
 <div class="conteneurForm">
 	<div class="gauche">
 		<label for="labNomActivite">Nom d'activité </label>
@@ -99,19 +99,11 @@ $pdo = getPDO();
 </div>
 <br>
 <button type="submit" id="createButton">Créer</button>
-	<?php
-		traitementFormActivite($pdo);
-	?>
 </form>
 <br><br>
 
 <footer id="footer" class="footer"></footer>
 </body>
-
-<!-- <script src="../Components/Navbar2.js"></script>
-<script>
-	document.getElementById("navbar").innerHTML = Navbar2();
-</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
