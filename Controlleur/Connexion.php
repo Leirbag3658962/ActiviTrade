@@ -18,7 +18,7 @@ if(!empty($_POST)) {
             exit;
         }
         
-        $user = User::getUserByEmail($_POST['email']);
+        $user = User::getByEmail($_POST['email']);
         
         if(!$user) {
             echo "Email ou mot de passe incorrect";

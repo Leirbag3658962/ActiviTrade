@@ -5,48 +5,78 @@ class User {
     
     public static function create($lastname, $firstname, $email, $birthdate, $ville, $telephone, $password_hash) {
         $pdo = getPDO();
-        $sql = "INSERT INTO `utilisateur`(`nom`, `prenom`, `email`, `dateNaissance`, `ville`, `telephone`, `role`, `password`) VALUES (:lastname, :firstname, :email, :birthdate, :ville, :telephone, 'user', '$password_hash')";
+        $sql = $pdo->prepare("
+            INSERT INTO `utilisateur`(`nom`, `prenom`, `email`, `dateNaissance`, `ville`, `telephone`, `role`, `password`) VALUES (:lastname, :firstname, :email, :birthdate, :ville, :telephone, 'user', '$password_hash')
+        ");
+        $sql->bindValue(':lastname', $lastname, PDO::PARAM_STR);
+        $sql->bindValue(':firstname', $firstname, PDO::PARAM_STR);
+        $sql->bindValue(':email', $email, PDO::PARAM_STR);
+        $sql->bindValue(':birthdate', $birthdate, PDO::PARAM_STR);
+        $sql->bindValue(':ville', $ville, PDO::PARAM_STR);
+        $sql->bindValue(':telephone', $telephone, PDO::PARAM_STR);
 
-        $query = $pdo->prepare($sql);
-
-        $query->bindValue(':lastname', $lastname, PDO::PARAM_STR);
-        $query->bindValue(':firstname', $firstname, PDO::PARAM_STR);
-        $query->bindValue(':email', $email, PDO::PARAM_STR);
-        $query->bindValue(':birthdate', $birthdate, PDO::PARAM_STR);
-        $query->bindValue(':ville', $ville, PDO::PARAM_STR);
-        $query->bindValue(':telephone', $telephone, PDO::PARAM_STR);
-
-        $query->execute();
+        $sql->execute();
         return $pdo->lastInsertId(); // Retourne le dernier id
     }
 
     public static function emailExists($email) {
         $pdo = getPDO();
-        $stmt = $pdo->prepare("
+        $sql = $pdo->prepare("
             SELECT email FROM utilisateur WHERE email = ?
         ");
-        $stmt->execute([$email]);
-        return $stmt->fetch() !== false;
+        $sql->execute([$email]);
+        return $sql->fetch() !== false;
     }
 
-    public static function getUserById($id) {
+    public static function getById($id) {
         $pdo = getPDO();
-        $stmt = $pdo->prepare("
+        $sql = $pdo->prepare("
             SELECT * FROM utilisateur WHERE idUtilisateur = :idUtilisateur
         ");
-        $stmt->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $sql->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_ASSOC);
     }
     
-    public static function getUserByEmail($email) {
+    public static function getByEmail($email) {
         $pdo = getPDO();
-        $stmt = $pdo->prepare("
+        $sql = $pdo->prepare("
             SELECT * FROM utilisateur WHERE email = :email
         ");
-        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $sql->bindValue(':email', $email, PDO::PARAM_STR);
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAll() {
+        $pdo = getPDO();
+        $sql = $pdo->prepare("
+            SELECT * FROM utilisateur
+        ");
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function update($id, $lastname, $firstname, $email, $birthdate, $ville, $telephone) {
+        $pdo = getPDO();
+        $sql = $pdo->prepare("UPDATE utilisateur SET nom = :lastname, prenom = :firstname, email = :email, dateNaissance = :birthdate, ville = :ville, telephone = :telephone WHERE idUtilisateur = :idUtilisateur");
+        $sql->bindValue(':lastname', $lastname, PDO::PARAM_STR);
+        $sql->bindValue(':firstname', $firstname, PDO::PARAM_STR);
+        $sql->bindValue(':email', $email, PDO::PARAM_STR);
+        $sql->bindValue(':birthdate', $birthdate, PDO::PARAM_STR);
+        $sql->bindValue(':ville', $ville, PDO::PARAM_STR);
+        $sql->bindValue(':telephone', $telephone, PDO::PARAM_STR);
+        $sql->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
+        $sql->execute();
+        return;
+    }
+
+    public static function delete($id) {
+        $pdo = getPDO();
+        $sql = $pdo->prepare("DELETE FROM utilisateur WHERE idUtilisateur = :idUtilisateur");
+        $sql->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
+        $sql->execute();
+        return;
     }
 }
 ?>
