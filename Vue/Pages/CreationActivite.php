@@ -22,7 +22,7 @@ $pdo = getPDO();
 </header>
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
 
-<form action="../../../Controller/ActiviteController.php" method="post" enctype="multipart/form-data">
+<form method="post" action="../../Controlleur/ActiviteController.php" enctype="multipart/form-data">
 <div class="conteneurForm">
 	<div class="gauche">
 		<label for="labNomActivite">Nom d'activité </label>

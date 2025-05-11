@@ -121,7 +121,7 @@ function afficherCgu($pdo){
             echo "</div>";
 	    }
     } catch (PDOException $e) {
-        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+        echo "<a> Erreur BDD lors de l'affichage des CGU: " . htmlspecialchars($e->getMessage()) . "</a>";
    }
 }
 
@@ -140,7 +140,7 @@ function listeCategorie($pdo){
 		    }
         } 
     }catch (PDOException $e) {
-        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+        echo "<a> Erreur BDD lors de l'affichage des catégories: " . htmlspecialchars($e->getMessage()) . "</a>";
         }
 }
 
@@ -160,12 +160,27 @@ function categorieActivite($idAct, $theme){
             $sqltheme = $pdo->prepare(" INSERT INTO `activite_theme`(`idActivite`, `idTheme`) VALUES (:idactivite, :idtheme)");
             
             $sqltheme->bindValue(':idactivite', $idAct, PDO::PARAM_STR);
-            $sqltheme->bindValue(':idtheme', $row['theme'], PDO::PARAM_STR);
+            $sqltheme->bindValue(':idtheme', $row['idTheme'], PDO::PARAM_STR);
 
             $sqltheme->execute();
         } 
     }catch (PDOException $e) {
-        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
-        }
+        echo "<a> Erreur BDD lors du lien catégorie-activité: " . htmlspecialchars($e->getMessage()) . "</a>";
+    }
+}
+
+function imageActivite($idAct, $image){
+    $pdo = lienPDO();
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+
+    try{
+        $sqlimage = "INSERT INTO `image`(`idActivite`, `image`) VALUES (:idactivite, :image)";
+	    $stmtimage = $pdo->prepare($sqlimage);
+        $stmtimage ->execute(['idactivite' => $idAct, 'image' => $image]);
+    }catch (PDOException $e) {
+        echo "<a> Erreur BDD lors du lien image-activité: " . htmlspecialchars($e->getMessage()) . "</a>";
+    }
 }
 ?>
