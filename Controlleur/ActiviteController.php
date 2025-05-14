@@ -39,13 +39,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: ../../Vue/Pages/LogIn.php");
         } else {
             
-            $uploadDir = __DIR__ . '/../../Uploads/Activites/';
+            $uploadDir = __DIR__ . '/../Vue/img/Uploads/Activites/';
             $uploadedFilesPathsDB = [];
 
             if (!is_dir($uploadDir) && !mkdir($uploadDir, 0777, true)) {
                 $messageErreur = 'Erreur serveur: Impossible de créer le dossier d\'upload (' . $uploadDir .').';
             } else {
                 if (isset($_FILES['ImageInput']) && is_array($_FILES['ImageInput']['name'])) {
+                    //var_dump($_FILES['ImageInput']); exit;
+
                     $totalFilesSent = count($_FILES['ImageInput']['name']);
                     $processedFilesCount = 0;
 
@@ -62,14 +64,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                             $newFileName = uniqid('act_' . $idCreator . '_', true) . '.' . $fileExt;
                             $destination = $uploadDir . $newFileName;
+                            
 
                             if (move_uploaded_file($fileTmpName, $destination)) {
-                                // CHEMIN POUR LA BDD : Relatif à la racine de votre site web.
-                                // Si Uploads est à la racine du projet (ex: ActiviTrade/Uploads)
-                                // et que votre site est localhost/ActiviTrade/
-                                // et que CreationActivite.php est dans Vue/Pages/
-                                // alors le chemin depuis la racine web est 'Uploads/Activites/'
-                                $uploadedFilesPathsDB[] = 'Uploads/Activites/' . $newFileName; // A ADAPTER
+                                $uploadedFilesPathsDB[] = '/Vue/img/Uploads/Activites/' . $newFileName; // A ADAPTER
                                 $processedFilesCount++;
                             } else {
                                 $messageErreur .= "Erreur déplacement fichier: $fileName. Vérifiez les permissions sur $uploadDir. ";
@@ -91,13 +89,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $img2 = $uploadedFilesPathsDB[1] ?? null;
                     $img3 = $uploadedFilesPathsDB[2] ?? null;
                     if($img1){
-                       ImageInput($idAct, $img1); 
+                       imageActivite($idAct, $img1); 
                     }
                     if($img2){
-                       ImageInput($idAct, $img2); 
+                       imageActivite($idAct, $img2); 
                     }
                     if($img3){
-                       ImageInput($idAct, $img3); 
+                       imageActivite($idAct, $img3); 
                     }
 
                     categorieActivite($idAct, $categorie);
@@ -109,19 +107,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 } catch (PDOException $e) {
                     $messageErreur = "Erreur BDD insertion : " . $e->getMessage();
-                    // foreach ($uploadedFilesPathsDB as $webPath) {
-                    //     // Reconstruire le chemin serveur pour unlink
-                    //     // Si $uploadDir est __DIR__ . '/../../Uploads/Activites/'
-                    //     // et $webPath est 'Uploads/Activites/nom_fichier.jpg'
-                    //     // alors il faut reconstruire le chemin serveur à partir de la racine web.
-                    //     // Ceci est une simplification, adaptez à votre structure.
-                    //     // Si __DIR__ est C:/xampp/htdocs/ActiviTrade/Vue/Pages
-                    //     // et Uploads est C:/xampp/htdocs/ActiviTrade/Uploads
-                    //     $serverPath = realpath(__DIR__ . '/../../' . $webPath);
-                    //     if ($serverPath && file_exists($serverPath)) {
-                    //         @unlink($serverPath);
-                    //     }
-                    // }
                 }
             }
         }

@@ -104,7 +104,7 @@ $pdo = getPDO();
 
 <footer id="footer" class="footer"></footer>
 </body>
-<script src="../Components/NavbarAnim.js"></script>
+<!-- <script src="../Components/NavbarAnim.js"></script> -->
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>

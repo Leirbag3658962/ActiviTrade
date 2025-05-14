@@ -31,11 +31,12 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
     <div class="barreDroite">
         <p>Sélectionner une table</p>
     </div>
-</div>
-<div id="add-modal" class="modal-overlay" style="display: none;">
-    <div class="modal-content">
-        <span class="close-modal-button">×</span>
-        <div id="modal-form-content">
+
+    <div id="add-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal-button">×</span>
+            <div id="modal-form-content">
+            </div>
         </div>
     </div>
 </div>
