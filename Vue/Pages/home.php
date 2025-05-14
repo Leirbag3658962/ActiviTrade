@@ -2,7 +2,7 @@
 // Connexion à la base de données
 $host = 'localhost';
 $port = '3306'; 
-$dbname = 'activitrade_demo2';
+$dbname = 'activitrade';
 $user = 'root';
 $password = 'hello'; 
 
@@ -12,11 +12,8 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
-// Récupérer les activités avec leurs thèmes
-$sql = "SELECT a.*, GROUP_CONCAT(at.idTheme) as themes 
-        FROM activite a 
-        LEFT JOIN activite_theme at ON a.idActivite = at.idActivite 
-        GROUP BY a.idActivite";
+// Récupérer les activités
+$sql = "SELECT * FROM activite";
 $stmt = $pdo->query($sql);
 $activites = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -41,7 +38,7 @@ if ($activeFilter == 'Nouveau') {
     $filteredActivites = $activites;
 } else {
     foreach ($activites as $activite) {
-        if (isset($activite['themes']) && strpos($activite['themes'], $activeFilter) !== false) {
+        if (isset($activite['categorie']) && $activite['categorie'] == $activeFilter) {
             $filteredActivites[] = $activite;
         }
     }

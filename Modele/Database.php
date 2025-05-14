@@ -2,7 +2,7 @@
 function getPDO() {
         $servername = "localhost";
         $username = "root";
-        $password = "";
+        $password = "hello";
         $dbname = "activitrade";
         $db = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

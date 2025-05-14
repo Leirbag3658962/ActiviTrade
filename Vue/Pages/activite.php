@@ -2,7 +2,7 @@
 // Connexion à la base de données
 $host = 'localhost';
 $port = '3306'; 
-$dbname = 'activitrade_demo2';
+$dbname = 'activitrade';
 $user = 'root';
 $password = 'hello'; 
 
