@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once "../../Modele/LienPDO.php";
-require_once "../Components/Navbar2.php";
-$pdo = lienPDO();
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO(); 
 
 $idForum = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -124,6 +124,7 @@ if ($idForumPost > 0 && !empty($contenu)) {
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
+<script src="../Components/ForumAnswer.js"></script>
 <script>
 	document.getElementById("footer").innerHTML = Footer2();
 </script>
