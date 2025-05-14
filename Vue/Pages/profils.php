@@ -5,28 +5,40 @@ $user = "root";
 $password = "";
 $dbname = "activititrade";
 
+session_start(); // Très important pour accéder à $_SESSION
+
 $conn = new mysqli($host, $user, $password, $dbname);
 if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
 }
 
-// Récupère un utilisateur
-$sql = "SELECT * FROM utilisateur LIMIT 1";
-$result = $conn->query($sql);
+// Vérifie que l'utilisateur est connecté
+if (isset($_SESSION['user']['id'])) {
+    $userId = intval($_SESSION['user']['id']); // Sécurisation de l'ID
 
-// Si aucun utilisateur n'existe, on en insère un par défaut
-if ($result->num_rows === 0) {
-    $insert = "INSERT INTO utilisateur 
-    (nom, prenom, email, dateNaissance, numeroRue, nomRue, codePostal, ville, pays, indicatif, telephone, role, password, photoprofil, isbanned)
-    VALUES 
-    ('Dupont', 'Jean', 'jean.dupont@example.com', '1990-01-01', '12', 'Rue des Lilas', '75000', 'Paris', 'France', '+33', '0612345678', 'utilisateur', 'pass123', '', 0)";
-    
-    $conn->query($insert);
-    $result = $conn->query($sql); // Refaire la requête après insertion
+    // Récupère l'utilisateur connecté
+    $sql = "SELECT * FROM utilisateur WHERE id = $userId";
+    $result = $conn->query($sql);
+
+    // Si aucun utilisateur trouvé, en insère un (cas rare)
+    if ($result->num_rows === 0) {
+        $insert = "INSERT INTO utilisateur 
+        (nom, prenom, email, dateNaissance, numeroRue, nomRue, codePostal, ville, pays, indicatif, telephone, role, password, photoprofil, isbanned)
+        VALUES 
+        ('Dupont', 'Jean', 'jean.dupont@example.com', '1990-01-01', '12', 'Rue des Lilas', '75000', 'Paris', 'France', '+33', '0612345678', 'utilisateur', 'pass123', '', 0)";
+        
+        $conn->query($insert);
+
+        // Récupère le nouvel utilisateur inséré
+        $result = $conn->query("SELECT * FROM utilisateur WHERE id = " . $conn->insert_id);
+    }
+
+    $user = $result->fetch_assoc();
+} else {
+    die("Utilisateur non connecté.");
 }
-
-$user = $result->fetch_assoc();
 ?>
+
 
 
 <!DOCTYPE html>
