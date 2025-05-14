@@ -1,3 +1,12 @@
+<?php
+session_start();
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../../Modele/LienPDO.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../../Controller/ActiviteController.php');
+$pdo = getPDO();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +17,12 @@
 <title>Créer une nouvelle activité</title>
 </head>
 <body>
-<header id="navbar" class="navbar"></header>
+<header id="navbar" class="navbar">
+	<?php echo Navbar2(); ?>
+</header>
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
 
 <form method="post" enctype="multipart/form-data">
-	<?php
-        require_once "../../Modele/LienPDO.php";
-        $pdo = lienPDO(); 
-    ?>
 <div class="conteneurForm">
 	<div class="gauche">
 		<label for="labNomActivite">Nom d'activité </label>
@@ -76,17 +83,17 @@
 <div class="conteneurImage">
 	<div class="Cells">
 		<p class="Paragraph"><label for="ImageInput1">Déposez ou cliquez pour parcourir</label></p>
-        <input type="file" name="ImageInput1" class="ImageInput" accept="image/*" hidden>
+        <input type="file" id="ImageInput1" name="ImageInput[]" class="ImageInput" accept="image/*" hidden>
         <img class="ImageActivite" src="" alt="" style="display: none;">
 	</div>
 	<div class="Cells">
 		<p class="Paragraph"><label for="ImageInput2">Déposez ou cliquez pour parcourir</label></p>
-        <input type="file" name="ImageInput2" class="ImageInput" accept="image/*" hidden>
+        <input type="file" id="ImageInput2" name="ImageInput[]" class="ImageInput" accept="image/*" hidden>
         <img class="ImageActivite" src="" alt="" style="display: none;">
 	</div>
 	<div class="Cells">
 		<p class="Paragraph"><label for="ImageInput3">Déposez ou cliquez pour parcourir</label></p>
-        <input type="file" name="ImageInput3" class="ImageInput" accept="image/*" hidden>
+        <input type="file" id="ImageInput3" name="ImageInput[]" class="ImageInput" accept="image/*" hidden>
         <img class="ImageActivite" src="" alt="" style="display: none;">
 	</div>
 </div>
@@ -101,10 +108,10 @@
 <footer id="footer" class="footer"></footer>
 </body>
 
-<script src="../Components/Navbar2.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
 	document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>

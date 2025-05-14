@@ -1,4 +1,5 @@
 <?php
+
 // Connexion à la base de données
 $host = 'localhost';
 $port = '3306'; 
@@ -6,11 +7,15 @@ $dbname = 'activitrade';
 $user = 'root';
 $password = 'hello'; 
 
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+// try {
+//     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
+// } catch (PDOException $e) {
+//     die("Erreur de connexion : " . $e->getMessage());
+// }
+session_start();
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO();
 
 // Récupérer les activités
 $sql = "SELECT * FROM activite";
@@ -51,13 +56,15 @@ if ($activeFilter == 'Nouveau') {
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/Vue/Style/Home.css">
-    <link rel="stylesheet" href="/Vue/Style/navbar2.css">
+    <link rel="stylesheet" href="/Vue/Style/Navbar2.css">
     <link rel="stylesheet" href="/Vue/Style/footer2.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ActiviTrade</title>
 </head>
 <body>
-    <header id="navbar" class="navbar"></header>
+    <header id="navbar" class="navbar">
+        <?php echo Navbar2(); ?>
+    </header>
 
     <div class="banner">
         <div class="carousel">
@@ -168,10 +175,10 @@ if ($activeFilter == 'Nouveau') {
     <footer id="footer" class="footer"></footer>
 
     <!--! navbar et footer -->
-    <script src="../Components/navbar2.js"></script>
+    <!-- <script src="../Components/Navbar2.js"></script>
     <script>
         document.getElementById("navbar").innerHTML = Navbar2();
-    </script>
+    </script> -->
     <script src="../Components/footer2.js"></script>
     <script>
         document.getElementById("footer").innerHTML = Footer2();

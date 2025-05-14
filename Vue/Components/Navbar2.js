@@ -9,9 +9,15 @@ function Navbar2(){
             <ul class="nav-links">
                 <li><a href="../Pages/activite.php" class="active">Activités</a></li>
                 <li><a href="../Pages/CreationActivite.php">Création</a></li>
-                <li><a href="../Pages/profils.php">Mon Compte</a></li>
                 <li><a href="../Pages/FAQ.php">FAQ</a></li>
                 <li><a href="../Pages/Forum.php">Forum</a></li>
+                <?php if(!isset($_SESSION['user'])): ?>
+                    <li><a href="../Pages/SignIn.php">S'inscrire</a></li>
+                    <li><a href="../Pages/LogIn.php">Se connecter</a></li>
+                <?php else: ?>
+                    <li><a href="../Pages/profils.php">Mon Compte</a></li>
+                    <li><a href="../../Controlleur/Deconnexion.php">Se deconnecter</a></li>
+                <?php endif; ?>
             </ul>
             <div class="search-container">
                 <form class="search-box" id="searchForm">

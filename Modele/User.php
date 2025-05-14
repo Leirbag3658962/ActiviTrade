@@ -28,5 +28,25 @@ class User {
         $stmt->execute([$email]);
         return $stmt->fetch() !== false;
     }
+
+    public static function getUserById($id) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("
+            SELECT * FROM utilisateur WHERE idUtilisateur = :idUtilisateur
+        ");
+        $stmt->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public static function getUserByEmail($email) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("
+            SELECT * FROM utilisateur WHERE email = :email
+        ");
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>

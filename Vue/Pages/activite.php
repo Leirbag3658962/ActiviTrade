@@ -1,16 +1,19 @@
 <?php
-// Connexion à la base de données
+
 $host = 'localhost';
 $port = '3306'; 
 $dbname = 'activitrade';
 $user = 'root';
 $password = 'hello'; 
 
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+// try {
+//     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
+// } catch (PDOException $e) {
+//     die("Erreur de connexion : " . $e->getMessage());
+// }
+session_start();
+require_once(__DIR__ . '../../../Modele/Database.php');
+$pdo = getPDO();
 
 // Vérifie qu'un ID est passé dans l'URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
