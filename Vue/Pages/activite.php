@@ -1,16 +1,19 @@
 <?php
 // Connexion à la base de données
-$host = 'localhost';
-$port = '3306'; 
-$dbname = 'activitrade_demo2';
-$user = 'root';
-$password = 'hello'; 
+// $host = 'localhost';
+// $port = '3306'; 
+// $dbname = 'activitrade_demo2';
+// $user = 'root';
+// $password = 'hello'; 
 
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+// try {
+//     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
+// } catch (PDOException $e) {
+//     die("Erreur de connexion : " . $e->getMessage());
+// }
+session_start();
+require_once(__DIR__ . '../../../Modele/Database.php');
+$pdo = getPDO();
 
 // Vérifie qu'un ID est passé dans l'URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -81,16 +84,13 @@ if (!$activite) {
     </div>
 
     <footer id="footer" class="footer"></footer>
-
-    <!-- Navbar & Footer -->
-    
 </body>
 <script src="../Components/navbar2.js"></script>
-    <script>
-        document.getElementById("navbar").innerHTML = Navbar2();
-    </script>
-    <script src="../Components/footer2.js"></script>
-    <script>
-        document.getElementById("footer").innerHTML = Footer2();
-    </script>
+<script>
+    document.getElementById("navbar").innerHTML = Navbar2();
+</script>
+<script src="../Components/footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>

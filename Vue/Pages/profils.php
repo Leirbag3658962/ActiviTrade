@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$dbname = "activititrade";
+$dbname = "activitrade";
 
 session_start(); // Très important pour accéder à $_SESSION
 
@@ -11,6 +11,12 @@ $conn = new mysqli($host, $user, $password, $dbname);
 if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
 }
+session_start();
+// require_once(__DIR__ . '../../../Modele/Database.php');
+// $conn = getPDO();
+require_once(__DIR__ . '../../../Modele/User.php');
+
+
 
 // Vérifie que l'utilisateur est connecté
 if (isset($_SESSION['user']['id'])) {
@@ -37,6 +43,7 @@ if (isset($_SESSION['user']['id'])) {
 } else {
     die("Utilisateur non connecté.");
 }
+
 ?>
 
 
@@ -48,12 +55,13 @@ if (isset($_SESSION['user']['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
     <link rel="stylesheet" href="../Style/Profil.css.css">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-
+    <link rel="stylesheet" href="../Style/Navbar2.css">
+    <link rel="stylesheet" href="../Style/Footer2.css">
     
     </head>
 
     <header id="navbar" class="navbar">
+        <?php echo Navbar2(); ?>
     </header>
 	
 <body>
@@ -217,7 +225,7 @@ if (isset($_SESSION['user']['id'])) {
   z-index: 999;
 ">💬</button>
 
-
+<footer id="footer" class="footer"></footer>
 </body>
 <script>
   function ouvrirMessagerie() {
@@ -270,12 +278,15 @@ window.addEventListener("message", function(event) {
 });
 
 </script>
-<script src="../Components/Navbar.js"></script>
+<!-- <script src="../Components/navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
-</script>
+    document.getElementById("navbar").innerHTML = Navbar2();
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 
 
 </body>
