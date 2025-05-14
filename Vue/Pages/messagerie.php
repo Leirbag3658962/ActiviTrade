@@ -90,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['ac
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -104,26 +103,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['ac
 
 <div id="messagerie">
   <header>
-    Messagerie <span class="close-btn" onclick="toggleMessagerie()">✖</span>
+    Messagerie 123<span class="close-btn" onclick="toggleMessagerie()">✖</span>
   </header>
-  <div class="contact-input">
-  <input type="text" id="idSearch" placeholder="ID ou email">
-  <button onclick="searchUser()">OK</button>
-</div>
 
-<ul id="contactHistory"></ul> <!-- Bonne position ici -->
+  <div class="messagerie-wrapper">
+    <div class="sidebar">
+      <div class="contact-input">
+        <input type="text" id="idSearch" placeholder="ID ou email">
+        <button onclick="searchUser()">OK</button>
+      </div>
+      <ul id="contactHistory"></ul>
+    </div>
 
-<div id="contactInfo" class="contact-info"></div>
-
-<div class="messages" id="messages"></div>
-
-<footer>
-  <input type="text" id="messageInput" placeholder="Écrire un message..." disabled>
-  <button class="send" onclick="sendMessage()" disabled>➤</button>
-</footer>
-  
+    <div class="chat-section">
+      <div id="contactInfo" class="contact-info"></div>
+      <div class="messages" id="messages"></div>
+      <footer>
+        <input type="text" id="messageInput" placeholder="Écrire un message..." disabled>
+        <button class="send" onclick="sendMessage()" disabled>➤</button>
+      </footer>
+    </div>
+  </div>
 </div>
 
 <script src="../Components/messagerie.js"></script>
 </body>
 </html>
+
+
