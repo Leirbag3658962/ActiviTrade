@@ -2,9 +2,9 @@
 session_start();
 $_SESSION['idUser'] = 1;
 
-require_once "../../Modele/LienPDO.php";
-require_once "../Components/Navbar2.php";
-$pdo = lienPDO();
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO(); 
 
 if (isset($_SESSION['idUser'])) {
     $idUser = $_SESSION['idUser'];
@@ -78,3 +78,4 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	document.getElementById("footer").innerHTML = Footer2();
 </script>
 </html>
+
