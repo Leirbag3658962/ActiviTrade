@@ -5,6 +5,8 @@ $user = "root";
 $password = "";
 $dbname = "activitrade";
 
+session_start(); // Très important pour accéder à $_SESSION
+
 $conn = new mysqli($host, $user, $password, $dbname);
 if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
@@ -14,30 +16,36 @@ session_start();
 // $conn = getPDO();
 require_once(__DIR__ . '../../../Modele/User.php');
 
-// Récupère un utilisateur
-// Vérifie si l'utilisateur est connecté
-if (!isset($_SESSION['user'])){
-    header('Location: ../Pages/LogIn.php');
-    exit();
+
+
+// Vérifie que l'utilisateur est connecté
+if (isset($_SESSION['user']['id'])) {
+    $userId = intval($_SESSION['user']['id']); // Sécurisation de l'ID
+
+    // Récupère l'utilisateur connecté
+    $sql = "SELECT * FROM utilisateur WHERE id = $userId";
+    $result = $conn->query($sql);
+
+    // Si aucun utilisateur trouvé, en insère un (cas rare)
+    if ($result->num_rows === 0) {
+        $insert = "INSERT INTO utilisateur 
+        (nom, prenom, email, dateNaissance, numeroRue, nomRue, codePostal, ville, pays, indicatif, telephone, role, password, photoprofil, isbanned)
+        VALUES 
+        ('Dupont', 'Jean', 'jean.dupont@example.com', '1990-01-01', '12', 'Rue des Lilas', '75000', 'Paris', 'France', '+33', '0612345678', 'utilisateur', 'pass123', '', 0)";
+        
+        $conn->query($insert);
+
+        // Récupère le nouvel utilisateur inséré
+        $result = $conn->query("SELECT * FROM utilisateur WHERE id = " . $conn->insert_id);
+    }
+
+    $user = $result->fetch_assoc();
+} else {
+    die("Utilisateur non connecté.");
 }
-$sql = "SELECT * FROM utilisateur LIMIT 1";
-$result = $conn->query($sql);
 
-// Si aucun utilisateur n'existe, on en insère un par défaut
-// if ($result->num_rows === 0) {
-//     $insert = "INSERT INTO utilisateur 
-//     (nom, prenom, email, dateNaissance, numeroRue, nomRue, codePostal, ville, pays, indicatif, telephone, role, password, photoprofil, isbanned)
-//     VALUES 
-//     ('Dupont', 'Jean', 'jean.dupont@example.com', '1990-01-01', '12', 'Rue des Lilas', '75000', 'Paris', 'France', '+33', '0612345678', 'utilisateur', 'pass123', '', 0)";
-    
-//     $conn->query($insert);
-//     $result = $conn->query($sql); // Refaire la requête après insertion
-// }
-
-// $user = $result->fetch_assoc();
-$user = User::getUserById($_SESSION['user']['id']);
-require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>
+
 
 
 <!DOCTYPE html>
@@ -192,8 +200,8 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 400px;
-  height: 500px;
+  width: 800px;
+  height: 600px;
   border: none;
   border-radius: 10px;
   z-index: 1000;

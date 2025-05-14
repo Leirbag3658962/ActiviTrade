@@ -71,7 +71,6 @@ if ($check->rowCount() == 0) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -232,27 +231,32 @@ if ($check->rowCount() == 0) {
 
   <button class="open-chat-btn" onclick="toggleChat()">💬</button>
 
-  <div class="chat-overlay" id="chatBox">
-    <div class="chat-header">
-      Messagerie
-      <span class="close-btn" onclick="toggleChat()">✖</span>
+
+<div id="messagerie">
+  <header>
+    Messagerie 123<span class="close-btn" onclick="toggleMessagerie()">✖</span>
+  </header>
+
+  <div class="messagerie-wrapper">
+    <div class="sidebar">
+      <div class="contact-input">
+        <input type="text" id="idSearch" placeholder="ID ou email">
+        <button onclick="searchUser()">OK</button>
+      </div>
+      <ul id="contactHistory"></ul>
     </div>
-    <div class="chat-body">
-      <div class="contact-list">
-        <div class="contact" onclick="openChat('Alice')">Alice</div>
-        <div class="contact" onclick="openChat('Bob')">Bob</div>
-        <div class="contact" onclick="openChat('Charlie')">Charlie</div>
-      </div>
-      <div class="chat-content">
-        <div class="messages" id="messages"></div>
-        <div class="input-container">
-          <input type="text" id="messageInput" placeholder="Écrire un message..." disabled>
-          <button id="sendBtn" onclick="sendMessage()" disabled>Envoyer</button>
-        </div>
-      </div>
+
+    <div class="chat-section">
+      <div id="contactInfo" class="contact-info"></div>
+      <div class="messages" id="messages"></div>
+      <footer>
+        <input type="text" id="messageInput" placeholder="Écrire un message..." disabled>
+        <button class="send" onclick="sendMessage()" disabled>➤</button>
+      </footer>
     </div>
   </div>
-  
+</div>
+
 
   <script>
   let currentContact = null;
@@ -348,6 +352,9 @@ window.addEventListener("message", function(event) {
   }
 });
 
+
   </script>
 </body>
 </html>
+
+
