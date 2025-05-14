@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .boxform {
     width: 50%;
     border: 2px solid #E5E4E2;
@@ -5,7 +10,7 @@
     border-radius: 10px;
     padding: 20px;
     margin: 20px auto;
-    max-width: 700px;
+    width: 700px;
 }
 
 .input {

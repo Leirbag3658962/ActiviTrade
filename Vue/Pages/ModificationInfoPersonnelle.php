@@ -1,22 +1,35 @@
 <?php
 session_start();
-require_once "../../ModeleB/LienPDO.php";
+$_SESSION['idUser'] = 1;
+
+require_once "../../Modele/LienPDO.php";
 $pdo = lienPDO();
 
 $message = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $id = $_SESSION['user_id']; 
-    $lastname = htmlspecialchars($_POST['lastname']);
-    $firstname = htmlspecialchars($_POST['firstname']);
-    $email = htmlspecialchars($_POST['email']);
-    $birthdate = $_POST['birthdate'];
-    $address = htmlspecialchars($_POST['address']);
+if (!isset($_SESSION['idUser'])) {
+    header("Location: LogIn.php");
+    exit;
+}
+$idUser = $_SESSION['idUser']; 
 
-    if (!empty($lastname) && !empty($firstname) && !empty($email) && !empty($birthdate) && !empty($address)) {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
+    $nom = htmlspecialchars($_POST['nom']);
+    $prenom = htmlspecialchars($_POST['prenom']);
+    $email = htmlspecialchars($_POST['email']);
+    $telephone = htmlspecialchars($_POST['telephone']);
+    $dateNaissance = $_POST['dateNaissance'];
+    $ville = htmlspecialchars($_POST['ville']);
+
+    if (!empty($nom) && !empty($prenom) && !empty($email) && !empty($telephone) && !empty($dateNaissance) && !empty($ville)) {
         try {
-            $stmt = $pdo->prepare("UPDATE utilisateurs SET lastname = ?, firstname = ?, email = ?, birthdate = ?, address = ? WHERE id = ?");
-            $stmt->execute([$lastname, $firstname, $email, $birthdate, $address, $id]);
+            $stmt = $pdo->prepare("UPDATE utilisateur 
+                SET nom = ?, prenom = ?, email = ?, telephone = ?, dateNaissance = ?, ville = ? 
+                WHERE idUtilisateur = ?");
+            
+            $stmt->execute([$nom, $prenom, $email, $telephone, $dateNaissance, $ville, $idUser]);
+
             $message = "Informations mises à jour avec succès !";
         } catch (PDOException $e) {
             $message = "Erreur lors de la mise à jour : " . $e->getMessage();
@@ -32,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/Navbar2.css">
+    <link rel="stylesheet" href="../Style/Footer2.css">
     <link rel="stylesheet" href="../Style/ModificationInfoPersonnelle.css">
     <title>ModificationInfo</title>
 </head>
@@ -49,16 +62,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php endif; ?>
     <form method="post">
         <br>
-        <label for="lastname">Nom</label><br>
-        <input type="text" id="lastname" name="lastname" placeholder="Smith" required><br>
-        <label for="firstname">Pr&eacute;nom</label><br>
-        <input type="text" id="firstname" name="firstname" placeholder="David" required><br>
+        <label for="nom">Nom</label><br>
+        <input type="text" id="nom" name="nom" placeholder="Smith" required><br>
+
+        <label for="prenom">Pr&eacute;nom</label><br>
+        <input type="text" id="prenom" name="prenom" placeholder="David" required><br>
+
         <label for="email">Email</label><br>
         <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required><br>
-        <label for="birthdate">Date de naissance</label><br>
-        <input type="date" id="birthdate" name="birthdate" required><br>
-        <label for="address">Adresse</label><br>
-        <input type="text" id="address" name="address" placeholder="1 avenue des champs Elysés, Paris 75001" required><br>
+
+        <label for="telephone">Num&eacute;ro de t&eacute;l&eacute;phone</label><br>
+        <input type="tel" id="telephone" name="telephone" placeholder="612345678" required><br>
+
+        <label for="dateNaissance">Date de naissance</label><br>
+        <input type="date" id="dateNaissance" name="dateNaissance" required><br>
+
+        <label for="ville">Ville</label><br>
+        <input type="text" id="ville" name="ville" placeholder="Paris" required><br>
         <br>
         <button id="Button" type="submit">Enregistrer</button>
     </form>
@@ -66,10 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </div>
 <footer id="footer" class="footer"></footer>
 </body>
-<script src="../Components/Navbar.js"></script>
+<script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
+    document.getElementById("navbar").innerHTML = Navbar2();
 </script>
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>
