@@ -1,8 +1,8 @@
 <?php
-function recherche($pdo, $mot){
+require_once(__DIR__ . '/Database.php');
 
-    require_once "../../Modele/LienPDO.php";
-
+function recherche($mot){
+    $pdo = getPDO();
     if(!$pdo){
         echo "<a> Erreur: Connexion BDD non fournie.</a>";
     }
@@ -21,6 +21,7 @@ function recherche($pdo, $mot){
 	    if($stmtrecherche){
 		    while ($row = $stmtrecherche->fetch(PDO::FETCH_ASSOC)){
                 $idList[] = $row['idActivite'];
+                // echo "<a>".$row['idActivite']."</a>";
 		    }
             return $idList;
 	    }

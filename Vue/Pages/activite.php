@@ -1,16 +1,4 @@
 <?php
-// Connexion à la base de données
-// $host = 'localhost';
-// $port = '3306'; 
-// $dbname = 'activitrade_demo2';
-// $user = 'root';
-// $password = 'hello'; 
-
-// try {
-//     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
-// } catch (PDOException $e) {
-//     die("Erreur de connexion : " . $e->getMessage());
-// }
 session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 $pdo = getPDO();

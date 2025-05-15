@@ -54,7 +54,9 @@ try {
     $html .= '<table class="tabledata">'; 
     $html .= '<tr class="titretableau">';
     foreach ($colonnes as $col) {
-        $html .= "<th>" . htmlspecialchars($col) . "</th>";
+        if($col != "password"){
+            $html .= "<th>" . htmlspecialchars($col) . "</th>";
+        }
     }
     $html .= '</tr>';
 
@@ -73,10 +75,11 @@ try {
         $html .= '<tr class="' . $classeLigne . '" id="row_' . htmlspecialchars($nomTableDemande) . '_' . htmlspecialchars($compteur) . '"' . $dataAttributes . '>';
         foreach ($row as $columnName => $value) {
             $isPkColumn = ($columnName === $nomClePrimaire);
-            
-            $tdClass = 'case' . ($isPkColumn ? ' pk-cell' : ' editable-cell');
-            $html .= "<td class=\"" . $tdClass . "\" data-column-name=\"" . htmlspecialchars($columnName) . "\">" 
-            . htmlspecialchars($value ?? '') . "</td>";
+            if($columnName != "password"){
+                $tdClass = 'case' . ($isPkColumn ? ' pk-cell' : ' editable-cell');
+                $html .= "<td class=\"" . $tdClass . "\" data-column-name=\"" . htmlspecialchars($columnName) . "\">" 
+                . htmlspecialchars($value ?? '') . "</td>";
+            }
         }
         $html .= "</tr>"; 
         $compteur++;

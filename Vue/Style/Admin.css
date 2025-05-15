@@ -59,7 +59,7 @@ html, body {
     padding: 20px;
     box-sizing: border-box; 
     vertical-align: middle;
-    min-height: 100vh;   /* Prend au moins toute la hauteur de la fenêtre */
+    min-height: 100vh;   
     
 }
 
@@ -202,4 +202,9 @@ html, body {
   #modal-form-content form .form-buttons button[type="button"] {
     background-color: #ccc;
     color: #333;
+  }
+
+  input.inputModif {
+    width: 100%;
+    height: 100%;
   }
