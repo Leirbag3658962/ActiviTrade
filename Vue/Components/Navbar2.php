@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__ . '../../../Modele/Database.php');
+
 function Navbar2() {
     ?>
     <nav>
@@ -23,15 +25,17 @@ function Navbar2() {
                 <li><a href='../Pages/Admin.php'>Admin</a></li>
             <?php endif; ?>
         </ul>
-        <div class='search-box'>
-            <input type='text' placeholder='Rechercher' />
-            <button type='submit'>
-                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-                    <circle cx='11' cy='11' r='8'></circle>
-                    <line x1='21' y1='21' x2='16.65' y2='16.65'></line>
-                </svg>
-            </button>
-        </div>
+        <form method="GET" action="../Pages/RechercheActivite.php" class="rechercheForm" value="<?php echo testValidationForm($_GET['q'] ?? ''); ?>">
+            <div class='search-box'>
+                <input type='text' name="q" placeholder='Rechercher' />
+                <button type='submit'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+                        <circle cx='11' cy='11' r='8'></circle>
+                        <line x1='21' y1='21' x2='16.65' y2='16.65'></line>
+                    </svg>
+                </button>
+            </div>
+        </form>
     </nav>
     <?php
 }

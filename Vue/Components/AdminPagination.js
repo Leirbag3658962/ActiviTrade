@@ -316,9 +316,9 @@ function makeCellEditable(cellElement) {
     if (!columnName) { console.error("data-column-name manquant", cellElement); return; }
 
     const inputElement = document.createElement('input');
-    inputElement.type = 'text'; // Adapter type si besoin (date, number...)
+    inputElement.type = 'text'; // Adapter type
     inputElement.value = originalValue;
-    inputElement.classList.add('inline-edit-input'); // Pour CSS
+    inputElement.classList.add('inputModif');
 
     cellElement.innerHTML = '';
     cellElement.appendChild(inputElement);

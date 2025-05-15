@@ -3,12 +3,14 @@ require_once(__DIR__ . '/Database.php');
 
 class Activite {
     
-    public static function create($nomActivite, $adresse, $ville, $prix, $nbrParticipantMax, $description, $duree, $isPublic, $idCreateur) {
+
+    public static function create($nomActivite, $date, $adresse, $ville, $prix, $nbrParticipantMax, $description, $duree, $isPublic, $idCreateur) {
         $pdo = getPDO();
         $sql = $pdo->prepare("
-            INSERT INTO `activite`(`nomActivite`, `adresse`, `ville`, `prix`, `nbrParticipantMax`, `description`, `duree`, `isPublic`, `idCreateur`) VALUES (:nomActivite, :adresse, :ville, :prix, :nbrParticipantMax, :description, :duree, :isPublic, :idCreateur)
+            INSERT INTO `activite`(`nomActivite`, `date`, `adresse`, `ville`, `prix`, `nbrParticipantMax`, `description`, `duree`, `isPublic`, `idCreateur`) VALUES (:nomActivite, :date, :adresse, :ville, :prix, :nbrParticipantMax, :description, :duree, :isPublic, :idCreateur)
         ");
         $sql->bindValue(':nomActivite', $nomActivite, PDO::PARAM_STR);
+        $sql->bindValue(':date', $date, PDO::PARAM_STR);
         $sql->bindValue(':adresse', $adresse, PDO::PARAM_STR);
         $sql->bindValue(':ville', $ville, PDO::PARAM_STR);
         $sql->bindValue(':prix', $prix, PDO::PARAM_INT);
@@ -41,10 +43,12 @@ class Activite {
         return $sql->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function update($id, $nomActivite, $adresse, $ville, $prix, $nbrParticipantMax, $description, $duree, $isPublic, $idCreateur) {
+
+    public static function update($id, $date, $nomActivite, $adresse, $ville, $prix, $nbrParticipantMax, $description, $duree, $isPublic, $idCreateur) {
         $pdo = getPDO();
-        $sql = $pdo->prepare("UPDATE activite SET nomActivite = :nomActivite, adresse = :adresse, ville = :ville, prix = :prix, nbrParticipantMax = :nbrParticipantMax, description = :description, duree = :duree, isPublic = :isPublic, idCreateur = :idCreateur WHERE idActivite = :idActivite");
+        $sql = $pdo->prepare("UPDATE activite SET nomActivite = :nomActivite, date = :date, adresse = :adresse, ville = :ville, prix = :prix, nbrParticipantMax = :nbrParticipantMax, description = :description, duree = :duree, isPublic = :isPublic, idCreateur = :idCreateur WHERE idActivite = :idActivite");
         $sql->bindValue(':nomActivite', $nomActivite, PDO::PARAM_STR);
+        $sql->bindValue(':date', $date, PDO::PARAM_STR);
         $sql->bindValue(':adresse', $adresse, PDO::PARAM_STR);
         $sql->bindValue(':ville', $ville, PDO::PARAM_STR);
         $sql->bindValue(':prix', $prix, PDO::PARAM_INT);
