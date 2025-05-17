@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once "../../Modele/LienPDO.php";
+require_once(__DIR__ . '/../Modele/LienPDO.php');
+require_once(__DIR__ . '/../Modele/AdminModele.php');
 $pdo = lienPDO();
 
 // Validation POST
@@ -10,24 +11,16 @@ if (!isset($_POST['table']) || empty($_POST['table'])) {
 }
 $nomTableDemande = $_POST['table'];
 
-// Validation existence table
-try {
-    $stmtCheck = $pdo->prepare("SHOW TABLES LIKE ?");
-    $stmtCheck->execute([$nomTableDemande]);
-    if ($stmtCheck->rowCount() == 0) {
-        echo '<p style="color:red;">Erreur : Table non valide.</p>';
-        exit;
-    }
-} catch (PDOException $e) {
-    echo '<p style="color:red;">Erreur vérification table: ' . htmlspecialchars($e->getMessage()) . '</p>';
+$messErreur = '';
+$messErreur = validationTable($nomTableDemande);
+if($messErreur != ''){
+    echo "".$messErreur."";
     exit;
 }
 
 // Récupérer colonnes
 try {
-    $stmtColumns = $pdo->query("DESCRIBE `$nomTableDemande`"); 
-    if (!$stmtColumns) { throw new PDOException("Erreur lors de DESCRIBE"); }
-    $colonnesDetails = $stmtColumns->fetchAll(PDO::FETCH_ASSOC);
+    $colonnesDetails = recupColonnes($nomTableDemande);
 
     
     $htmlForm = '<form id="add-entity-form" data-table="' . htmlspecialchars($nomTableDemande) . '">';

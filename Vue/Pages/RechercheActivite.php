@@ -25,13 +25,8 @@ $activityIds = verifRechercheSoumise($_GET['q']);
 </header>
 
 <div class="conteneur">
-	<?php
-		if (isset($activityIds)) {
-        echo listeActivites($activityIds);
-		} else {
-			echo "<p>Veuillez entrer un autre terme dans la barre de recherche.</p>";
-		}
-		
+	<?php	
+    	echo listeActivites($activityIds);
 	?>
 </div>
 
