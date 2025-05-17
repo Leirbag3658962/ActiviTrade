@@ -29,6 +29,27 @@ function recherche($mot){
         echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
    }
 }
+    function rechercheVide(){
+        $pdo = getPDO();
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+    try{
+        $idList = array();
 
+        $sqlrecherche = "SELECT idActivite FROM activite";
+        $stmtrecherche= $pdo->query($sqlrecherche);
+	    
+	    if($stmtrecherche){
+		    while ($row = $stmtrecherche->fetch(PDO::FETCH_ASSOC)){
+                $idList[] = $row['idActivite'];
+                // echo "<a>".$row['idActivite']."</a>";
+		    }
+            return $idList;
+	    }
+    } catch (PDOException $e) {
+        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+   }
+    }
 
 ?>

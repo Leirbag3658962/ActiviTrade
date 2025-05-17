@@ -5,13 +5,13 @@ $user = "root";
 $password = "";
 $dbname = "activitrade";
 
-$conn = new mysqli($host, $user, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connexion échouée : " . $conn->connect_error);
-}
+// $conn = new mysqli($host, $user, $password, $dbname);
+// if ($conn->connect_error) {
+//     die("Connexion échouée : " . $conn->connect_error);
+// }
 session_start();
-// require_once(__DIR__ . '../../../Modele/Database.php');
-// $conn = getPDO();
+require_once(__DIR__ . '../../../Modele/Database.php');
+$conn = getPDO();
 require_once(__DIR__ . '../../../Modele/User.php');
 
 // Récupère un utilisateur
