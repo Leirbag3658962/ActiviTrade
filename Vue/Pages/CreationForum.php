@@ -1,24 +1,26 @@
 <?php
 session_start();
-$_SESSION['idUser'] = 1;
 
-require_once "../../Modele/LienPDO.php";
-require_once "../Components/Navbar2.php";
-$pdo = lienPDO();
+//$_SESSION['idUser'] = 1;
 
 if (!isset($_SESSION['idUser'])) {
     header("Location: LogIn.php");
     exit;
 }
 
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO();
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $theme = htmlspecialchars($_POST['theme']);
     $contenu = htmlspecialchars($_POST['contenu']);
-    $idUser = $_SESSION['idUser']; 
+    $idUser = $_SESSION['idUser'];
     $date = date("Y-m-d H:i:s");
 
-    $idParent = NULL;  
+    $idParent = NULL;
 
     $sql = "INSERT INTO forum (theme, date, contenu, idUser, idParent) 
             VALUES (:theme, :date, :contenu, :idUser, :idParent)";
@@ -29,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':date', $date);
     $stmt->bindParam(':contenu', $contenu);
     $stmt->bindParam(':idUser', $idUser);
-    $stmt->bindParam(':idParent', $idParent);  
+    $stmt->bindParam(':idParent', $idParent);
 
     if ($stmt->execute()) {
         echo "Le sujet a été créé avec succès.";
@@ -75,17 +77,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <footer id="footer" class="footer"></footer>
 
 
-</body>             
-script src="../Components/Navbar2.js"></script>
-<script>
-	document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+</body>
 
+<!--<script src="../Components/Navbar2.js"></script>-->
+<!--<script>-->
+<!--    document.getElementById("navbar").innerHTML = Navbar2();-->
+<!--</script>-->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>
-	document.getElementById("footer").innerHTML = Footer2();
+    document.getElementById("footer").innerHTML = Footer2();
 </script>
 
 </html>
