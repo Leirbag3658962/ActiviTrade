@@ -2,7 +2,8 @@
 session_start();
 header('Content-Type: application/json');
 
-require_once "../../Modele/LienPDO.php"; 
+require_once(__DIR__ . '/../Modele/LienPDO.php');
+require_once(__DIR__ . '/../Modele/AdminModele.php');
 $pdo = lienPDO(); 
 
 $response = ['success' => false]; 
@@ -32,10 +33,9 @@ if (!$pdo) {
 
 
 try {
-    
-    $stmtCheckTable = $pdo->prepare("SHOW TABLES LIKE ?");
-    $stmtCheckTable->execute([$nomTable]);
-    if ($stmtCheckTable->rowCount() == 0) {
+    $messErreur = '';
+    $messErreur = validationTable($nomTable);
+    if($messErreur != ''){
         $response['message'] = 'Erreur : La table "' . htmlspecialchars($nomTable) . '" n\'existe pas ou n\'est pas autorisée.';
         echo json_encode($response);
         exit;
@@ -47,7 +47,7 @@ try {
     $estColonnePk = false;
 
     
-    $stmtCols = $pdo->query("DESCRIBE `$nomTable`");
+    $stmtCols = describeTable($nomTable);
     if ($stmtCols) {
         while ($col = $stmtCols->fetch(PDO::FETCH_ASSOC)) {
             if (strtoupper($col['Key']) === 'PRI') {
@@ -83,9 +83,7 @@ try {
         exit;
     }
 
-
-    $sqlUpdate = "UPDATE `$nomTable` SET `$nomColonne` = ? WHERE `$nomClePrimaire` = ?";
-    $stmtUpdate = $pdo->prepare($sqlUpdate);
+    $stmtUpdate = updateLigne($nomTable, $nomColonne, $nomClePrimaire);
 
     $valeurAInserer = ($nouvelleValeur === '') ? null : $nouvelleValeur;
 

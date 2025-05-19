@@ -9,6 +9,7 @@ session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
 require_once(__DIR__ . '../../Components/Footer2.php');
+
 $pdo = getPDO();
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {

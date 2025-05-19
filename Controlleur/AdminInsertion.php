@@ -1,14 +1,9 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-
-// Pour erreur
-ini_set('display_errors', 1); error_reporting(E_ALL);
-
-$host = 'localhost'; 
-$dbname = 'activitrade'; 
-$username = 'root'; 
-$password = '';
+require_once(__DIR__ . '/../Modele/LienPDO.php');
+require_once(__DIR__ . '/../Modele/AdminModele.php');
+$pdo = lienPDO();
 
 $response = ['success' => false]; 
 
@@ -22,26 +17,20 @@ $formData = $_POST;
 unset($formData['table']); 
 
 
-try {
-    $pdo = new PDO("mysql:host=$host;port=3307;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    $response['message'] = 'Erreur Connexion DB: ' . $e->getMessage();
-    echo json_encode($response); exit;
-}
+
 
 try {
     // Validation existence table
-    $stmtCheck = $pdo->prepare("SHOW TABLES LIKE ?");
-    $stmtCheck->execute([$nomTable]);
-    if ($stmtCheck->rowCount() == 0) {
+    $messErreur = '';
+    $messErreur = validationTable($nomTable);
+    if($messErreur != ''){
         $response['message'] = 'Table non valide.';
         echo json_encode($response); exit;
     }
 
     // Récupérer colonnes 
     $validColumns = [];
-    $stmtCols = $pdo->query("DESCRIBE `$nomTable`");
+    $stmtCols = describeTable($nomTable);
     if ($stmtCols) {
         while ($col = $stmtCols->fetch(PDO::FETCH_ASSOC)) {
             if (!(strtoupper($col['Key']) === 'PRI' && strpos(strtolower($col['Extra']), 'auto_increment') !== false)) {
@@ -65,9 +54,7 @@ try {
     $colsString = "`" . implode("`, `", $validColumns) . "`";
     $placeholders = implode(", ", array_fill(0, count($validColumns), '?'));
 
-    $sqlInsert = "INSERT INTO `$nomTable` ($colsString) VALUES ($placeholders)";
-
-    $stmtInsert = $pdo->prepare($sqlInsert);
+    $stmtInsert = insertLigne($nomTable, $colsString, $placeholders);
 
     
     $values = [];

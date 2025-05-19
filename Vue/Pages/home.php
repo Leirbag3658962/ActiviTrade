@@ -1,10 +1,4 @@
 <?php
-$host = 'localhost';
-$port = '3306'; 
-$dbname = 'activitrade';
-$user = 'root';
-$password = ''; 
-
 session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
@@ -50,6 +44,7 @@ if ($activeFilter == 'Nouveau') {
     <link rel="stylesheet" href="/Vue/Style/Home.css">
     <link rel="stylesheet" href="/Vue/Style/Navbar2.css">
     <link rel="stylesheet" href="/Vue/Style/Footer2.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ActiviTrade</title>
 </head>
