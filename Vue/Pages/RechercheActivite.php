@@ -15,6 +15,7 @@ $activityIds = verifRechercheSoumise($_GET['q']);
 <link rel="stylesheet" href="../Style/RechercheActivite.css">
 <link rel="stylesheet" href="../Style/navbar2.css">
 <link rel="stylesheet" href="../Style/footer2.css">
+<script src="../Components/Caroussel.js"></script>
 
 <title>RechercheActivite</title>
 </head>
