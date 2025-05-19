@@ -11,7 +11,7 @@ function lienPDO(){
     $host = 'localhost';
     $dbname = 'activitrade';
     $username = 'root';
-    $password = 'hello';
+    $password = '';
     $port = '3306';
     $pageActuelle = "utilisateur";
 
