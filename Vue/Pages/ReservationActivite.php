@@ -1,15 +1,38 @@
 <?php
+ob_start();
 session_start();
-$_SESSION['idUser'] = 1;
-$_SESSION['idActivite'] = 1;
 
-//if (isset($_GET['idActivite'])) {
-//    $_SESSION['idActivite'] = (int)$_GET['idActivite'];
-//}
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO(); 
 
-require_once "../../Modele/LienPDO.php";
-require_once "../Components/Navbar2.php";
-$pdo = lienPDO();  
+
+if (!isset($_SESSION['idUser'])) {
+    header("Location: LogIn.php");
+    exit;
+}
+
+$idUser = $_SESSION['idUser']; 
+
+if (isset($_GET['idActivite'])) {
+   $_SESSION['idActivite'] = (int)$_GET['idActivite'];
+}
+
+$idActivite = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+$nomActivite = "Nom de l'activité";
+
+if ($idActivite > 0) {
+    $stmt = $pdo->prepare("SELECT nomActivite FROM activite WHERE idActivite = ?");
+    $stmt->execute([$idActivite]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result) {
+        $nomActivite = $result['nomActivite'];
+    } else {
+        $nomActivite = "Activité inconnue";
+    }
+}
 
 $participants = [];
 $participant_count = 0;
@@ -32,9 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
 }
 
-$idActivite = $_SESSION['idActivite']; 
-$idUser = $_SESSION['idUser']; 
-
 $stmt = $pdo->prepare("SELECT * FROM reservation WHERE idUser = :idUser AND idActivite = :idActivite ORDER BY date DESC");
 $stmt->execute([
     ':idUser' => $idUser,
@@ -43,6 +63,7 @@ $stmt->execute([
 $participants = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $participant_count = count($participants);
 
+ob_end_flush(); 
 ?>
 
 <!DOCTYPE html>
@@ -61,17 +82,17 @@ $participant_count = count($participants);
     <?php echo Navbar2(); ?>
 </header>
 <br><br>
-<h1>Réservation: Club de lecture</h1>
+<h1>Réservation: <?php echo htmlspecialchars($nomActivite); ?></h1>
 <div class="container">
     <div class="boxform">
-        <h2>Participant</h2><br>
+        <h2>Participant</h2>
         <form method="post">
             <label for="nom">Nom</label><br>
             <input type="text" id="nom" name="nom" placeholder="Smith" required><br>
             <label for="prenom">Prénom</label><br>
             <input type="text" id="prenom" name="prenom" placeholder="David" required><br>
             <label for="age">Age</label><br>
-            <input type="int" id="age" name="age" placeholder="" required><br><br>
+            <input type="number" id="age" name="age" placeholder="" required><br><br>
             <button id="Button" type="submit">Ajouter un participant</button>
         </form>
     </div>
