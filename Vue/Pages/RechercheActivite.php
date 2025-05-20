@@ -3,10 +3,16 @@ session_start();
 require_once(__DIR__ . '/../../Modele/Database.php');
 require_once(__DIR__ . '/../../Modele/LienPDO.php');
 require_once(__DIR__ . '/../../Modele/Research.php');
+require_once(__DIR__ . '/../../Modele/ActiviteModele.php');
 require_once(__DIR__ . '/../../Controlleur/RechercheActiviteController.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
 
-$activityIds = verifRechercheSoumise($_GET['q']); 
+if(!isset($_GET['q'])){
+	$activityIds = Activite::getAllId();
+}else{
+	$activityIds = verifRechercheSoumise($_GET['q']); 
+}
+
 
 ?>
 <!DOCTYPE html>

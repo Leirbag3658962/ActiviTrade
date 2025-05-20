@@ -35,8 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $messageErreur = "Le nombre de participants doit être un entier positif.";
         } elseif (!is_numeric($prix) || $prix < 0) {
             $messageErreur = "Le prix doit être un nombre positif ou zéro.";
-        } elseif (empty($idCreator)) {
-            header("Location: ../../Vue/Pages/LogIn.php");
+        // } elseif (empty($idCreator)) {
+        //     header("Location: ../../Vue/Pages/LogIn.php");
         } else {
             
             $uploadDir = __DIR__ . '/../Vue/img/Uploads/Activites/';

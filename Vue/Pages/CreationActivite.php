@@ -5,6 +5,10 @@ require_once(__DIR__ . '/../../Modele/LienPDO.php');
 require_once(__DIR__ . '/../Components/Navbar2.php');
 // require_once "../../../Controller/ActiviteController.php";
 $pdo = getPDO();
+$idCreator = $_SESSION['user']['id'];
+if(empty($idCreator)){
+	header("Location: LogIn.php");
+}
 ?>
 
 <!DOCTYPE html>

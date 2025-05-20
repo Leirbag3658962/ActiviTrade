@@ -10,7 +10,7 @@ function Navbar2() {
             </div>
         </a>
         <ul class='nav-links'>
-            <li><a href='../Pages/activite.php'>Activités</a></li>
+            <li><a href='../Pages/RechercheActivite.php'>Activités</a></li>
             <li><a href='../Pages/CreationActivite.php'>Création</a></li>
             <li><a href='../Pages/FAQ.php'>FAQ</a></li>
             <li><a href='../Pages/Forum.php'>Forum</a></li>
