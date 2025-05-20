@@ -78,5 +78,34 @@ class User {
         $sql->execute();
         return;
     }
+
+    public static function updateResetToken($email, $token_hash, $expiration) {
+        $pdo = getPDO();
+        $sql = $pdo->prepare("UPDATE utilisateur SET reset_token_hash = :token_hash, reset_token_expires_at = :expiration WHERE email = :email");
+        $sql->bindValue(':token_hash', $token_hash, PDO::PARAM_STR);
+        $sql->bindValue(':expiration', $expiration, PDO::PARAM_STR);
+        $sql->bindValue(':email', $email, PDO::PARAM_STR);
+        $sql->execute();
+        return;
+    }
+
+    public static function getResetToken($token_hash) {
+        $pdo = getPDO();
+        $sql = $pdo->prepare("
+            SELECT * FROM utilisateur WHERE reset_token_hash = :reset_token
+        ");
+        $sql->bindValue(':reset_token', $token_hash, PDO::PARAM_STR);
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function updatePassword($id, $password_hash) {
+        $pdo = getPDO();
+        $sql = $pdo->prepare("UPDATE utilisateur SET password= :password, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE idUtilisateur=:id");
+        $sql->bindValue(':password', $password_hash, PDO::PARAM_STR);
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+        return;
+    }
 }
 ?>

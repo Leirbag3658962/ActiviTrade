@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(isset($_SESSION['user'])) {
+    header('Location: home.php');
+    exit;
+}
 require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>
 
@@ -18,7 +22,7 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
         <?php echo Navbar2(); ?>
     </header>
     <div class="boxform">
-        <form id="resetForm" method="post">
+        <form id="resetForm" method="post" action="../../Controlleur/ResetPasswordController.php">
             <h1>Mot de passe oubli&eacute;</h1>
             <p class="instructions">Nous vous enverrons un email de r&eacute;cup&eacute;ration afin de r&eacute;initialiser votre mot de passe.</p>
             
@@ -28,36 +32,20 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
                 <div class="error"></div>
             </div>
             <p>Vous n'avez pas encore de compte ? <a href="SignIn.php">Inscrivez-vous</a></p>
-        <p>Vous avez d&eacute;j&agrave; un compte ? <a href="LogIn.php">Connectez-vous</a></p>
+            <p>Vous avez d&eacute;j&agrave; un compte ? <a href="LogIn.php">Connectez-vous</a></p>
 
             <button type="submit" id="sendButton">Envoyer</button>
-        </form>
-
-        <div id="codeInputs" style="display: none;">
-            <p>Entrez le code que vous avez re&ccedil;u par email :</p>
-            <div class="code-container">
-                <input type="text" maxlength="1" class="code-input">
-                <input type="text" maxlength="1" class="code-input">
-                <input type="text" maxlength="1" class="code-input">
-                <input type="text" maxlength="1" class="code-input">
-                <input type="text" maxlength="1" class="code-input">
-                <input type="text" maxlength="1" class="code-input">
-            </div>
-            <br>
-            <button type="submit">V&eacute;rifier</button>
-        </div>
-
-        
+        </form>        
     </div>
     <footer id="footer" class="footer"></footer>
 </body>
 
 <!-- <script src="../Components/Navbar2.js"></script> -->
-<script src="../Components/CodePassword.js"></script>
-<script>
+<!-- <script src="../Components/CodePassword.js"></script> -->
+<!-- <script>
     // document.getElementById("navbar").innerHTML = Navbar2();
     document.getElementById("sendButton").addEventListener("click", CodePassword);
-</script>
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>

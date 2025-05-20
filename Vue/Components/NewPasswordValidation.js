@@ -1,10 +1,4 @@
-const form = document.getElementById('form');
-const lastname = document.getElementById('lastname');
-const firstname = document.getElementById('firstname');
-const email = document.getElementById('email');
-const birthdate = document.getElementById('birthdate');
-const ville = document.getElementById('ville');
-const telephone = document.getElementById('telephone');
+const form = document.getElementById('resetPasswordForm');
 const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
 
@@ -31,66 +25,9 @@ const setSuccess = element => {
     inputControl.classList.add('success');
     inputControl.classList.remove('error');
 };
-
-const isValidEmail = email => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()\[\]\\.,;:\s@"]+\.)+[^<>()\[\]\\.,;:\s@"]{2,})$/i;
-    return re.test(String(email).toLowerCase());
-};
-
-const isPhoneNumber = number => {
-    const re = /^(0|\+33)[1-9](\d{2}){4}$/;
-    return re.test(String(number).toLowerCase());
-};
-
-const validateInputs = () => {
-    const lastnameValue = lastname.value.trim();
-    const firstnameValue = firstname.value.trim();
-    const emailValue = email.value.trim();
-    const birthdateValue = birthdate.value.trim();
-    const villeValue = ville.value.trim();
-    const telephoneValue = telephone.value.trim();
+const validateInputs = () => {    
     const passwordValue = password.value.trim();
     const password2Value = password2.value.trim();
-
-    if (lastnameValue === '') {
-        setError(lastname, 'Le nom est requis');
-    } else {
-        setSuccess(lastname);
-    }
-
-    if (firstnameValue === '') {
-        setError(firstname, 'Le prénom est requis');
-    } else {
-        setSuccess(firstname);
-    }
-
-    if (emailValue === '') {
-        setError(email, 'L\'email est requis');
-    } else if (!isValidEmail(emailValue)) {
-        setError(email, 'Email non valide');
-    } else {
-        setSuccess(email);
-    }
-
-    if (birthdateValue === '') {
-        setError(birthdate, 'La date de naissance est requise');
-    } else {
-        setSuccess(birthdate);
-    }
-
-    if (villeValue === '') {
-        setError(ville, 'La ville est requise');
-    } else {
-        setSuccess(ville);
-    }
-
-    if (telephoneValue === '') {
-        setError(telephone, 'Le numéro de téléphone est requis');
-    } else if (!isPhoneNumber(telephoneValue)) {
-        setError(telephone, 'Numéro de téléphone non valide');
-    } else {
-        setSuccess(telephone);
-    }
 
     if (passwordValue === '') {
         setError(password, 'Le mot de passe est requis');

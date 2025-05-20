@@ -14,7 +14,7 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
     <link rel="stylesheet" href="../Style/LogIn.css">
     <link rel="stylesheet" href="../Style/Navbar2.css">
     <link rel="stylesheet" href="../Style/Footer2.css">
-    <title>Inscription</title>
+    <title>Connexion</title>
 </head>
 <body>
     <header id="navbar" class="navbar">
