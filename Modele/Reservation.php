@@ -24,7 +24,7 @@ class FAQ {
         ");
         $sql->bindValue(':idReservation', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getAll() {
@@ -33,7 +33,7 @@ class FAQ {
             SELECT * FROM reservation
         ");
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function update($id, $nombrePersonne, $date, $idUser, $idActivite) {

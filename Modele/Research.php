@@ -30,12 +30,12 @@ function recherche($mot){
    }
 }
 
-function rechercheTheme($mot){
+function rechercheTheme($theme){
     $pdo = getPDO();
     if(!$pdo){
         echo "<a> Erreur: Connexion BDD non fournie.</a>";
     }
-    testValidationForm($mot);
+    testValidationForm($theme);
     try{
         $idList = array();
 
@@ -45,8 +45,69 @@ function rechercheTheme($mot){
                         WHERE t.theme LIKE :mot ORDER BY at.idActivite DESC";
 
         $stmtrecherche = $pdo->prepare($sqlrecherche);
-        $motrecherche = "%".$mot."%";
+        $motrecherche = "%".$theme."%";
         $stmtrecherche->bindParam(':mot', $motrecherche);
+
+        $stmtrecherche->execute();
+
+	    
+	    if($stmtrecherche){
+		    while ($row = $stmtrecherche->fetch(PDO::FETCH_ASSOC)){
+                $idList[] = $row['idActivite'];
+                // echo "<a>".$row['idActivite']."</a>";
+		    }
+            return $idList;
+	    }
+    } catch (PDOException $e) {
+        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+   }
+}
+
+function recherchePrix($prixInf, $prixSup){
+    $pdo = getPDO();
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+    testValidationForm($prixInf);
+    testValidationForm($prixSup);
+    try{
+        $idList = array();
+
+        $sqlrecherche = "SELECT idActivite FROM activite as a 
+                        WHERE prix>=:prixinf AND prix<=:prixsup ORDER BY a.idActivite DESC";
+
+        $stmtrecherche = $pdo->prepare($sqlrecherche);
+        $stmtrecherche->bindParam(':prixinf', $prixInf);
+        $stmtrecherche->bindParam(':prixsup', $prixSup);
+
+        $stmtrecherche->execute();
+
+	    
+	    if($stmtrecherche){
+		    while ($row = $stmtrecherche->fetch(PDO::FETCH_ASSOC)){
+                $idList[] = $row['idActivite'];
+                // echo "<a>".$row['idActivite']."</a>";
+		    }
+            return $idList;
+	    }
+    } catch (PDOException $e) {
+        echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+   }
+}
+
+function rechercheVille($ville){
+    $pdo = getPDO();
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+    testValidationForm($ville);
+    try{
+        $idList = array();
+
+        $sqlrecherche = "SELECT idActivite FROM activite as a WHERE ville=:ville ORDER BY a.idActivite DESC;";
+
+        $stmtrecherche = $pdo->prepare($sqlrecherche);
+        $stmtrecherche->bindParam(':ville', $ville);
 
         $stmtrecherche->execute();
 

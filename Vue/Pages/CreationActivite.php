@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once(__DIR__ . '/../../Modele/Database.php');
-require_once(__DIR__ . '/../../Modele/LienPDO.php');
-require_once(__DIR__ . '/../Components/Navbar2.php');
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../../Modele/Theme.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
 // require_once "../../../Controller/ActiviteController.php";
 $pdo = getPDO();
 $idCreator = $_SESSION['user']['id'];
@@ -53,7 +53,7 @@ if(empty($idCreator)){
 		<br>
 		<select class="input" id="inputCategorie" name="inputCategorie">
 			<?php
-				listeCategorie($pdo);
+				Theme::listeCategorie();
 			?>
 		</select><br>
 		<br>

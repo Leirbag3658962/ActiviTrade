@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../../Modele/MentionsLegales.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,10 +17,8 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
 </header>
 
 <h1>Mentions Légales</h1>
-<?php
-    require_once "../../Modele/LienPDO.php";
-    $pdo = lienPDO();
-    afficherMentions($pdo);
+    <?php
+        MentionsLegales::afficherMentions();
     ?>
 
 

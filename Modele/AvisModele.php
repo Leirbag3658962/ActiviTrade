@@ -25,7 +25,7 @@ class Avis {
         ");
         $sql->bindValue(':idAvis', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getAll() {
@@ -34,7 +34,7 @@ class Avis {
             SELECT * FROM avis
         ");
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function update($id, $note, $contenu, $date, $idUser, $idActivite) {

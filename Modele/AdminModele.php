@@ -113,4 +113,25 @@ function updateLigne($nomTable, $nomColonne, $nomClePrimaire){
     $stmtUpdate = $pdo->prepare($sqlUpdate);
     return $stmtUpdate;
 }
+
+function recuperationTable(){
+    $pdo = getPDO();
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+
+    try{
+        $recuptable = 'SHOW TABLES';
+        $nomtable = $pdo->query($recuptable);
+        if($nomtable){
+            while ($ligne = $nomtable->fetch(PDO::FETCH_COLUMN)) {
+                echo "<a href='javascript:void(0);' id=\"" . htmlspecialchars($ligne) . "\" class=\"deroulement\">" . htmlspecialchars($ligne) . "</a>";
+            } 
+        }else{
+            echo "<a> Echec de récupération </a>";
+        }
+    } catch (PDOException $e) {
+        echo "<a> Erreur BDD lors de la récupération des tables: " . htmlspecialchars($e->getMessage()) . "</a>";
+    }  
+}
 ?>

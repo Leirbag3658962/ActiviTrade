@@ -91,5 +91,20 @@ class Activite {
         $sql->execute();
         return;
     }
+
+    public static function imageActivite($idAct, $image){
+        $pdo = getPDO();
+        if(!$pdo){
+            echo "<a> Erreur: Connexion BDD non fournie.</a>";
+        }
+
+        try{
+            $sqlimage = "INSERT INTO `image`(`idActivite`, `image`) VALUES (:idactivite, :image)";
+            $stmtimage = $pdo->prepare($sqlimage);
+            $stmtimage ->execute(['idactivite' => $idAct, 'image' => $image]);
+        }catch (PDOException $e) {
+            echo "<a> Erreur BDD lors du lien image-activité: " . htmlspecialchars($e->getMessage()) . "</a>";
+        }
+    }
 }
 ?>
