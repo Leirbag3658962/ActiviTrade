@@ -70,10 +70,10 @@ if(empty($idCreator)){
 		<br>
 		<label for="labType">Type</label>
 		<br><br>
-		<input type="radio" id="Public" name="Groupe" value="Public">
-		<label for="Public">Public</label>
+		<input type="radio" id="Public" name="Groupe" value="Public" checked>
+		<label id="labPublic" for="Public">Public</label>
 		<input type="radio" id="Privée" name="Groupe" value="Privée">
-		<label for="Privée">Privée</label>
+		<label id="labPrivée" for="Privée">Privée</label>
 		<br><br><br>
 		
 		<label for="labDescription">Description de l'activité </label>
@@ -111,6 +111,7 @@ if(empty($idCreator)){
 <!-- <script src="../Components/NavbarAnim.js"></script> -->
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
+<script src="../Components/CreationActivite.js"></script>
 <script>
 	document.getElementById("footer").innerHTML = Footer2();
 </script>

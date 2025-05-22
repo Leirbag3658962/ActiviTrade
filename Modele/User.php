@@ -25,7 +25,7 @@ class User {
             SELECT email FROM utilisateur WHERE email = ?
         ");
         $sql->execute([$email]);
-        return $sql->fetchAll() !== false;
+        return $sql->fetch() !== false;
     }
 
     public static function getById($id) {
@@ -45,7 +45,7 @@ class User {
         ");
         $sql->bindValue(':email', $email, PDO::PARAM_STR);
         $sql->execute();
-        return $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $sql->fetch(PDO::FETCH_ASSOC);
     }
 
     public static function getAll() {
