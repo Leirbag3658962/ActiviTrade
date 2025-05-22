@@ -1,6 +1,5 @@
 <?php
 session_start();
-// $_SESSION['idUser'] = 1;
 
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
@@ -8,11 +7,23 @@ $pdo = getPDO();
 
 $message = "";
 
-if (!isset($_SESSION['idUser'])) {
+//if (!isset($_SESSION['idUser'])) {
+//    header("Location: LogIn.php");
+//    exit;
+//}
+
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: LogIn.php");
     exit;
 }
-$idUser = $_SESSION['idUser']; 
+$idUser = (int) $_GET['id'];
+$_SESSION['idUser'] = $idUser;
+
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM utilisateur WHERE idUtilisateur = ?");
+$stmt->execute([$idUser]);
+if ($stmt->fetchColumn() == 0) {
+    die("Utilisateur introuvable.");
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
