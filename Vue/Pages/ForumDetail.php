@@ -2,7 +2,9 @@
 session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
-$pdo = getPDO(); 
+$pdo = getPDO();
+
+//$_SESSION['idUser'] = 2;
 
 $idForum = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -109,6 +111,7 @@ if ($idForumPost > 0 && !empty($contenu)) {
     </div>
 
     <?php $isLoggedIn = isset($_SESSION['idUser']); ?>
+
 
     <button class="reply-button">
         Répondre
