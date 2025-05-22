@@ -8,9 +8,27 @@ html, body {
 #titrecreation{
 	text-align:center;
 }
-.input{
-	width: 170px;
-	height: 20px;
+
+.input {
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid;
+    width: 200px;
+    height: 20px;
+}
+
+#inputCategorie {
+    width: 200px;
+    height: 25px;
+}
+
+input[type="radio"] {
+     width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    position: relative; 
+    top: 4px;          
+    accent-color: black;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -45,6 +63,9 @@ input[type=number]::-webkit-outer-spin-button {
 	margin-bottom: 10px;
 	width: 250px;
 	resize: none;
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid;
 }
 
 #labPicture{
