@@ -96,14 +96,19 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
                 <div class="password-input">
                     <input type="password" id="password2" name="password2" placeholder="Confirmez votre mot de passe">
                     <img src="../img/Hide.svg" id="showHideConfirm">
+                    <div class="error"></div>
                 </div>
-                <div class="error"></div>
+                <div class="password-check">
+                    <div class="check-same-password">
+                        <img src="../img/close.svg" />&nbsp;Les mots de passe sont identiques
+                    </div>
+                </div>
             </div>
 
 
             <div id="checkboxdiv" class="checkboxdiv">
                 <input type="checkbox" id="cgu" value="CGU" name="condition[]" required>
-                <label for="cgu">J'ai lu et j'accepte les <a href="MentionLegale.php">Conditions Générales d'Utilisation</a></label><br>
+                <label for="cgu">J'ai lu et j'accepte les <a href="Cgu.php">Conditions Générales d'Utilisation</a></label><br>
             </div>
             <br>
             <button type="submit">S'inscrire</button>

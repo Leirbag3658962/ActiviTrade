@@ -161,3 +161,19 @@ validatorText.addEventListener("keyup", function(e) {
         }
     })
 });
+
+const checkSamePassword = document.querySelector('.check-same-password');
+const checkSamePasswordImg = checkSamePassword.querySelector('img');
+
+function updateSamePasswordCheck() {
+    if (password.value && password2.value && password.value === password2.value) {
+        checkSamePasswordImg.src = "../img/check.svg";
+        checkSamePassword.style.color = "green";
+    } else {
+        checkSamePasswordImg.src = "../img/close.svg";
+        checkSamePassword.style.color = "red";
+    }
+}
+
+password.addEventListener("input", updateSamePasswordCheck);
+password2.addEventListener("input", updateSamePasswordCheck);

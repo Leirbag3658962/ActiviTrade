@@ -61,8 +61,13 @@ $token = isset($_GET["token"]) ? $_GET["token"] : "";
         <div class="password-input">
             <input type="password" id="password2" name="password2" required>
             <img src="../img/Hide.svg" class="toggle-password" data-target="password2" alt="toggle">
+            <div class="error"></div>
         </div>
-        <div class="error"></div>
+        <div class="password-check">
+            <div class="check-same-password">
+                <img src="../img/close.svg" />&nbsp;Les mots de passe sont identiques
+            </div>
+        </div>
     </div>
 
     <button type="submit">Envoyer</button>
