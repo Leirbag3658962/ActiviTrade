@@ -22,6 +22,7 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
         <?php echo Navbar2(); ?>
     </header>
     <div class="boxform">
+        <?php if (!isset($_GET['sent'])): ?>
         <form id="resetForm" method="post" action="../../Controlleur/ResetPasswordController.php">
             <h1>Mot de passe oubli&eacute;</h1>
             <p class="instructions">Nous vous enverrons un email de r&eacute;cup&eacute;ration afin de r&eacute;initialiser votre mot de passe.</p>
@@ -38,6 +39,11 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
 
             <button type="submit" id="sendButton">Envoyer</button>
         </form>        
+        <?php elseif (isset($_GET['sent']) && $_GET['sent'] == 1): ?>
+            <div id="mailSentMsg" style="color: green; text-align: center; margin-bottom: 1em;">
+                Un email vous a été envoyé, vous pouvez fermer cette page.
+            </div>
+        <?php endif; ?>
     </div>
     <footer id="footer" class="footer"></footer>
 </body>

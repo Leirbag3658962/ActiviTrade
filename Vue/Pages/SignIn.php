@@ -80,9 +80,8 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
                 <div class="password-input">
                     <input type="password" id="password" name="password" placeholder="Votre mot de passe" >
                     <img src="../img/Hide.svg" id="showHide" >
-                    <!-- <span class="toggle-password" onclick="togglePasswordVisibility('password')"></span> -->
-                    <div class="error"></div>
                 </div>
+                <div class="error"></div>
                 <div class="password-check">
                     <div class="check-length">
                         <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 8 caract&egrave;res
@@ -108,8 +107,8 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
                 <div class="password-input">
                     <input type="password" id="password2" name="password2" placeholder="Confirmez votre mot de passe">
                     <img src="../img/Hide.svg" id="showHideConfirm">
-                    <div class="error"></div>
                 </div>
+                <div class="error"></div>
                 <div class="password-check">
                     <div class="check-same-password">
                         <img src="../img/close.svg" />&nbsp;Les mots de passe sont identiques
@@ -117,10 +116,12 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
                 </div>
             </div>
 
-
-            <div id="checkboxdiv" class="checkboxdiv">
-                <input type="checkbox" id="cgu" value="CGU" name="condition[]" required>
-                <label for="cgu">J'ai lu et j'accepte les <a href="Cgu.php">Conditions Générales d'Utilisation</a></label><br>
+            <div class="input-control">
+                <div id="checkboxdiv" class="checkboxdiv">
+                    <input type="checkbox" id="cgu" value="CGU" name="condition[]">
+                    <label for="cgu">J'ai lu et j'accepte les <a href="Cgu.php">Conditions Générales d'Utilisation</a></label><br>
+                </div>
+                <div class="error"></div>
             </div>
             <br>
             <button type="submit">S'inscrire</button>
@@ -131,10 +132,6 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
     <footer id="footer" class="footer"></footer>
 </body>
 <script src="../Components/InscriptionValidation.js"></script>
-<!-- <script src="../Components/Navbar2.js"></script>
-<script>
-    document.getElementById("navbar").innerHTML = Navbar2();
-</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>

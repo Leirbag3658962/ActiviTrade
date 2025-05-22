@@ -56,11 +56,8 @@ if (User::emailExists($email)) {
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-type: text/html; charset=UTF-8\r\n";
 
-    if (mail($destinataire, $sujet, $message, $headers)) {
-        //echo "L'email a été envoyé avec succès.";
-    } else {
-        //echo "L'email n'a pas pu être envoyé.";
-    }
+    header("Location: ../../Vue/Pages/ResetPassword.php?sent=1");
+    exit;
 
 } else {
 $_SESSION["erreur"] = "le formulaire est incomplet";
