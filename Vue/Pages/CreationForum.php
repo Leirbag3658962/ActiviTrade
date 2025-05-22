@@ -1,10 +1,9 @@
 <?php
 session_start();
 
-//$_SESSION['idUser'] = 1;
 
-if (!isset($_SESSION['idUser'])) {
-    header("Location: LogIn.php");
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header("Location: LogIn.php"); // 或者：die("Aucune activité spécifiée.");
     exit;
 }
 
@@ -12,12 +11,14 @@ require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
 $pdo = getPDO();
 
+$idUser = (int) $_GET['id'];
+$_SESSION['idUser'] = $idUser;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $theme = htmlspecialchars($_POST['theme']);
     $contenu = htmlspecialchars($_POST['contenu']);
-    $idUser = $_SESSION['idUser'];
+//    $idUser = $_SESSION['idUser'];
     $date = date("Y-m-d H:i:s");
 
     $idParent = NULL;
@@ -91,3 +92,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </script>
 
 </html>
+
