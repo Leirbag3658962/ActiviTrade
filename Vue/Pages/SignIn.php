@@ -29,37 +29,49 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
             <h1>Inscription</h1>
             <div class="input-control">
                 <label for="lastname">Nom</label><br>
+                <div class="password-input">
                 <input type="text" id="lastname" name="lastname" placeholder="Smith" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="firstname">Pr&eacute;nom</label><br>
+                <div class="password-input">
                 <input type="text" id="firstname" name="firstname" placeholder="David" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="email">Email</label><br>
+                <div class="password-input">
                 <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="birthdate">Date de naissance</label><br>
+                <div class="password-input">
                 <input type="date" id="birthdate" name="birthdate" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="ville">Ville</label><br>
+                <div class="password-input">
                 <input type="text" id="ville" name="ville" placeholder="Paris" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="telephone">Num&eacute;ro de t&eacute;l&eacute;phone</label>
+                <div class="password-input">
                 <input type="tel" id="telephone" name="telephone" placeholder="612345678" >
+                </div>
                 <div class="error"></div>
             </div>
 

@@ -27,8 +27,10 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
             <p class="instructions">Nous vous enverrons un email de r&eacute;cup&eacute;ration afin de r&eacute;initialiser votre mot de passe.</p>
             
             <div class="input-control">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required>
+                <label for="email">Email</label><br>
+                <div class="password-input">
+                    <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" ><br>
+                </div>
                 <div class="error"></div>
             </div>
             <p>Vous n'avez pas encore de compte ? <a href="SignIn.php">Inscrivez-vous</a></p>

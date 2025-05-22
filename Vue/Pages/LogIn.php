@@ -27,7 +27,9 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
 
             <div class="input-control">
                 <label for="email">Email</label><br>
-                <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" required><br>
+                <div class="password-input">
+                <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
