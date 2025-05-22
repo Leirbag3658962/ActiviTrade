@@ -2,7 +2,7 @@
 session_start(); 
 
 require_once(__DIR__ . '/../Modele/Database.php');
-require_once(__DIR__ . '/../Modele/LienPDO.php');
+require_once(__DIR__ . '/../Modele/Theme.php');
 require_once(__DIR__ . '/../Modele/ActiviteModele.php');
 
 $pdo = getPDO(); 
@@ -35,8 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $messageErreur = "Le nombre de participants doit être un entier positif.";
         } elseif (!is_numeric($prix) || $prix < 0) {
             $messageErreur = "Le prix doit être un nombre positif ou zéro.";
-        } elseif (empty($idCreator)) {
-            header("Location: ../../Vue/Pages/LogIn.php");
+        // } elseif (empty($idCreator)) {
+        //     header("Location: ../../Vue/Pages/LogIn.php");
         } else {
             
             $uploadDir = __DIR__ . '/../Vue/img/Uploads/Activites/';
@@ -89,16 +89,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $img2 = $uploadedFilesPathsDB[1] ?? null;
                     $img3 = $uploadedFilesPathsDB[2] ?? null;
                     if($img1){
-                       imageActivite($idAct, $img1); 
+                       Activite::imageActivite($idAct, $img1); 
                     }
                     if($img2){
-                       imageActivite($idAct, $img2); 
+                       Activite::imageActivite($idAct, $img2); 
                     }
                     if($img3){
-                       imageActivite($idAct, $img3); 
+                       Activite::imageActivite($idAct, $img3); 
                     }
 
-                    categorieActivite($idAct, $categorie);
+                    Theme::categorieActivite($idAct, $categorie);
 
                     $messageSucces = "Activité \"".htmlspecialchars($nomActivite)."\" créée avec succès !";
                     $_POST = array();

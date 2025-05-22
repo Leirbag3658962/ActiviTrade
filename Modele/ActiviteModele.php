@@ -40,9 +40,31 @@ class Activite {
             SELECT * FROM activite
         ");
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getAllId() {
+        $pdo = getPDO();
+        if(!$pdo){
+            echo "<a> Erreur: Connexion BDD non fournie.</a>";
+        }
+        try{
+            $idList = array();
+
+            $sqlrecherche = "SELECT idActivite FROM activite";
+            $stmtrecherche= $pdo->query($sqlrecherche);
+            
+            if($stmtrecherche){
+                while ($row = $stmtrecherche->fetch(PDO::FETCH_ASSOC)){
+                    $idList[] = $row['idActivite'];
+                    // echo "<a>".$row['idActivite']."</a>";
+                }
+                return $idList;
+            }
+        } catch (PDOException $e) {
+            echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+        }
+    }
 
     public static function update($id, $date, $nomActivite, $adresse, $ville, $prix, $nbrParticipantMax, $description, $duree, $isPublic, $idCreateur) {
         $pdo = getPDO();
@@ -68,6 +90,21 @@ class Activite {
         $sql->bindValue(':idActivite', $id, PDO::PARAM_INT);
         $sql->execute();
         return;
+    }
+
+    public static function imageActivite($idAct, $image){
+        $pdo = getPDO();
+        if(!$pdo){
+            echo "<a> Erreur: Connexion BDD non fournie.</a>";
+        }
+
+        try{
+            $sqlimage = "INSERT INTO `image`(`idActivite`, `image`) VALUES (:idactivite, :image)";
+            $stmtimage = $pdo->prepare($sqlimage);
+            $stmtimage ->execute(['idactivite' => $idAct, 'image' => $image]);
+        }catch (PDOException $e) {
+            echo "<a> Erreur BDD lors du lien image-activité: " . htmlspecialchars($e->getMessage()) . "</a>";
+        }
     }
 }
 ?>

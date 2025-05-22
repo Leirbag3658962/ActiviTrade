@@ -3,10 +3,16 @@ session_start();
 require_once(__DIR__ . '/../../Modele/Database.php');
 require_once(__DIR__ . '/../../Modele/LienPDO.php');
 require_once(__DIR__ . '/../../Modele/Research.php');
+require_once(__DIR__ . '/../../Modele/ActiviteModele.php');
 require_once(__DIR__ . '/../../Controlleur/RechercheActiviteController.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
 
-$activityIds = verifRechercheSoumise($_GET['q']); 
+if(!isset($_GET['q'])){
+	$activityIds = Activite::getAllId();
+}else{
+	$activityIds = verifRechercheSoumise($_GET['q']); 
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -15,6 +21,7 @@ $activityIds = verifRechercheSoumise($_GET['q']);
 <link rel="stylesheet" href="../Style/RechercheActivite.css">
 <link rel="stylesheet" href="../Style/navbar2.css">
 <link rel="stylesheet" href="../Style/footer2.css">
+<script src="../Components/Caroussel.js"></script>
 
 <title>RechercheActivite</title>
 </head>

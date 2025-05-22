@@ -35,7 +35,7 @@ class User {
         ");
         $sql->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->All(PDO::FETCH_ASSOC);
     }
     
     public static function getByEmail($email) {
@@ -54,7 +54,7 @@ class User {
             SELECT * FROM utilisateur
         ");
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function update($id, $lastname, $firstname, $email, $birthdate, $ville, $telephone) {

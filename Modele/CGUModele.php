@@ -23,7 +23,7 @@ class CGU {
         ");
         $sql->bindValue(':idCgu', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getAll() {
@@ -32,7 +32,7 @@ class CGU {
             SELECT * FROM mentionlegale
         ");
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function update($id, $numero, $titreCgu, $description) {
@@ -52,6 +52,30 @@ class CGU {
         $sql->bindValue(':idCgu', $id, PDO::PARAM_INT);
         $sql->execute();
         return;
+    }
+
+    public static function afficherCgu(){
+        $pdo = getPDO();
+        if(!$pdo){
+            echo "<a> Erreur: Connexion BDD non fournie.</a>";
+        }
+
+        try{
+            $sqlcgu = "SELECT titreCgu, description FROM cgu ORDER BY numero ASC";
+            $stmtcgu = $pdo->query($sqlcgu); 
+            if($stmtcgu){
+                echo "<div id=\"box\">";
+                while ($row = $stmtcgu->fetch(PDO::FETCH_ASSOC)){
+                    echo"<h2 class=\"titre2\">" . htmlspecialchars($row['titreCgu']) . "</h2>";
+
+                    echo"<p>" . $row['description'] . "</p>";
+                    echo"<br>";
+                }
+                echo "</div>";
+            }
+        } catch (PDOException $e) {
+            echo "<a> Erreur BDD lors de l'affichage des CGU: " . htmlspecialchars($e->getMessage()) . "</a>";
+        }
     }
 }
 ?>
