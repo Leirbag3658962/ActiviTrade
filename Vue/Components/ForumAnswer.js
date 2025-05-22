@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (replyButton) {
         replyButton.addEventListener("click", function () {
             if (window.isLoggedIn) {
-                if (replyForm.style.display === "none") {
+                if (getComputedStyle(replyForm).display === "none") {
                     replyForm.style.display = "block";
                 } else {
                     replyForm.style.display = "none";
