@@ -1,17 +1,10 @@
 <?php
-
 session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
 require_once(__DIR__ . '../../Components/Footer2.php');
 
-// Configuration de la base de données
-$host = 'localhost';
-$port = '3306';
-$dbname = 'activitrade';
-$user = 'root';
-$password = '';
-
+$pdo = getPDO();
 
 // Variables pour stocker les messages
 $statusMessage = "";
@@ -157,49 +150,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </section>
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>ActiviTrade</h3> //mettre logo activitrave
-                    <p>Votre partenaire dans le développement commercial et la croissance de votre entreprise.</p> // mettre les logo reseaux sociaux svg telecharge
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Liens rapides</h3> // activites
-                    <ul class="footer-links">
-                        <li><a href="index.php">Accueil</a></li> //diff theme ex sport
-                        <li><a href="services.php">Services</a></li> // looisir (prendre de la bdd)
-                        <li><a href="about.php">À propos</a></li>
-                        <li><a href="contact.php">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Services</h3> // toutes les autres pages comme creer activites, faq, mon compte etc
-                    <ul class="footer-links">
-                        <li><a href="services.php#consulting">Consulting</a></li>
-                        <li><a href="services.php#marketing">Marketing</a></li>
-                        <li><a href="services.php#development">Développement</a></li>
-                        <li><a href="services.php#analytics">Analytique</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact</h3> //enlever
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Rue du Commerce, Paris</li>
-                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
-                        <li><i class="fas fa-envelope"></i> contact@activitrade.com</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> ActiviTrade. Tous droits réservés.</p> // vous avez une questions? contacytez nous
-            </div>
-        </div>
+    <footer id="footer" class="footer">
+        <?php echo Footer2(); ?>
     </footer>
 </body>
 </html>

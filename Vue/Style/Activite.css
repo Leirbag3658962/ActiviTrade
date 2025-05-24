@@ -16,70 +16,42 @@ header {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 }  
 
-nav {     
-    display: flex;     
-    justify-content: space-between;     
-    align-items: center;     
-    padding: 15px 50px;     
-    max-width: 1200px;     
-    margin: 0 auto; 
-}  
-
-.logo img{     
-    height: 50px; 
-}  
-
-.nav-links {     
-    display: flex;     
-    list-style: none;     
-    gap: 30px; 
-}  
-
-.nav-links a {     
-    text-decoration: none;     
-    color: white;     
-    font-weight: 500;     
-    transition: color 0.3s ease; 
-}  
-
-.nav-links a.active, .nav-links a:hover {     
-    color: white;     
-    font-weight: 550;  
-}  
-
-.search-box {     
-    display: flex;     
-    align-items: center;     
-    border: 1px solid #ddd;     
-    border-radius: 20px;     
-    overflow: hidden;     
-    background-color: white; 
-}  
-
-.search-box input {     
-    border: none;     
-    padding: 8px 15px;     
-    outline: none; 
-}  
-
-.search-box button {     
-    background: none;     
-    border: none;     
-    padding: 8px 15px;     
-    cursor: pointer; 
-}   
-
 /* En-tête de contenu et bouton réserver */
 .content-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;  /* Changé de center à flex-start pour permettre l'alignement vertical */
     margin-bottom: 40px;
 }
 
+.title-creator {
+    display: flex;
+    flex-direction: column;  /* Affiche les éléments en colonne */
+}
+
+.title-creator h1 {
+    margin-bottom: 15px;  /* Plus d'espace entre le titre et le créateur */
+}
+
+.creator-info {
+    font-size: 1.1rem;
+    color: #333;  /* Couleur noire plutôt que grise */
+    margin-top: 20px;
+}
+
+.creator-info a {
+    color: #333;
+    transition: bold 0.9s ease;
+}
+
+.creator-info a:hover {
+    font-weight: bold;
+}
+
 .cta-container {     
-    display: flex;     
-    justify-content: right;
+    display: flex;
+    flex-direction: column;  /* Affiche les éléments en colonne */
+    align-items: center;     /* Centre les éléments horizontalement */
 }  
 
 .cta-button {     
@@ -93,11 +65,18 @@ nav {
     cursor: pointer;     
     transition: background-color 0.3s ease; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 15px;  
 }  
 
 .cta-button:hover {     
     background-color: #2a4a30; 
-}  
+}
+
+.places-info {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 0;
+}
 
 /*Content*/ 
 .content{     
