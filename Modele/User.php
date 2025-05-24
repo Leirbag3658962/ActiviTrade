@@ -35,7 +35,7 @@ class User {
         ");
         $sql->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->All(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public static function getByEmail($email) {
@@ -98,6 +98,7 @@ class User {
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     public static function updateResetToken($email, $token_hash, $expiration) {
         $pdo = getPDO();
