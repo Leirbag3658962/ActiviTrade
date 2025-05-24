@@ -3,8 +3,49 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$dbname = "activitrade";
+$dbname = "activitrade"; // vérifie bien le nom ici aussi
 
+session_start(); // Très important pour accéder à $_SESSION
+
+
+require_once(__DIR__ . '../../Components/Navbar2.php');
+
+
+// $conn = new mysqli($host, $user, $password, $dbname);
+// if ($conn->connect_error) {
+//     die("Connexion échouée : " . $conn->connect_error);
+// }
+
+// // Vérifie que l'utilisateur est connecté
+// if (isset($_SESSION['user']['id'])) {
+//     $userId = intval($_SESSION['user']['id']); // Sécurisation de l'ID
+
+//     // Récupère l'utilisateur connecté
+//     $sql = "SELECT * FROM utilisateur WHERE idUtilisateur = $userId";
+//     $result = $conn->query($sql);
+
+//     // Vérifie si la requête a réussi
+//     if (!$result) {
+//         die("Erreur SQL : " . $conn->error);
+//     }
+
+//     // Si aucun utilisateur trouvé, on en insère un (optionnel)
+//     if ($result->num_rows === 0) {
+//         $insert = "INSERT INTO utilisateur 
+//         (nom, prenom, email, dateNaissance, numeroRue, nomRue, codePostal, ville, pays, indicatif, telephone, role, password, photoprofil, isbanned)
+//         VALUES 
+//         ('Dupont', 'Jean', 'jean.dupont@example.com', '1990-01-01', '12', 'Rue des Lilas', '75000', 'Paris', 'France', '+33', '0612345678', 'utilisateur', 'pass123', '', 0)";
+        
+//         $conn->query($insert);
+
+//         // Récupère le nouvel utilisateur inséré
+//         $result = $conn->query("SELECT * FROM utilisateur WHERE idUtilisateur = " . $conn->insert_id);
+//     }
+
+//     $user = $result->fetch_assoc();
+// } else {
+//     die("Utilisateur non connecté.");
+// }
 // $conn = new mysqli($host, $user, $password, $dbname);
 // if ($conn->connect_error) {
 //     die("Connexion échouée : " . $conn->connect_error);
@@ -41,21 +82,25 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
-    <link rel="stylesheet" href="../Style/Profil.css.css">
-    <link rel="stylesheet" href="../Style/Navbar2.css">
-    <link rel="stylesheet" href="../Style/Footer2.css">
+    <link rel="stylesheet" href="../Style/Moncompte.css">
+    <link rel="stylesheet" href="../Style/navbar2.css">
+    <link rel="stylesheet" href="../Style/footer2.css">
+
     
     </head>
 
     <header id="navbar" class="navbar">
-        <?php echo Navbar2(); ?>
-    </header>
+	<?php echo Navbar2(); ?>
+</header>
 	
 <body>
    
@@ -66,7 +111,16 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
     <div class="gauche">
         <!-- Boîte des informations personnelles -->
         <div class="boite-info">
-        <h4>Informations personnelles</h4>
+       
+
+        <div class="bloc-titre-modifier">
+            <h4>Informations personnelles</h4>
+                <a href="ModificationInfoPersonnelle.php" title="Modifier mon profil" aria-label="Modifier mon profil">
+                    <img src="../img/CrayonIcone.png" alt="Modifier mon profil" class="icone-modifier">
+                </a>
+</div>
+
+
         <p><strong>Nom :</strong> <?= htmlspecialchars($user['nom']) ?></p>
         <p><strong>Prénom :</strong> <?= htmlspecialchars($user['prenom']) ?></p>
         <p><strong>Numéro :</strong> <?= htmlspecialchars($user['telephone']) ?></p>
@@ -193,8 +247,8 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 400px;
-  height: 500px;
+  width: 800px;
+  height: 600px;
   border: none;
   border-radius: 10px;
   z-index: 1000;
@@ -271,16 +325,13 @@ window.addEventListener("message", function(event) {
 });
 
 </script>
-<!-- <script src="../Components/navbar2.js"></script>
-<script>
-    document.getElementById("navbar").innerHTML = Navbar2();
-</script> -->
 <script src="../Components/NavbarAnim.js"></script>
+<script src="../Components/DragAndDrop.js"></script>
+<!-- <script src="../Components/BackgroundImageChanges.js"></script> -->
 <script src="../Components/Footer2.js"></script>
 <script>
-    document.getElementById("footer").innerHTML = Footer2();
+	document.getElementById("footer").innerHTML = Footer2();
 </script>
-
 
 </body>
 </html>
