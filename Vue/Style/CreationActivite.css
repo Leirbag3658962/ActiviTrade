@@ -2,84 +2,112 @@ html, body {
     font-family: Arial, sans-serif; 
     text-align: center;
     margin: 0;
-	padding: 0;
+    padding: 0;
 }
 
-#titrecreation{
-	text-align:center;
+#titrecreation {
+    text-align: center;
 }
-.input{
-	width: 170px;
-	height: 20px;
+
+.input {
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid;
+    width: 200px;
+    height: 20px;
+}
+
+#inputCategorie {
+    width: 200px;
+    height: 25px;
+}
+
+input[type="radio"] {
+     width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    position: relative; 
+    top: 4px;          
+    accent-color: black;
 }
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-.gauche{
-	width: 50%;
-	margin-top: 50px;
-	text-align: left;
+.gauche {
+    width: 50%;
+    margin-top: 50px;
+    text-align: left;
 }
 
-.droite{
-	width: 50%;
-	margin-top: 50px;
-	text-align: left;
+.droite {
+    width: 50%;
+    margin-top: 50px;
+    text-align: left;
 }
 
-.conteneurForm{
-	display: flex;
+.conteneurForm {
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
     width: 80%;
     margin: auto;
 }
 
-#inputDescription{
-	width: 70%;
-	padding: 8px;
-	margin-bottom: 10px;
-	width: 250px;
-	resize: none;
+
+#inputDescription {
+    width: 70%;
+    height: 200px;
+    padding: 8px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    resize: none;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-#labPicture{
-	margin-left: 40px;
+#labPicture {
+    margin-left: 40px;
 }
 
-.conteneurImage{
-	display: flex;
+.conteneurImage {
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin: auto;
 }
 
-.Cells{
-	height:224px;
-	width: 300px;
-	margin-left: 10px;
-	border-width: 2px;
-	border-style: solid;
-	cursor: pointer;
-	text-align: center;
+.Cells {
+    height: 224px;
+    width: 300px;
+    margin-left: 10px;
+    border-width: 2px;
+    border-style: dotted;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    overflow: hidden; 
 }
 
 
 .Cells:hover {
-	border-style: dotted;
-}
-p :hover{
-	cursor: pointer;
+    border-style: solid;
 }
 
-.ImageActivite{
+
+p :hover {
+    cursor: pointer;
+}
+
+.ImageActivite {
     width: 100%;
     height: auto;
-	object-fit: cover;
+    object-fit: cover;
     margin-top: 10px;
     border-radius: 5px;
 }
@@ -116,4 +144,14 @@ p :hover{
 
 #createButton:hover {
     background-color: #afd9b6;
+}
+
+@media (max-width: 550px) and (max-height: 2350px){
+    .conteneurImage {
+        flex-direction: column;
+        align-items: center;
+    }
+    .Cells{
+        margin-top: 10px;
+    }
 }

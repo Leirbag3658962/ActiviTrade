@@ -2,16 +2,7 @@ body {
     margin: 0;
     padding: 0;
 }
-/* .boxform {
-	width: 50%; 
-    border: 2px solid lightblue; 
-    background-color: lightblue; 
-    border-radius: 10px; 
-    padding: 20px; 
-    margin: 20px auto;
-    text-align: center;
-    max-width: 450px;
-} */
+
 @font-face {
     font-family: 'League_Spartan';
     src: url('/Fonts/League_Spartan/static/LeagueSpartan-Regular.ttf');
@@ -84,6 +75,7 @@ body {
     color: #ff3860;
     font-size: 9px;
     height: 13px;
+    margin-bottom: 5px;
 }
 
 .password-input {
@@ -93,7 +85,6 @@ body {
     background: #fff;
     border-radius: 4px;
     padding-left: 10px;
-    margin-bottom: 25px;
 }
 
 .password-input input {
@@ -103,13 +94,11 @@ body {
     outline: none;
     padding: 10px 0;
     font-size: 12px;
-    /* color: #fff; */
 }
 
 .password-input img {
     cursor: pointer;
     margin-right: 5px;
-    /* background: greenyellow; */
     border-radius: 4px;
 }
 
@@ -134,55 +123,6 @@ body {
 button {
     cursor: pointer;
 }
-
-/* input[type=text] {
-    background: transparent;
-    border-radius: 5px;
-    border: 2px solid;
-    width: 200px;
-}
-
-input[type=email] {
-    background: transparent;
-    border-radius: 5px;
-    border: 2px solid;
-    width: 200px;
-}
-
-input[type=date] {
-    background: transparent;
-    border-radius: 5px;
-    border: 2px solid;
-    width: 200px;
-}
-
-input[type=tel] {
-    background: transparent;
-    border-radius: 5px;
-    border: 2px solid;
-    width: 200px;
-}
-
-input[type=password] {
-    background: transparent;
-    border-radius: 5px;
-    border: 2px solid;
-    width: 200px;
-}
-
-input[type=submit] {
-    background-color: lightgrey;
-    border-radius: 15px;
-    border: 2px solid;
-    height: 40px;
-    width: 100px;
-}
-
-
-form input{
-    height: 25px;
-    margin-bottom: 15px;
-} */
 
 @media screen and (max-width: 500px) {
     .boxform {

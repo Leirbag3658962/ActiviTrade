@@ -1,5 +1,11 @@
 <?php 
 session_start();
+require_once(__DIR__ . '../../Components/Navbar2.php');
+if(isset($_SESSION['user'])) {
+    header('Location: Home.php');
+    exit;
+}
+$token = isset($_GET["token"]) ? $_GET["token"] : "";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -13,28 +19,55 @@ session_start();
 </head>
 
 <body>
-    <header id="navbar" class="navbar"></header>
+    <header id="navbar" class="navbar">
+        <?php echo Navbar2(); ?>
+    </header>
     <div class="boxform">
-    <form method="post" id="resetPasswordForm">
+    <form method="post" id="resetPasswordForm" action="../../Controlleur/ProcessNewPasswordController.php">
+        <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
     <h1>R&eacute;initialisation de votre mot de passe</h1>
     <p class="instructions">Saisissez un nouveau mot de passe</p>
 
     <div class="input-control">
-        <label for="newpassword1">Nouveau mot de passe</label>
+        <label for="password">Nouveau mot de passe</label>
         <div class="password-input">
-            <input type="password" id="newpassword1" name="newpassword1" required>
-            <img src="../img/Hide.svg" class="toggle-password" data-target="newpassword1" alt="toggle">
+            <input type="password" id="password" name="password" required>
+            <img src="../img/Hide.svg" class="toggle-password" data-target="password" alt="toggle">
         </div>
         <div class="error"></div>
+        <div class="password-check">
+            <div class="check-length">
+                <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 8 caract&egrave;res
+            </div>
+            <div class="check-uppercase">
+                <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 1 lettre majuscule
+            </div>
+            <div class="check-lowercase">
+                <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 1 lettre minuscule
+            </div>
+            <div class="check-number">
+                <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 1 chiffre
+            </div>
+            <div class="check-special">
+                <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 1 caract&egrave;re sp&eacute;cial
+            </div>
+        </div>
     </div>
 
+    
+
     <div class="input-control">
-        <label for="newpassword2">Confirmer le nouveau mot de passe</label>
+        <label for="password2">Confirmer le nouveau mot de passe</label>
         <div class="password-input">
-            <input type="password" id="newpassword2" name="newpassword2" required>
-            <img src="../img/Hide.svg" class="toggle-password" data-target="newpassword2" alt="toggle">
+            <input type="password" id="password2" name="password2" required>
+            <img src="../img/Hide.svg" class="toggle-password" data-target="password2" alt="toggle">
+            <div class="error"></div>
         </div>
-        <div class="error"></div>
+        <div class="password-check">
+            <div class="check-same-password">
+                <img src="../img/close.svg" />&nbsp;Les mots de passe sont identiques
+            </div>
+        </div>
     </div>
 
     <button type="submit">Envoyer</button>
@@ -56,10 +89,7 @@ session_start();
         });
     });
 </script>
-<script src="../Components/Navbar2.js"></script>
-<script>
-    document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+<script src="../Components/NewPasswordValidation.js"></script>
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>
