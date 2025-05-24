@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once(__DIR__ . '/../Modele/LienPDO.php');
 require_once(__DIR__ . '/../Modele/AdminModele.php');
 $pdo = lienPDO();

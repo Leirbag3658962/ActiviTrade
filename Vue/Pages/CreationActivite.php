@@ -1,8 +1,10 @@
 <?php
 session_start();
+
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../../Modele/Theme.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
+
 // require_once "../../../Controller/ActiviteController.php";
 $pdo = getPDO();
 $idCreator = $_SESSION['user']['id'];
@@ -25,6 +27,7 @@ if(empty($idCreator)){
 	<?php echo Navbar2(); ?>
 </header>
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
+
 
 <form method="post" action="../../Controlleur/ActiviteController.php" enctype="multipart/form-data">
 <div class="conteneurForm">
@@ -108,6 +111,7 @@ if(empty($idCreator)){
 
 <footer id="footer" class="footer"></footer>
 </body>
+
 <!-- <script src="../Components/NavbarAnim.js"></script> -->
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>

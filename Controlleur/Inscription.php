@@ -101,7 +101,6 @@ if(!empty($_POST)) {
 
         //Redirection vers la page d'accueil
         header('Location: ../../Vue/Pages/Home.php');
-
     } else { // Si un champ est vide
         echo "Veuillez remplir tous les champs.";
         exit;

@@ -79,6 +79,26 @@ class User {
         return;
     }
 
+
+    public static function getUserById($id) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("
+            SELECT * FROM utilisateur WHERE idUtilisateur = :idUtilisateur
+        ");
+        $stmt->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public static function getUserByEmail($email) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("
+            SELECT * FROM utilisateur WHERE email = :email
+        ");
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
     public static function updateResetToken($email, $token_hash, $expiration) {
         $pdo = getPDO();
         $sql = $pdo->prepare("UPDATE utilisateur SET reset_token_hash = :token_hash, reset_token_expires_at = :expiration WHERE email = :email");
@@ -106,6 +126,7 @@ class User {
         $sql->bindValue(':id', $id, PDO::PARAM_INT);
         $sql->execute();
         return;
+
     }
 }
 ?>

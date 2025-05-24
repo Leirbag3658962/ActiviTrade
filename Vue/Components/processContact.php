@@ -1,70 +1,76 @@
 <?php
-header('Content-Type: application/json');
+// Fichier de traitement du formulaire à placer dans un dossier Components
+// Exemple: Components/processContact.php
 
-// Activer l'affichage des erreurs pour le débogage
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Connexion à la base de données
+// Configuration de la base de données
 $host = 'localhost';
-$port = '3306'; 
+$port = '3306';
 $dbname = 'activitrade';
 $user = 'root';
 $password = '';
 
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Initialisation de la réponse
+$response = array(
+    'status' => 'error',
+    'message' => 'Une erreur est survenue.'
+);
 
-    // Vérifier si la table contact existe, sinon la créer
-    $tableExists = $pdo->query("SHOW TABLES LIKE 'contact'")->rowCount() > 0;
+// Vérification si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération et nettoyage des données
+    $nom = isset($_POST['nom']) ? htmlspecialchars(trim($_POST['nom'])) : '';
+    $email = isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '';
+    $message = isset($_POST['message']) ? htmlspecialchars(trim($_POST['message'])) : '';
     
-    if (!$tableExists) {
-        $pdo->exec("CREATE TABLE contact (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            email VARCHAR(255) NOT NULL,
-            sujet VARCHAR(255) NOT NULL,
-            contenu TEXT NOT NULL,
-            date DATETIME NOT NULL
-        )");
-        error_log("Table 'contact' créée avec succès");
-    }
-
-    // Récupération des données du formulaire
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $message = $_POST['message'] ?? '';
-
-    // Log des données reçues
-    error_log("Données reçues - Nom: $name, Email: $email, Message: $message");
-
     // Validation des données
-    if (empty($name) || empty($email) || empty($message)) {
-        throw new Exception('Tous les champs sont obligatoires');
+    if (empty($nom)) {
+        $response['message'] = 'Le nom est requis.';
+    } elseif (empty($email)) {
+        $response['message'] = 'L\'email est requis.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $response['message'] = 'L\'email n\'est pas valide.';
+    } elseif (empty($message)) {
+        $response['message'] = 'Le message est requis.';
+    } else {
+        try {
+            // Connexion à la base de données
+            $conn = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            // Préparation et exécution de la requête
+            $stmt = $conn->prepare("INSERT INTO contact (nom, email, message, date) 
+                                   VALUES (:nom, :email, :message, NOW())");
+            
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':message', $message);
+            
+            if ($stmt->execute()) {
+                $response['status'] = 'success';
+                $response['message'] = 'Votre message a été envoyé avec succès!';
+                
+                // Envoi d'un email de notification (optionnel)
+                $to = "admin@activitrade.com"; // Remplacer par votre adresse email
+                $subject = "Nouveau message de contact de $nom";
+                $messageBody = "Nouveau message de contact reçu :\n\n";
+                $messageBody .= "Nom: $nom\n";
+                $messageBody .= "Email: $email\n";
+                $messageBody .= "Message:\n$message";
+                $headers = "From: $email";
+                
+                mail($to, $subject, $messageBody, $headers);
+            }
+            
+        } catch(PDOException $e) {
+            $response['message'] = 'Erreur lors de l\'envoi du message: ' . $e->getMessage();
+        }
+        
+        $conn = null;
     }
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        throw new Exception('L\'adresse email n\'est pas valide');
-    }
-
-    // Préparation et exécution de la requête
-    $sql = "INSERT INTO contact (email, sujet, contenu, date) VALUES (?, ?, ?, NOW())";
-    error_log("Requête SQL: " . $sql);
-    
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$email, $name, $message]);
-
-    error_log("Message inséré avec succès dans la base de données");
-    echo json_encode(['success' => true, 'message' => 'Message envoyé avec succès !']);
-
-} catch (PDOException $e) {
-    error_log("Erreur PDO: " . $e->getMessage());
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Erreur de base de données. Veuillez réessayer.']);
-} catch (Exception $e) {
-    error_log("Erreur: " . $e->getMessage());
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
-?> 
+
+// Retour de la réponse en JSON
+header('Content-Type: application/json');
+echo json_encode($response);
+exit;
+?>

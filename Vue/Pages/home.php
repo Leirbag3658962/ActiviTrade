@@ -1,32 +1,15 @@
 <?php
-// // Connexion à la base de données
-// $host = 'localhost';
-// $port = '3306'; 
-// $dbname = 'activitrade_demo2';
-// $user = 'root';
-// $password = 'hello'; 
-
-// try {
-//     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
-// } catch (PDOException $e) {
-//     die("Erreur de connexion : " . $e->getMessage());
-// }
 session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
+
 $pdo = getPDO();
 
-// Récupérer les activités
-$sql = "SELECT * FROM activite";
-$stmt = $pdo->query($sql);
-$activites = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Trier les activités par ID de manière sécurisée
-usort($activites, function($a, $b) {
-    $idA = isset($a['idActivite']) ? $a['idActivite'] : 0;
-    $idB = isset($b['idActivite']) ? $b['idActivite'] : 0;
-    return $idB - $idA;
-});
+// Récupérer tous les thèmes
+$sqlThemes = "SELECT * FROM theme ORDER BY theme ASC";
+$stmtThemes = $pdo->query($sqlThemes);
+$themes = $stmtThemes->fetchAll(PDO::FETCH_ASSOC);
 
 // Déterminer le filtre actif
 $activeFilter = 'Nouveau';
@@ -34,18 +17,22 @@ if (isset($_GET['filter'])) {
     $activeFilter = $_GET['filter'];
 }
 
-$filteredActivites = [];
+// Récupérer les activités en fonction du filtre
 if ($activeFilter == 'Nouveau') {
-    usort($activites, function($a, $b) {
-        return $b['idActivite'] - $a['idActivite'];
-    });
-    $filteredActivites = $activites;
+    // Pour les nouvelles activités, on récupère toutes les activités triées par ID décroissant (les plus récentes)
+    $sql = "SELECT * FROM activite ORDER BY idActivite DESC";
+    $stmt = $pdo->query($sql);
+    $filteredActivites = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
-    foreach ($activites as $activite) {
-        if (isset($activite['categorie']) && $activite['categorie'] == $activeFilter) {
-            $filteredActivites[] = $activite;
-        }
-    }
+    // Pour un thème spécifique, on utilise une jointure avec activite_theme
+    $sql = "SELECT a.* FROM activite a
+            INNER JOIN activite_theme at ON a.idActivite = at.idActivite
+            INNER JOIN theme t ON at.idTheme = t.idTheme
+            WHERE t.theme = :theme
+            ORDER BY a.idActivite DESC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['theme' => $activeFilter]);
+    $filteredActivites = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 ?>
@@ -56,7 +43,8 @@ if ($activeFilter == 'Nouveau') {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/Vue/Style/Home.css">
     <link rel="stylesheet" href="/Vue/Style/Navbar2.css">
-    <link rel="stylesheet" href="/Vue/Style/footer2.css">
+    <link rel="stylesheet" href="/Vue/Style/Footer2.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ActiviTrade</title>
 </head>
@@ -104,33 +92,40 @@ if ($activeFilter == 'Nouveau') {
             
             <div class="tags">
                 <a href="?filter=Nouveau" class="tag <?= $activeFilter == 'Nouveau' ? 'active' : '' ?>">Nouveau</a>
-                <a href="?filter=Sport" class="tag <?= $activeFilter == 'Sport' ? 'active' : '' ?>">Sport</a>
-                <a href="?filter=Cuisine" class="tag <?= $activeFilter == 'Cuisine' ? 'active' : '' ?>">Cuisine</a>
-                <a href="?filter=Culture" class="tag <?= $activeFilter == 'Culture' ? 'active' : '' ?>">Culture</a>
+                
+                <!-- Afficher seulement les 3 premiers thèmes -->
+                <?php 
+                $displayedThemes = 0;
+                foreach ($themes as $theme): 
+                    if ($displayedThemes < 3): // Limite à 3 thèmes
+                        $displayedThemes++;
+                ?>
+                    <a href="?filter=<?= urlencode($theme['theme']) ?>" class="tag <?= $activeFilter == $theme['theme'] ? 'active' : '' ?>">
+                        <?= htmlspecialchars($theme['theme']) ?>
+                    </a>
+                <?php 
+                    endif;
+                endforeach; 
+                ?>
+                <a href="ToutesActivites.php" class="tag">Plus</a>
             </div>
             
             <div class="activities-grid">
-            <?php foreach ($filteredActivites as $activite): ?>
-                    <div class="activity">
-                        <img src="../img/banner1.jpg" alt="<?= htmlspecialchars($activite['nomActivite']) ?>">
-                        <h3><?= htmlspecialchars($activite['nomActivite']) ?></h3>
-                        <p>Coût d'inscription: <?= $activite['prix'] == 0 ? 'gratuit' : $activite['prix'] . '€' ?></p>
-                        <p>Description: <?= htmlspecialchars($activite['description']) ?></p>
-                        <a href="ReservationActivite.php?id=<?= $activite['idActivite'] ?>">
-                            <button class="reserve-button">Réserver</button>
-                        </a>
-                    </div>
-                <?php endforeach; ?>   <?php foreach ($filteredActivites as $activite): ?>
-                    <div class="activity">
-                        <img src="../img/banner1.jpg" alt="<?= htmlspecialchars($activite['nomActivite']) ?>">
-                        <h3><?= htmlspecialchars($activite['nomActivite']) ?></h3>
-                        <p>Coût d'inscription: <?= $activite['prix'] == 0 ? 'gratuit' : $activite['prix'] . '€' ?></p>
-                        <p>Description: <?= htmlspecialchars($activite['description']) ?></p>
-                        <a href="ReservationActivite.php?id=<?= $activite['idActivite'] ?>">
-                            <button class="reserve-button">Réserver</button>
-                        </a>
-                    </div>
-                <?php endforeach; ?>
+                <?php if (empty($filteredActivites)): ?>
+                    <p>Aucune activité ne correspond à ce filtre.</p>
+                <?php else: ?>
+                    <?php foreach ($filteredActivites as $activite): ?>
+                        <div class="activity">
+                            <img src="../img/banner1.jpg" alt="<?= htmlspecialchars($activite['nomActivite']) ?>">
+                            <h3><?= htmlspecialchars($activite['nomActivite']) ?></h3>
+                            <p>Coût d'inscription: <?= $activite['prix'] == 0 ? 'gratuit' : $activite['prix'] . '€' ?></p>
+                            <p>Description: <?= htmlspecialchars($activite['description']) ?></p>
+                            <a href="Activite.php?id=<?= $activite['idActivite'] ?>">
+                                <button class="view-button">Voir plus</button>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
             <div class="slider-controls">
@@ -171,22 +166,12 @@ if ($activeFilter == 'Nouveau') {
             </a>
         </div>
     </div>
-    <footer id="footer" class="footer"></footer>
+    <footer id="footer" class="footer">
+        <?php echo Footer2(); ?>
+    </footer>
 
-    <!--! navbar et footer -->
-    <!-- <script src="../Components/Navbar2.js"></script>
-    <script>
-        document.getElementById("navbar").innerHTML = Navbar2();
-    </script> -->
-    <script src="../Components/footer2.js"></script>
-
-    <!--! carousel de la bannière -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Injecter le footer
-        const footerElement = document.getElementById('footer');
-        footerElement.innerHTML = Footer2();
-
         // Carousel functionality for banner
         const carousel = document.querySelector('.carousel');
         const items = carousel.querySelectorAll('.carousel-item');

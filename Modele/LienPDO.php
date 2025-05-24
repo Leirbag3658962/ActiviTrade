@@ -10,16 +10,20 @@ function lienPDO(){
     $dbname = 'activitrade';
     $username = 'root';
     $password = '';
+    $port = '3306';
     $pageActuelle = "utilisateur";
 
     try {
-        $pdo = new PDO("mysql:host=$host;port=3307;dbname=$dbname;charset=utf8", $username, $password);
+
+        $pdo = new PDO("mysql:host=$host;port=3306;dbname=$dbname;charset=utf8", $username, $password);
+
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        error_log("Connexion à la base de données réussie");
         return $pdo;
 
     } catch(PDOException $e) {
-        echo "Erreur de connexion : " . $e->getMessage();
-        exit;
+        error_log("Erreur de connexion à la base de données: " . $e->getMessage());
+        throw new Exception("Erreur de connexion à la base de données: " . $e->getMessage());
     }
 }
 ?>

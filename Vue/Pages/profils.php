@@ -35,6 +35,7 @@ $result = $conn->query($sql);
 // }
 
 // $user = $result->fetch_assoc();
+
 $user = User::getById($_SESSION['user']['id']);
 require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>

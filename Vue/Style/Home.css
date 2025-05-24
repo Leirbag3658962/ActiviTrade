@@ -319,7 +319,7 @@ nav {
 .dot.active {
     background-color: #333;
 }
-.reserve-button {
+.view-button {
     background-color: #355e3b;
     color: white;
     border: none;
