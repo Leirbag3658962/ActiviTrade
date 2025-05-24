@@ -53,5 +53,29 @@ class MentionsLegales {
         $sql->execute();
         return;
     }
+
+    public static function afficherMentions(){
+        $pdo = getPDO();
+        if(!$pdo){
+            echo "<a> Erreur: Connexion BDD non fournie.</a>";
+        }
+
+        try{
+            $sqlmention = "SELECT titreparagraphe, description FROM mentionlegale ORDER BY numero ASC";
+            $stmtmention = $pdo->query($sqlmention); 
+            if($stmtmention){
+                echo "<div id=\"box\">";
+                while ($row = $stmtmention->fetch(PDO::FETCH_ASSOC)){
+                    echo"<h2 class=\"titre2\">" . htmlspecialchars($row['titreparagraphe']) . "</h2>";
+
+                    echo"<p>" . $row['description'] . "</p>";
+                    echo"<br>";
+                }
+                echo "</div>";
+            }
+        } catch (PDOException $e) {
+            echo "<a> Erreur BDD lors de l'affichage des mentions légales: " . htmlspecialchars($e->getMessage()) . "</a>";
+        }
+    }
 }
 ?>

@@ -24,7 +24,7 @@ class PersonneTierce {
         ");
         $sql->bindValue(':idPersonneTierce', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getAll() {
@@ -33,7 +33,7 @@ class PersonneTierce {
             SELECT * FROM personnetierce
         ");
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function update($id, $nom, $prenom, $age, $idUser) {

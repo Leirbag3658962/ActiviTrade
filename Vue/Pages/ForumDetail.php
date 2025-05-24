@@ -1,8 +1,10 @@
 <?php
 session_start();
-require_once "../../Modele/LienPDO.php";
-require_once "../Components/Navbar2.php";
-$pdo = lienPDO();
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO();
+
+//$_SESSION['idUser'] = 2;
 
 $idForum = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -32,6 +34,10 @@ $idForumPost = isset($_POST['idForum']) ? intval($_POST['idForum']) : 0;
 $contenu = isset($_POST['contenu']) ? trim($_POST['contenu']) : '';
 
 if ($idForumPost > 0 && !empty($contenu)) {
+    if (!isset($_SESSION['idUser'])) {
+        header("Location: LogIn.php");
+        exit;
+    }
 
     $idUser = $_SESSION['idUser']; 
     $stmt = $pdo->prepare("INSERT INTO forum (idUser, contenu, date, idParent) 
@@ -104,8 +110,14 @@ if ($idForumPost > 0 && !empty($contenu)) {
         <?php endforeach; ?>
     </div>
 
-    <button class="reply-button" onclick="toggleReplyForm('main')">Répondre</button>
+    <?php $isLoggedIn = isset($_SESSION['idUser']); ?>
 
+
+    <button class="reply-button">
+        Répondre
+    </button>
+
+    <?php if ($isLoggedIn): ?>
     <div class="reply-form" id="reply-form-main" style="display: none;">
         <form action="ForumDetail.php?id=<?php echo $idForum; ?>" method="POST">
             <input type="hidden" name="idForum" value="<?php echo $forum['idForum']; ?>">
@@ -113,8 +125,7 @@ if ($idForumPost > 0 && !empty($contenu)) {
             <button type="submit">Envoyer</button>
         </form>
     </div>
-    <?php else: ?>
-        <p>Sujet non trouvé.</p>
+    <?php endif; ?>
     <?php endif; ?>
 </div>
 
@@ -124,6 +135,10 @@ if ($idForumPost > 0 && !empty($contenu)) {
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
+<script>
+    window.isLoggedIn = <?= json_encode($isLoggedIn); ?>;
+</script>
+<script src="../Components/ForumAnswer.js"></script>
 <script>
 	document.getElementById("footer").innerHTML = Footer2();
 </script>

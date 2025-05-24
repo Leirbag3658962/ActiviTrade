@@ -24,7 +24,7 @@ class Signalement {
         ");
         $sql->bindValue(':idSignalement', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getAll() {
@@ -33,7 +33,7 @@ class Signalement {
             SELECT * FROM signalement
         ");
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function update($id, $raison, $description, $idSignaleur, $idSignalee) {

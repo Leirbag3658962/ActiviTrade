@@ -22,7 +22,7 @@ class FAQ {
         ");
         $sql->bindValue(':idFAQ', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getAll() {
@@ -31,7 +31,7 @@ class FAQ {
             SELECT * FROM faq
         ");
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function update($id, $question, $reponse) {
@@ -51,5 +51,30 @@ class FAQ {
         $sql->execute();
         return;
     }
+
+    public static function afficheFaq(){
+        $pdo = getPDO();
+    if(!$pdo){
+        echo "<a> Erreur: Connexion BDD non fournie.</a>";
+    }
+
+    try{
+        $sqlfaq = "SELECT * FROM faq";
+	    $stmtfaq = $pdo->query($sqlfaq); 
+	    if($stmtfaq){
+		    while ($row = $stmtfaq->fetch(PDO::FETCH_ASSOC)){
+			    echo"<div>";
+                echo"<a class=\"bulle-sms bulle-gauche\">" . htmlspecialchars($row['question']) . "</a>";
+                echo"</div>";
+
+                echo"<div>";
+                echo"<a class=\"bulle-sms bulle-droite\">" . htmlspecialchars($row['reponse']) . "</a>";
+                echo"</div>";
+		    }
+	    }
+    } catch (PDOException $e) {
+        echo "<a> Erreur BDD lors de l'affichage de la FAQ: " . htmlspecialchars($e->getMessage()) . "</a>";
+   }
+}
 }
 ?>

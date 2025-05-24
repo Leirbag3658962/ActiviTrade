@@ -7,15 +7,23 @@ const ville = document.getElementById('ville');
 const telephone = document.getElementById('telephone');
 const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
+const cgu = document.getElementById('cgu');
 
 form.addEventListener('submit', e => {
-    // e.preventDefault();
+    e.preventDefault();
 
-    validateInputs();
+    const isValid = validateInputs();
+
+    if (isValid) {
+        form.submit();
+    }
 });
 
 const setError = (element, message) => {
-    const inputControl = element.parentElement;
+    let inputControl = element.parentElement;
+    while (inputControl && !inputControl.classList.contains('input-control')) {
+        inputControl = inputControl.parentElement;
+    }
     const errorDisplay = inputControl.querySelector('.error');
 
     errorDisplay.innerText = message;
@@ -24,7 +32,10 @@ const setError = (element, message) => {
 };
 
 const setSuccess = element => {
-    const inputControl = element.parentElement;
+    let inputControl = element.parentElement;
+    while (inputControl && !inputControl.classList.contains('input-control')) {
+        inputControl = inputControl.parentElement;
+    }
     const errorDisplay = inputControl.querySelector('.error');
 
     errorDisplay.innerText = '';
@@ -43,6 +54,7 @@ const isPhoneNumber = number => {
 };
 
 const validateInputs = () => {
+    let valid = true;
     const lastnameValue = lastname.value.trim();
     const firstnameValue = firstname.value.trim();
     const emailValue = email.value.trim();
@@ -54,67 +66,92 @@ const validateInputs = () => {
 
     if (lastnameValue === '') {
         setError(lastname, 'Le nom est requis');
+        valid = false;
     } else {
         setSuccess(lastname);
     }
 
     if (firstnameValue === '') {
-        setError(firstname, 'Le pr&eacute;nom est requis');
+        setError(firstname, 'Le prénom est requis');
+        valid = false;
     } else {
         setSuccess(firstname);
     }
 
     if (emailValue === '') {
         setError(email, 'L\'email est requis');
+        valid = false;
     } else if (!isValidEmail(emailValue)) {
         setError(email, 'Email non valide');
+        valid = false;
     } else {
         setSuccess(email);
     }
 
     if (birthdateValue === '') {
         setError(birthdate, 'La date de naissance est requise');
+        valid = false;
     } else {
         setSuccess(birthdate);
     }
 
     if (villeValue === '') {
         setError(ville, 'La ville est requise');
+        valid = false;
     } else {
         setSuccess(ville);
     }
 
     if (telephoneValue === '') {
         setError(telephone, 'Le numéro de téléphone est requis');
+        valid = false;
     } else if (!isPhoneNumber(telephoneValue)) {
         setError(telephone, 'Numéro de téléphone non valide');
+        valid = false;
     } else {
         setSuccess(telephone);
     }
 
     if (passwordValue === '') {
         setError(password, 'Le mot de passe est requis');
+        valid = false;
     } else if (passwordValue.length < 8) {
         setError(password, 'Le mot de passe doit contenir au moins 8 caractères');
+        valid = false;
     } else if (!/[A-Z]/.test(passwordValue)) {
         setError(password, 'Le mot de passe doit contenir au moins une lettre majuscule');
+        valid = false;
     } else if (!/[a-z]/.test(passwordValue)) {
         setError(password, 'Le mot de passe doit contenir au moins une lettre minuscule');
+        valid = false;
     } else if (!/[0-9]/.test(passwordValue)) {
         setError(password, 'Le mot de passe doit contenir au moins un chiffre');
+        valid = false;
     } else if (!/[!@#$%^&*]/.test(passwordValue)) {
         setError(password, 'Le mot de passe doit contenir au moins un caractère spécial (!@#$%^&*)');
+        valid = false;
     } else {
         setSuccess(password);
     }
 
     if (password2Value === '') {
         setError(password2, 'La confirmation du mot de passe est requise');
+        valid = false;
     } else if (password2Value !== passwordValue) {
         setError(password2, 'Les mots de passe ne correspondent pas');
+        valid = false;
     } else {
         setSuccess(password2);
     }
+
+    if (!cgu.checked) {
+        setError(cgu, 'Vous devez accepter les CGU');
+        valid = false;
+    } else {
+        setSuccess(cgu);
+    }
+
+    return valid;
 };
 
 const validatorText = document.getElementById('password');
@@ -161,3 +198,19 @@ validatorText.addEventListener("keyup", function(e) {
         }
     })
 });
+
+const checkSamePassword = document.querySelector('.check-same-password');
+const checkSamePasswordImg = checkSamePassword.querySelector('img');
+
+function updateSamePasswordCheck() {
+    if (password.value && password2.value && password.value === password2.value) {
+        checkSamePasswordImg.src = "../img/check.svg";
+        checkSamePassword.style.color = "green";
+    } else {
+        checkSamePasswordImg.src = "../img/close.svg";
+        checkSamePassword.style.color = "red";
+    }
+}
+
+password.addEventListener("input", updateSamePasswordCheck);
+password2.addEventListener("input", updateSamePasswordCheck);
