@@ -28,7 +28,7 @@ if (!$activite) {
 if (isset($_POST['envoyer_commentaire'])) {
     $note = (int)$_POST['note'];
     $texte = trim($_POST['texte']);
-    $idUtilisateur = $_SESSION['idUtilisateur'] ?? null; // adapte selon ton système de session
+    $idUtilisateur = $_SESSION['idUtilisateur'] ?? null; 
 
     if ($note >= 1 && $note <= 5 && !empty($texte)) {
         $sql = "INSERT INTO commentaire (idActivite, idUtilisateur, note, texte) VALUES (?, ?, ?, ?)";
@@ -36,7 +36,27 @@ if (isset($_POST['envoyer_commentaire'])) {
         $stmt->execute([$id, $idUtilisateur, $note, $texte]);
     }
 }
+$idActivite = $_GET['id']; 
+
+$sql = "SELECT a.*, u.nom, u.prenom 
+        FROM activite a
+        JOIN utilisateur u ON a.idCreateur = u.idUtilisateur
+        WHERE a.idActivite = :idActivite";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute(['idActivite' => $idActivite]);
+$activite = $stmt->fetch();
+
+
+$stmtReservations = $pdo->prepare("SELECT COUNT(*) AS total_reservations FROM reservation WHERE idActivite = :idActivite");
+$stmtReservations->bindParam(':idActivite', $activite['idActivite'], PDO::PARAM_INT);
+$stmtReservations->execute();
+$reservationsCount = $stmtReservations->fetch(PDO::FETCH_ASSOC);
+
+$placesDisponibles = $activite['nbrParticipantMax'] - $reservationsCount['total_reservations'];
+$placesDisponibles = max(0, $placesDisponibles); 
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -55,11 +75,15 @@ if (isset($_POST['envoyer_commentaire'])) {
 
     <div class="content">
         <div class="content-header">
-            <h1><?= htmlspecialchars($activite['nomActivite']) ?></h1>
+            <div class="title-creator">
+                <h1><?= htmlspecialchars($activite['nomActivite']) ?></h1>
+                <p class="creator-info">Activité créée par <a href="Profil.php?id=<?= $activite['idCreateur']?>"><?= htmlspecialchars($activite['prenom']) ?> <?= htmlspecialchars($activite['nom']) ?></a></p>
+            </div>
             <div class="cta-container">
                 <a href="ReservationActivite.php?id=<?= $activite['idActivite'] ?>">
-                    <button class="cta-button">Réserver</button>
+                        <button class="cta-button">Réserver</button>
                 </a>
+                <p class="places-info">Places disponibles: <?= htmlspecialchars($placesDisponibles) ?> / <?= htmlspecialchars($activite['nbrParticipantMax']) ?></p>
             </div>
         </div>
 
@@ -100,14 +124,12 @@ if (isset($_POST['envoyer_commentaire'])) {
                         <option value="<?= $i ?>"><?= $i ?></option>
                     <?php endfor; ?>
                 </select>
-
                 <label for="texte">Commentaire :</label>
                 <textarea name="texte" id="texte" rows="4" cols="50" required></textarea>
 
                 <input type="submit" name="envoyer_commentaire" value="Envoyer">
             </form>
         </section>
-
         <?php
         $commentaires = [];
 
@@ -153,7 +175,6 @@ if (isset($_POST['envoyer_commentaire'])) {
             </div>
         </section>
     </div>
-    
     <footer id="footer" class="footer"><?php echo Footer2(); ?></footer>
 </body>
 </html>

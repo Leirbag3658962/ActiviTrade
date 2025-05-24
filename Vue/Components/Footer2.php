@@ -51,7 +51,7 @@ function Footer2() {
             <div class="footer-column">
                 <h3>Activités</h3>
                 <div class="footer-links">
-                    <a href="../Pages/ToutesActivites.php">Decouvrir les activites</a>
+                    <a href="../Pages/ToutesActivites.php">Découvrir les activités</a>
                     <?php foreach ($themes as $theme): ?>
                     <a href="../pages/home.php?filter=<?php echo htmlspecialchars($theme['nom']); ?>">
                         <?php echo htmlspecialchars($theme['nom']); ?>

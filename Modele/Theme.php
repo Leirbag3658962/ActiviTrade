@@ -30,7 +30,7 @@ class Theme {
             SELECT * FROM theme
         ");
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function update($id, $theme) {

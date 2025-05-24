@@ -65,12 +65,11 @@
     color: #ffffff;
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.01s ease;
     display: inline-block;
 }
 
 .footer-column a:hover {
-    transform: translateX(5px);
     font-weight: 550;
 }
 
@@ -101,7 +100,6 @@
 
 .social-icon:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
 }
 
 .social-icon img {

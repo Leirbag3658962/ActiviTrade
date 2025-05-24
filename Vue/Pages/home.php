@@ -3,13 +3,10 @@ session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
 require_once(__DIR__ . '../../Components/Footer2.php');
-
+require_once(__DIR__ . '../../../Modele/Theme.php');
 $pdo = getPDO();
 
-// Récupérer tous les thèmes
-$sqlThemes = "SELECT * FROM theme ORDER BY theme ASC";
-$stmtThemes = $pdo->query($sqlThemes);
-$themes = $stmtThemes->fetchAll(PDO::FETCH_ASSOC);
+$themes = Theme::getAll();
 
 // Déterminer le filtre actif
 $activeFilter = 'Nouveau';
@@ -169,6 +166,7 @@ if ($activeFilter == 'Nouveau') {
     <footer id="footer" class="footer">
         <?php echo Footer2(); ?>
     </footer>
+
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
