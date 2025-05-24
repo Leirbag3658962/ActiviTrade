@@ -217,3 +217,18 @@ h1 {
 .conteneur-activites-bas .indicator.active {
     background-color: #333;
 }
+
+.bloc-titre-modifier {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* CENTRER HORIZONTALEMENT */
+  gap: 8px; /* espace entre titre et icône */
+}
+
+.icone-modifier {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}

@@ -1,12 +1,34 @@
 <?php
-$pdo = new PDO('mysql:host=localhost;dbname=activititrade', 'root', '');
+session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=activitrade', 'root', '');
+header('Content-Type: text/html; charset=utf-8');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Recherche infos utilisateur
+// Vérifie que l'utilisateur est connecté
+if (!isset($_SESSION['user']['id'])) {
+    echo json_encode(["success" => false, "error" => "Utilisateur non connecté"]);
+    exit;
+}
+
+$userId = intval($_SESSION['user']['id']); // Sécurisation de l'ID
+
+// Vérifie que l'utilisateur existe
+$stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE idUtilisateur = ?");
+$stmt->execute([$userId]);
+$me = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$me) {
+    echo json_encode(["success" => false, "error" => "Utilisateur introuvable"]);
+    exit;
+}
+
+// Recherche infos utilisateur (par ID ou email)
 if (isset($_GET['info']) && isset($_GET['search'])) {
     $input = $_GET['search'];
     $stmt = is_numeric($input)
-        ? $pdo->prepare("SELECT idUtilisateur, nom, prenom, email, dateNaissance, numeroRue, nomRue, codePostal, ville, pays, telephone, role FROM utilisateur WHERE idUtilisateur = ?")
-        : $pdo->prepare("SELECT idUtilisateur, nom, prenom, email, dateNaissance, numeroRue, nomRue, codePostal, ville, pays, telephone, role FROM utilisateur WHERE email = ?");
+        ? $pdo->prepare("SELECT idUtilisateur, nom, prenom, email, dateNaissance, ville, telephone, role FROM utilisateur WHERE idUtilisateur = ?")
+        : $pdo->prepare("SELECT idUtilisateur, nom, prenom, email, dateNaissance, ville, telephone, role FROM utilisateur WHERE email = ?");
     $stmt->execute([$input]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -18,11 +40,7 @@ if (isset($_GET['info']) && isset($_GET['search'])) {
             "prenom" => $user['prenom'],
             "email" => $user['email'],
             "dateNaissance" => $user['dateNaissance'],
-            "numeroRue" => $user['numeroRue'],
-            "nomRue" => $user['nomRue'],
-            "codePostal" => $user['codePostal'],
             "ville" => $user['ville'],
-            "pays" => $user['pays'],
             "telephone" => $user['telephone'],
             "role" => $user['role']
         ]);
@@ -31,52 +49,53 @@ if (isset($_GET['info']) && isset($_GET['search'])) {
     }
     exit;
 }
+
+// Récupération historique des contacts
 if (isset($_GET['history'])) {
-  $idMoi = 1; // ⚠️ Remplacer par $_SESSION['idUtilisateur'] en production
+    $sql = "
+        SELECT DISTINCT u.idUtilisateur, u.nom, u.email
+        FROM discussion d
+        JOIN utilisateur u ON u.idUtilisateur = 
+            CASE 
+                WHEN d.idUser1 = :idMoi THEN d.idUser2
+                WHEN d.idUser2 = :idMoi THEN d.idUser1
+            END
+        WHERE d.idUser1 = :idMoi OR d.idUser2 = :idMoi
+    ";
 
-  $sql = "
-    SELECT DISTINCT u.idUtilisateur, u.nom, u.email
-    FROM discussion d
-    JOIN utilisateur u ON u.idUtilisateur = 
-      CASE 
-        WHEN d.idUser1 = :idMoi THEN d.idUser2
-        WHEN d.idUser2 = :idMoi THEN d.idUser1
-      END
-    WHERE d.idUser1 = :idMoi OR d.idUser2 = :idMoi
-  ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['idMoi' => $userId]);
 
-  $stmt = $pdo->prepare($sql);
-  $stmt->execute(['idMoi' => $idMoi]);
-
-  $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  echo json_encode($contacts);
-  exit;
+    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($contacts);
+    exit;
 }
 
-// Récupération messages
+// Récupération des messages
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['contact'])) {
-    $idMoi = 1;
     $idContact = intval($_GET['contact']);
 
-    $stmt = $pdo->prepare("SELECT * FROM discussion WHERE (idUser1 = ? AND idUser2 = ?) OR (idUser1 = ? AND idUser2 = ?) ORDER BY date ASC");
-    $stmt->execute([$idMoi, $idContact, $idContact, $idMoi]);
+    $stmt = $pdo->prepare("
+        SELECT * FROM discussion 
+        WHERE (idUser1 = ? AND idUser2 = ?) OR (idUser1 = ? AND idUser2 = ?) 
+        ORDER BY date ASC
+    ");
+    $stmt->execute([$userId, $idContact, $idContact, $userId]);
 
     $messages = [];
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $messages[] = [
-            "sender" => $row['idUser1'] == $idMoi ? "Moi" : "Lui",
+            "sender" => $row['idUser1'] == $userId ? "Moi" : "Lui",
             "text" => $row['contenu']
         ];
     }
-    header('Content-Type: application/json');
     echo json_encode($messages);
     exit;
 }
 
-// Envoi message
+// Envoi d'un message
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] === 'send') {
     $data = json_decode(file_get_contents('php://input'), true);
-    $idMoi = 1;
     $idContact = intval($data['contact'] ?? 0);
 
     if (!$idContact || empty($data['text'])) {
@@ -85,18 +104,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['ac
     }
 
     $stmt = $pdo->prepare("INSERT INTO discussion (idUser1, idUser2, contenu, date) VALUES (?, ?, ?, NOW())");
-    $stmt->execute([$idMoi, $idContact, $data['text']]);
+    $stmt->execute([$userId, $idContact, $data['text']]);
     echo json_encode(["success" => true]);
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Messagerie</title>
   <link rel="stylesheet" href="../Style/messagerie.css">
 </head>
+
 <body>
 
 <button id="messagerie-toggle" onclick="toggleMessagerie()">Message</button>
