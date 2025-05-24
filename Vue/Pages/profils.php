@@ -1,15 +1,7 @@
 <?php
-// Connexion à la base de données
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "activitrade"; // vérifie bien le nom ici aussi
 
 session_start(); // Très important pour accéder à $_SESSION
-
-
 require_once(__DIR__ . '../../Components/Navbar2.php');
-
 
 // $conn = new mysqli($host, $user, $password, $dbname);
 // if ($conn->connect_error) {
@@ -50,10 +42,10 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
 // if ($conn->connect_error) {
 //     die("Connexion échouée : " . $conn->connect_error);
 // }
-session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 $conn = getPDO();
 require_once(__DIR__ . '../../../Modele/User.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 
 // Récupère un utilisateur
 // Vérifie si l'utilisateur est connecté
@@ -61,8 +53,6 @@ if (!isset($_SESSION['user'])){
     header('Location: ../Pages/LogIn.php');
     exit();
 }
-$sql = "SELECT * FROM utilisateur LIMIT 1";
-$result = $conn->query($sql);
 
 // Si aucun utilisateur n'existe, on en insère un par défaut
 // if ($result->num_rows === 0) {
@@ -78,7 +68,6 @@ $result = $conn->query($sql);
 // $user = $result->fetch_assoc();
 
 $user = User::getById($_SESSION['user']['id']);
-require_once(__DIR__ . '../../Components/Navbar2.php');
 ?>
 
 
@@ -91,7 +80,7 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
-    <link rel="stylesheet" href="../Style/Moncompte.css">
+    <link rel="stylesheet" href="../Style/profils.css">
     <link rel="stylesheet" href="../Style/navbar2.css">
     <link rel="stylesheet" href="../Style/footer2.css">
 
@@ -115,10 +104,10 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
 
         <div class="bloc-titre-modifier">
             <h4>Informations personnelles</h4>
-                <a href="ModificationInfoPersonnelle.php" title="Modifier mon profil" aria-label="Modifier mon profil">
+                <a href="ModificationInfoPersonnelle.php?id=<?php echo $_SESSION['user']['id'] ?>" title="Modifier mon profil" aria-label="Modifier mon profil">
                     <img src="../img/CrayonIcone.png" alt="Modifier mon profil" class="icone-modifier">
                 </a>
-</div>
+        </div>
 
 
         <p><strong>Nom :</strong> <?= htmlspecialchars($user['nom']) ?></p>
@@ -272,7 +261,9 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
   z-index: 999;
 ">💬</button>
 
-<footer id="footer" class="footer"></footer>
+<footer id="footer" class="footer">
+    <?php echo Footer2(); ?>
+</footer>
 </body>
 <script>
   function ouvrirMessagerie() {
@@ -327,11 +318,5 @@ window.addEventListener("message", function(event) {
 </script>
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
-<!-- <script src="../Components/BackgroundImageChanges.js"></script> -->
-<script src="../Components/Footer2.js"></script>
-<script>
-	document.getElementById("footer").innerHTML = Footer2();
-</script>
-
 </body>
 </html>

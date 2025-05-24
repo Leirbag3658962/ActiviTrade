@@ -35,7 +35,7 @@ class User {
         ");
         $sql->bindValue(':idUtilisateur', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $sql->fetch(PDO::FETCH_ASSOC);
     }
     
     public static function getByEmail($email) {

@@ -7,6 +7,7 @@ $password = '';
 
 session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../../Modele/ActiviteModele.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
 require_once(__DIR__ . '../../Components/Footer2.php');
 
@@ -86,11 +87,22 @@ $placesDisponibles = max(0, $placesDisponibles);
                 <p class="places-info">Places disponibles: <?= htmlspecialchars($placesDisponibles) ?> / <?= htmlspecialchars($activite['nbrParticipantMax']) ?></p>
             </div>
         </div>
-
+        <?php
+            $cheminsImages = [];
+            $cheminsImages = Activite::afficheImage($activite['idActivite']);
+        ?>
         <div class="images">
-            <img src="../img/banner2.jpg" alt="Image de l'activité">
-            <img src="../img/banner3.jpeg" alt="Image de l'activité">
-            <img src="../img/banner4.jpeg" alt="Image de l'activité">
+            <?php
+                if (!empty($cheminsImages)){
+                    foreach ($cheminsImages as $imageData){
+                        echo '<img src="../../'. $imageData['image'] .'" alt="Image de l\'activité">';
+                    }
+                }else{
+                    echo'<img src="../img/banner2.jpg" alt="Image de l\'activité">';
+                    echo'<img src="../img/banner3.jpeg" alt="Image de l\'activité">';
+                    echo'<img src="../img/banner4.jpeg" alt="Image de l\'activité">';
+                }
+            ?>
         </div>
         <div class="details1">
             <div class="details-item">

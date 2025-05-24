@@ -3,6 +3,7 @@ session_start();
 
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 $pdo = getPDO(); 
 
 $message = "";
@@ -96,15 +97,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </form>
     <br>
 </div>
-<footer id="footer" class="footer"></footer>
+<footer id="footer" class="footer">
+    <?php echo Footer2(); ?>
+</footer>
 </body>
 <!-- <script src="../Components/Navbar2.js"></script>
 <script>
     document.getElementById("navbar").innerHTML = Navbar2();
 </script> -->
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer2.js"></script>
-<script>
-    document.getElementById("footer").innerHTML = Footer2();
-</script>
 </html>
