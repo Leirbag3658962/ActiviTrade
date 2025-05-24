@@ -1,17 +1,11 @@
 <?php
 session_start();
-$_SESSION['idUser'] = 1;
 
-require_once "../../Modele/LienPDO.php";
-require_once "../Components/Navbar2.php";
-$pdo = lienPDO();
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO(); 
 
-if (isset($_SESSION['idUser'])) {
-    $idUser = $_SESSION['idUser'];
-} else {
-    header("Location: LogIn.php");
-    exit;
-}
+$idUser = $_SESSION['idUser'] ?? null;
 
 $sql = "SELECT forum.idForum, forum.theme, forum.date, utilisateur.nom, utilisateur.prenom 
         FROM forum 

@@ -1,10 +1,16 @@
 <?php
 session_start();
+
 require_once(__DIR__ . '../../../Modele/Database.php');
-require_once(__DIR__ . '../../../Modele/LienPDO.php');
+require_once(__DIR__ . '../../../Modele/Theme.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
-require_once(__DIR__ . '../../../Controller/ActiviteController.php');
+
+// require_once "../../../Controller/ActiviteController.php";
 $pdo = getPDO();
+$idCreator = $_SESSION['user']['id'];
+if(empty($idCreator)){
+	header("Location: LogIn.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +28,8 @@ $pdo = getPDO();
 </header>
 <h1 id="titrecreation">Création d'une nouvelle activité</h1>
 
-<form method="post" enctype="multipart/form-data">
+
+<form method="post" action="../../Controlleur/ActiviteController.php" enctype="multipart/form-data">
 <div class="conteneurForm">
 	<div class="gauche">
 		<label for="labNomActivite">Nom d'activité </label>
@@ -49,7 +56,7 @@ $pdo = getPDO();
 		<br>
 		<select class="input" id="inputCategorie" name="inputCategorie">
 			<?php
-				listeCategorie($pdo);
+				Theme::listeCategorie();
 			?>
 		</select><br>
 		<br>
@@ -66,10 +73,10 @@ $pdo = getPDO();
 		<br>
 		<label for="labType">Type</label>
 		<br><br>
-		<input type="radio" id="Public" name="Groupe" value="Public">
-		<label for="Public">Public</label>
+		<input type="radio" id="Public" name="Groupe" value="Public" checked>
+		<label id="labPublic" for="Public">Public</label>
 		<input type="radio" id="Privée" name="Groupe" value="Privée">
-		<label for="Privée">Privée</label>
+		<label id="labPrivée" for="Privée">Privée</label>
 		<br><br><br>
 		
 		<label for="labDescription">Description de l'activité </label>
@@ -99,22 +106,16 @@ $pdo = getPDO();
 </div>
 <br>
 <button type="submit" id="createButton">Créer</button>
-	<?php
-		traitementFormActivite($pdo);
-	?>
 </form>
 <br><br>
 
 <footer id="footer" class="footer"></footer>
 </body>
 
-<!-- <script src="../Components/Navbar2.js"></script>
-<script>
-	document.getElementById("navbar").innerHTML = Navbar2();
-</script> -->
-<script src="../Components/NavbarAnim.js"></script>
+<!-- <script src="../Components/NavbarAnim.js"></script> -->
 <script src="../Components/DragAndDrop.js"></script>
 <script src="../Components/Footer2.js"></script>
+<script src="../Components/CreationActivite.js"></script>
 <script>
 	document.getElementById("footer").innerHTML = Footer2();
 </script>

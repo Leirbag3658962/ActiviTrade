@@ -1,7 +1,7 @@
 body{
 	margin: 0;
 	padding: 0;
-	background-image: url("../img/bibliotheque.jpg");
+	background-image: url("../img/faq.jpg");
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -17,8 +17,8 @@ body{
     height: flex; 
 	max-height: 600px;
 	overflow-y: auto;
-    border: 2px solid white; 
-    background-color: white; 
+    border: 2px solid #d7dedf; 
+    background-color: #d7dedf; 
     border-radius: 10px; 
     padding: 20px;
     margin: 20px auto;
@@ -28,8 +28,8 @@ body{
 .bulle-sms{
 
 	position: relative;
-	border: 2px solid #afd9b6;
-	background-color: #afd9b6;
+	border: 2px solid #A8D8C9;
+	background-color: #A8D8C9;
 	padding: 5px;
 	border-radius: 4px;
 	margin: 10px;

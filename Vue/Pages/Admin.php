@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../../Modele/AdminModele.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,9 +21,7 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
         <div id="divGauche">
             <h2 id="titreBarre">Base de données</h2>
             <?php
-                require_once "../../Modele/LienPDO.php";
-                $pdo = lienPDO();
-                recuperationTable($pdo); 
+                recuperationTable(); 
             ?>
         </div>
     </div>
@@ -31,11 +30,12 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
     <div class="barreDroite">
         <p>Sélectionner une table</p>
     </div>
-</div>
-<div id="add-modal" class="modal-overlay" style="display: none;">
-    <div class="modal-content">
-        <span class="close-modal-button">×</span>
-        <div id="modal-form-content">
+
+    <div id="add-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal-button">×</span>
+            <div id="modal-form-content">
+            </div>
         </div>
     </div>
 </div>
