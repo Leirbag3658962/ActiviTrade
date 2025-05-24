@@ -265,13 +265,13 @@ nav {
     cursor: pointer;
     border-radius: 4px;
 }
-
 .activities-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     margin-bottom: 20px;
 }
+
 .activity {
     background: white;
     border-radius: 8px;
@@ -279,6 +279,9 @@ nav {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     text-align: center;
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px; /* Ajout de padding en bas */
 }
 
 .activity:hover {
@@ -294,12 +297,31 @@ nav {
 .activity h3 {
     margin: 15px 0 10px;
     font-size: 1.2rem;
+    padding: 0 15px; /* Ajout de padding latéral */
 }
 
 .activity p {
     color: #666;
     margin-bottom: 10px;
     font-size: 0.9rem;
+    padding: 0 15px; /* Ajout de padding latéral */
+    flex-grow: 1; /* Permet au contenu de s'étendre */
+}
+
+.view-button {
+    background-color: #355e3b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 10px 15px 0 15px; /* Marges ajustées */
+    width: calc(100% - 30px); /* Largeur ajustée pour tenir compte des marges */
+    transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+    background-color: #2d4f32;
 }
 
 .slider-dots {
@@ -308,6 +330,7 @@ nav {
     gap: 10px;
     margin-bottom: 30px;
 }
+
 .dot {
     width: 10px;
     height: 10px;
@@ -318,16 +341,6 @@ nav {
 
 .dot.active {
     background-color: #333;
-}
-.reserve-button {
-    background-color: #355e3b;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 10px;
-    width: 100%;
 }
 
 /* À propos */

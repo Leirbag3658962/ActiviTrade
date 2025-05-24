@@ -1,16 +1,11 @@
 <?php
 session_start();
-$_SESSION['idUser'] = 1;
 
-require_once "../../Modele/LienPDO.php";
-$pdo = lienPDO();
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO(); 
 
-if (isset($_SESSION['idUser'])) {
-    $idUser = $_SESSION['idUser'];
-} else {
-    header("Location: LogIn.php");
-    exit;
-}
+$idUser = $_SESSION['idUser'] ?? null;
 
 $sql = "SELECT forum.idForum, forum.theme, forum.date, utilisateur.nom, utilisateur.prenom 
         FROM forum 
@@ -28,13 +23,15 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/Forum.css">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/navbar2.css">
+    <link rel="stylesheet" href="../Style/footer2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Forum</title>
 </head>
 <body>
-<header id="navbar" class="navbar"></header>
+<header id="navbar" class="navbar">
+    <?php echo Navbar2(); ?>
+</header>
 
 <div class="main-content">
     <div class="forum-container">
@@ -57,20 +54,21 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
-
 <a href="CreationForum.php" class="floating-button">
     <i class="fas fa-plus"></i> Créer un sujet
 </a>
 <br><br>
-    
 <footer id="footer" class="footer"></footer>
-
-<script src="../Components/Navbar.js"></script>
-<script>
-    document.getElementById("navbar").innerHTML = Navbar();
-</script>
-<script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
 </body>
-</html>
 
+<!-- <script src="../Components/Navbar2.js"></script>
+<script>
+	document.getElementById("navbar").innerHTML = Navbar2();
+</script> -->
+<script src="../Components/NavbarAnim.js"></script>
+<script src="../Components/DragAndDrop.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+	document.getElementById("footer").innerHTML = Footer2();
+</script>
+</html>

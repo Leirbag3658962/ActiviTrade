@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['user'])) {
-    header('Location: ../../index.php');
+    header('Location: home.php');
     exit;
 }
 require_once(__DIR__ . '/../Modele/User.php');
@@ -54,7 +54,7 @@ if(!empty($_POST)) {
             $isGoodPassword = false;
             // exit;
         }
-        if(!preg_match("#\W+#", $password)) {
+        if(!preg_match("/[!@#$%^&*(),.?\":{}|<>]/", $password)) {
             $_SESSION["erreur"] = "Le mot de passe doit contenir au moins un caractère spécial.";
             header('Location: ../../Vue/Pages/SignIn.php');
             $isGoodPassword = false;
@@ -92,9 +92,15 @@ if(!empty($_POST)) {
             'isbanned' => 0
         ];
 
-        //Redirection vers la page d'accueil
-        header('Location: ../../index.php');
+        $destinataire = $_POST['email'];
+        $sujet = "Bienvenue sur notre site !";
+        $message = "Bonjour $firstname,\n\nMerci de vous être inscrit sur ActiviTrade !\n\nCordialement,\nL'équipe d'ActiviTrade";
+        $headers = "From: vincentgab78@gmail.com";
+        mail($destinataire, $sujet, $message, $headers);
 
+
+        //Redirection vers la page d'accueil
+        header('Location: ../../Vue/Pages/Home.php');
     } else { // Si un champ est vide
         echo "Veuillez remplir tous les champs.";
         exit;

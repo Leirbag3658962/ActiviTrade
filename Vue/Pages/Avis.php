@@ -60,13 +60,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="boxform">
     <form method="POST" action="">
-        <label for="inputNote">Note d'activité</label>
+        <label for="inputNote" class="label-bold">Note d'activité</label>
         <br>
         <input class="input" type="text" id="inputNote" name="inputNote" required>&nbsp;&nbsp;&nbsp;&nbsp;
         <span class="note-text">Saisir une note de 0 à 5</span>
         <br><br>
-        <label for="inputCommentaire">Commentaire</label>
-        <br>
+        <label for="inputCommentaire" class="label-bold">Commentaire</label>
+        
         <textarea id="inputCommentaire" name="inputCommentaire" rows="10" cols="80" required></textarea><br><br>
         <div class="button-container">
             <button id="Button" type="submit">Confirmer</button>
@@ -87,3 +87,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     document.getElementById("footer").innerHTML = Footer2();
 </script>
 </html>
+

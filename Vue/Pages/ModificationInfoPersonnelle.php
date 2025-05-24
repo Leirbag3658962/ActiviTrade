@@ -1,19 +1,32 @@
 <?php
 session_start();
-$_SESSION['idUser'] = 1;
 
-require_once "../../Modele/LienPDO.php";
-$pdo = lienPDO();
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO(); 
 
 $message = "";
 
-if (!isset($_SESSION['idUser'])) {
+//if (!isset($_SESSION['idUser'])) {
+//    header("Location: LogIn.php");
+//    exit;
+//}
+
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: LogIn.php");
     exit;
 }
-$idUser = $_SESSION['idUser']; 
+$idUser = (int) $_GET['id'];
+$_SESSION['idUser'] = $idUser;
+
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM utilisateur WHERE idUtilisateur = ?");
+$stmt->execute([$idUser]);
+if ($stmt->fetchColumn() == 0) {
+    die("Utilisateur introuvable.");
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
     $email = htmlspecialchars($_POST['email']);
@@ -44,23 +57,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Style/Navbar.css">
-    <link rel="stylesheet" href="../Style/Footer.css">
+    <link rel="stylesheet" href="../Style/Navbar2.css">
+    <link rel="stylesheet" href="../Style/Footer2.css">
     <link rel="stylesheet" href="../Style/ModificationInfoPersonnelle.css">
     <title>ModificationInfo</title>
 </head>
 <body>
-<header id="navbar" class="navbar"></header>
+<header id="navbar" class="navbar">
+    <?php echo Navbar2(); ?>
+</header>
 <br><br>
-<h1>Mon Profil</h1>
+<h1>Profil</h1>
 <div class="boxform">
-    <br>
     <h2>Modification</h2>
     <?php if ($message): ?>
         <p style="color: green; font-weight: bold;"><?= $message ?></p>
     <?php endif; ?>
     <form method="post">
-        <br>
         <label for="nom">Nom</label><br>
         <input type="text" id="nom" name="nom" placeholder="Smith" required><br>
 
@@ -85,10 +98,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </div>
 <footer id="footer" class="footer"></footer>
 </body>
-<script src="../Components/Navbar.js"></script>
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
-    document.getElementById("navbar").innerHTML = Navbar();
-</script>
+    document.getElementById("navbar").innerHTML = Navbar2();
+</script> -->
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer.js"></script>
+<script src="../Components/Footer2.js"></script>
+<script>
+    document.getElementById("footer").innerHTML = Footer2();
+</script>
 </html>

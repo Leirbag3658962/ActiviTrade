@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 formData.append('table', nomTable);
 
                 
-                fetch('../Pages/AdminGetTable.php', {
+                fetch('../../Controlleur/AdminGetTable.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     formData.append('pkValue', pkValue);
 
                     
-                    fetch('../Pages/AdminDeleteRow.php', { 
+                    fetch('../../Controlleur/AdminDeleteRow.php', { 
                         method: 'POST',
                         body: formData
                     })
@@ -180,7 +180,7 @@ function chargerTable(nomTable, containerElement) {
     const formData = new FormData();
     formData.append('table', nomTable);
 
-    fetch('../Pages/AdminGetTable.php', { 
+    fetch('../../Controlleur/AdminGetTable.php', { 
         method: 'POST',
         body: formData
     })
@@ -217,7 +217,7 @@ function displayAddForm(tableName) {
     const formData = new FormData();
     formData.append('table', tableName);
 
-    fetch('../Pages/AdminGetForm.php', { method: 'POST', body: formData })
+    fetch('../../Controlleur/AdminGetForm.php', { method: 'POST', body: formData })
         .then(response => {
             if (!response.ok) { throw new Error('Erreur réseau formulaire: ' + response.statusText); }
             return response.text();
@@ -245,7 +245,7 @@ function handleFormSubmit(formElement) {
     formData.append('table', tableName); 
 
 
-    fetch('../Pages/AdminInsertion.php', { method: 'POST', body: formData })
+    fetch('../../Controlleur/AdminInsertion.php', { method: 'POST', body: formData })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -281,7 +281,7 @@ function handleRowDelete(clickedRow) {
          formData.append('table', tableName);
          formData.append('pkValue', pkValue);
 
-         fetch('../Pages/AdminDeleteRow.php', { 
+         fetch('../../Controlleur/AdminDeleteRow.php', { 
              method: 'POST',
              body: formData
          })
@@ -316,9 +316,9 @@ function makeCellEditable(cellElement) {
     if (!columnName) { console.error("data-column-name manquant", cellElement); return; }
 
     const inputElement = document.createElement('input');
-    inputElement.type = 'text'; // Adapter type si besoin (date, number...)
+    inputElement.type = 'text'; // Adapter type
     inputElement.value = originalValue;
-    inputElement.classList.add('inline-edit-input'); // Pour CSS
+    inputElement.classList.add('inputModif');
 
     cellElement.innerHTML = '';
     cellElement.appendChild(inputElement);
@@ -374,7 +374,7 @@ function saveCellUpdate() {
     formData.append('column', columnName);
     formData.append('value', newValue);
 
-    fetch('../Pages/AdminUpdateRow.php', { method: 'POST', body: formData }) 
+    fetch('../../Controlleur/AdminUpdateRow.php', { method: 'POST', body: formData }) 
         .then(response => response.json())
         .then(data => {
             if (data.success) {

@@ -109,11 +109,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 
+
 <!-- <script src="../Components/Navbar2.js"></script>
 <script>
 	document.getElementById("navbar").innerHTML = Navbar2();
 </script> -->
+
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer.js"></script>
 </html>
-

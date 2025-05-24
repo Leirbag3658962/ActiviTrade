@@ -1,5 +1,7 @@
 <?php
-require_once "../../Modele/LienPDO.php";
+session_start();
+require_once(__DIR__ . '/../Modele/LienPDO.php');
+require_once(__DIR__ . '/../Modele/AdminModele.php');
 $pdo = lienPDO();
 
 //En cas d'erreur
@@ -10,41 +12,26 @@ if (!isset($_POST['table']) || empty($_POST['table'])) {
 
 $nomTableDemande = $_POST['table'];
 
-try {
-    $stmtCheck = $pdo->prepare("SHOW TABLES LIKE ?");
-    $stmtCheck->execute([$nomTableDemande]);
-    if ($stmtCheck->rowCount() == 0) {
-        //En cas d'erreur
-        echo '<p style="color:red;">Erreur : La table "' . htmlspecialchars($nomTableDemande) . '" n\'existe pas ou n\'est pas autorisée.</p>';
-        exit;
-    }
-
-//En cas d'erreur
-} catch (PDOException $e) {
-    echo '<p style="color:red;">Erreur lors de la vérification de la table : ' . htmlspecialchars($e->getMessage()) . '</p>';
+$messErreur = '';
+$messErreur = validationTable($nomTableDemande);
+if($messErreur != ''){
+    echo "".$messErreur."";
     exit;
 }
 
 
 
 try {
-    $nomClePrimaire = null;
-    $stmtKeys = $pdo->query("SHOW KEYS FROM `$nomTableDemande` WHERE Key_name = 'PRIMARY'");
-    if ($stmtKeys && $keyInfo = $stmtKeys->fetch(PDO::FETCH_ASSOC)) {
-        $nomClePrimaire = $keyInfo['Column_name'];
-    }
+    $nomClePrimaire = nomClePrimaire($nomTableDemande);
     if (!$nomClePrimaire) {
         echo '<p style="color:orange;">Attention : Aucune clé primaire trouvée pour la table ' . htmlspecialchars($nomTableDemande) . '. La suppression ne fonctionnera pas.</p>';
     }
 
     //Colonnes
-    $recupcol = "SHOW COLUMNS FROM `$nomTableDemande`"; 
-    $stmtColonnes = $pdo->query($recupcol);
-    $colonnes = $stmtColonnes->fetchAll(PDO::FETCH_COLUMN); 
+    $colonnes = showColonnes($nomTableDemande);
 
     //Données
-    $sql = "SELECT * FROM `$nomTableDemande`"; 
-    $stmtData = $pdo->query($sql);
+    $stmtData = data($nomTableDemande);
 
     $html = '<button id="BoutonAjouter" type="button" data-table="'.htmlspecialchars($nomTableDemande).'">Ajouter '.htmlspecialchars($nomTableDemande).'</button>';
     $html .= '<br>';
@@ -53,7 +40,9 @@ try {
     $html .= '<table class="tabledata">'; 
     $html .= '<tr class="titretableau">';
     foreach ($colonnes as $col) {
-        $html .= "<th>" . htmlspecialchars($col) . "</th>";
+        if($col != "password"){
+            $html .= "<th>" . htmlspecialchars($col) . "</th>";
+        }
     }
     $html .= '</tr>';
 
@@ -72,10 +61,11 @@ try {
         $html .= '<tr class="' . $classeLigne . '" id="row_' . htmlspecialchars($nomTableDemande) . '_' . htmlspecialchars($compteur) . '"' . $dataAttributes . '>';
         foreach ($row as $columnName => $value) {
             $isPkColumn = ($columnName === $nomClePrimaire);
-            
-            $tdClass = 'case' . ($isPkColumn ? ' pk-cell' : ' editable-cell');
-            $html .= "<td class=\"" . $tdClass . "\" data-column-name=\"" . htmlspecialchars($columnName) . "\">" 
-            . htmlspecialchars($value ?? '') . "</td>";
+            if($columnName != "password"){
+                $tdClass = 'case' . ($isPkColumn ? ' pk-cell' : ' editable-cell');
+                $html .= "<td class=\"" . $tdClass . "\" data-column-name=\"" . htmlspecialchars($columnName) . "\">" 
+                . htmlspecialchars($value ?? '') . "</td>";
+            }
         }
         $html .= "</tr>"; 
         $compteur++;
