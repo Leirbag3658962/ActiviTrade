@@ -106,5 +106,21 @@ class Activite {
             echo "<a> Erreur BDD lors du lien image-activité: " . htmlspecialchars($e->getMessage()) . "</a>";
         }
     }
+
+    public static function afficheImage($idAct){
+        $pdo = getPDO();
+        if(!$pdo){
+            echo "<a> Erreur: Connexion BDD non fournie.</a>";
+        }
+
+        try{
+            $sqlimage = "SELECT image FROM image WHERE idActivite=:id";
+            $stmtimage = $pdo->prepare($sqlimage);
+            $stmtimage ->execute(['id' => $idAct]);
+            return $stmtimage->fetchAll(PDO::FETCH_ASSOC);
+        }catch (PDOException $e) {
+            echo "<a> Erreur BDD lors du lien image-activité: " . htmlspecialchars($e->getMessage()) . "</a>";
+        }
+    }
 }
 ?>
