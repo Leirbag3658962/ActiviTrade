@@ -29,37 +29,49 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
             <h1>Inscription</h1>
             <div class="input-control">
                 <label for="lastname">Nom</label><br>
+                <div class="password-input">
                 <input type="text" id="lastname" name="lastname" placeholder="Smith" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="firstname">Pr&eacute;nom</label><br>
+                <div class="password-input">
                 <input type="text" id="firstname" name="firstname" placeholder="David" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="email">Email</label><br>
+                <div class="password-input">
                 <input type="email" id="email" name="email" placeholder="david.smith@gmail.com" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="birthdate">Date de naissance</label><br>
+                <div class="password-input">
                 <input type="date" id="birthdate" name="birthdate" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="ville">Ville</label><br>
+                <div class="password-input">
                 <input type="text" id="ville" name="ville" placeholder="Paris" ><br>
+                </div>
                 <div class="error"></div>
             </div>
 
             <div class="input-control">
                 <label for="telephone">Num&eacute;ro de t&eacute;l&eacute;phone</label>
+                <div class="password-input">
                 <input type="tel" id="telephone" name="telephone" placeholder="612345678" >
+                </div>
                 <div class="error"></div>
             </div>
 
@@ -68,9 +80,8 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
                 <div class="password-input">
                     <input type="password" id="password" name="password" placeholder="Votre mot de passe" >
                     <img src="../img/Hide.svg" id="showHide" >
-                    <!-- <span class="toggle-password" onclick="togglePasswordVisibility('password')"></span> -->
-                    <div class="error"></div>
                 </div>
+                <div class="error"></div>
                 <div class="password-check">
                     <div class="check-length">
                         <img src="../img/close.svg" />&nbsp;Votre mot de passe doit contenir au moins 8 caract&egrave;res
@@ -98,12 +109,19 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
                     <img src="../img/Hide.svg" id="showHideConfirm">
                 </div>
                 <div class="error"></div>
+                <div class="password-check">
+                    <div class="check-same-password">
+                        <img src="../img/close.svg" />&nbsp;Les mots de passe sont identiques
+                    </div>
+                </div>
             </div>
 
-
-            <div id="checkboxdiv" class="checkboxdiv">
-                <input type="checkbox" id="cgu" value="CGU" name="condition[]" required>
-                <label for="cgu">J'ai lu et j'accepte les <a href="MentionLegale.php">Conditions Générales d'Utilisation</a></label><br>
+            <div class="input-control">
+                <div id="checkboxdiv" class="checkboxdiv">
+                    <input type="checkbox" id="cgu" value="CGU" name="condition[]">
+                    <label for="cgu">J'ai lu et j'accepte les <a href="Cgu.php">Conditions Générales d'Utilisation</a></label><br>
+                </div>
+                <div class="error"></div>
             </div>
             <br>
             <button type="submit">S'inscrire</button>
@@ -114,10 +132,6 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
     <footer id="footer" class="footer"></footer>
 </body>
 <script src="../Components/InscriptionValidation.js"></script>
-<!-- <script src="../Components/Navbar2.js"></script>
-<script>
-    document.getElementById("navbar").innerHTML = Navbar2();
-</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer2.js"></script>
 <script>

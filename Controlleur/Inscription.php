@@ -54,7 +54,7 @@ if(!empty($_POST)) {
             $isGoodPassword = false;
             // exit;
         }
-        if(!preg_match("#\W+#", $password)) {
+        if(!preg_match("/[!@#$%^&*(),.?\":{}|<>]/", $password)) {
             $_SESSION["erreur"] = "Le mot de passe doit contenir au moins un caractère spécial.";
             header('Location: ../../Vue/Pages/SignIn.php');
             $isGoodPassword = false;
