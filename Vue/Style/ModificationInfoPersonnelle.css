@@ -38,6 +38,13 @@ input[type=email] {
     width: 200px;
 }
 
+input[type=tel] {
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid;
+    width: 200px;
+}
+
 input[type=date] {
     background: transparent;
     border-radius: 5px;

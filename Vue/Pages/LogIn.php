@@ -5,6 +5,7 @@ if(isset($_SESSION['user'])) {
     exit;
 }
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -47,7 +48,9 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
         </form>
     </div>
 
-    <footer id="footer" class="footer"></footer>
+    <footer id="footer" class="footer">
+        <?php echo Footer2(); ?>
+    </footer>
 </body>
 <script src="../Components/LogIn.js"></script>
 <!-- <script src="../Components/Navbar2.js"></script>
@@ -55,8 +58,4 @@ require_once(__DIR__ . '../../Components/Navbar2.php');
     document.getElementById("navbar").innerHTML = Navbar2();
 </script> -->
 <script src="../Components/NavbarAnim.js"></script>
-<script src="../Components/Footer2.js"></script>
-<script>
-    document.getElementById("footer").innerHTML = Footer2();
-</script>
 </html>

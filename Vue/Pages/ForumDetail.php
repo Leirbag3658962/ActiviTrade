@@ -34,12 +34,12 @@ $idForumPost = isset($_POST['idForum']) ? intval($_POST['idForum']) : 0;
 $contenu = isset($_POST['contenu']) ? trim($_POST['contenu']) : '';
 
 if ($idForumPost > 0 && !empty($contenu)) {
-    if (!isset($_SESSION['idUser'])) {
+    if (!isset($_SESSION['user']['id'])) {
         header("Location: LogIn.php");
         exit;
     }
 
-    $idUser = $_SESSION['idUser']; 
+    $idUser = $_SESSION['user']['id']; 
     $stmt = $pdo->prepare("INSERT INTO forum (idUser, contenu, date, idParent) 
                            VALUES (?, ?, NOW(), ?)");
     $stmt->execute([$idUser, $contenu, $idForum]);
