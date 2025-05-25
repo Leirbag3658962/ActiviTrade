@@ -1,4 +1,4 @@
-function CodePassword() {
+function Password() {
     document.getElementById("resetForm").style.display = "none";
     document.getElementById("codeInputs").style.display = "block";
 

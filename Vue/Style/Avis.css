@@ -10,12 +10,34 @@ body {
     border-radius: 10px;
     padding: 20px;
     margin: 20px auto;
-    width: 700px;
+    width: 650px;
+}
+
+.label-bold {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 22px;
 }
 
 .input {
     width: 120px;
     height: 30px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    transition: border 0.3s ease;
+}
+
+.input:focus {
+    border: 2px solid #333;
+    outline: none;
+}
+
+.note-text {
+    color: #666666;
+    font-size: 15px;
+    font-style: italic;
 }
 
 #titreAvis {
@@ -30,6 +52,15 @@ body {
     height: 300px;
     overflow: auto;
     resize: none;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: border 0.3s ease;
+}
+
+#inputCommentaire:focus {
+    border: 2px solid #333;
+    outline: none;
 }
 
 #Button {

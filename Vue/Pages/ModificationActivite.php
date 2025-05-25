@@ -1,8 +1,8 @@
-
 <?php
 session_start();
-require_once "../../Modele/LienPDO.php";
-$pdo = lienPDO();
+require_once(__DIR__ . '../../../Modele/Database.php');
+require_once(__DIR__ . '../../Components/Navbar2.php');
+$pdo = getPDO();
 
 // $_SESSION['idActivite'] = 1;
 
@@ -58,7 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <title>Modifier une activité</title>
 </head>
 <body>
-<header id="navbar" class="navbar"></header>
+<header id="navbar" class="navbar">
+    <?php echo Navbar2(); ?>
+</header>
+
 <h1 id="titrecreation">Modification de ton activité</h1>
 <div class="conteneurForm">
     <div class="gauche">
@@ -106,10 +109,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 
-<script src="../Components/Navbar2.js"></script>
+
+<!-- <script src="../Components/Navbar2.js"></script>
 <script>
 	document.getElementById("navbar").innerHTML = Navbar2();
-</script>
+</script> -->
+
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Footer.js"></script>
 </html>

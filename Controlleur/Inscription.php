@@ -54,7 +54,7 @@ if(!empty($_POST)) {
             $isGoodPassword = false;
             // exit;
         }
-        if(!preg_match("#\W+#", $password)) {
+        if(!preg_match("/[!@#$%^&*(),.?\":{}|<>]/", $password)) {
             $_SESSION["erreur"] = "Le mot de passe doit contenir au moins un caractère spécial.";
             header('Location: ../../Vue/Pages/SignIn.php');
             $isGoodPassword = false;
@@ -100,8 +100,7 @@ if(!empty($_POST)) {
 
 
         //Redirection vers la page d'accueil
-        header('Location: ../../Vue/Pages/home.php');
-
+        header('Location: ../../Vue/Pages/Home.php');
     } else { // Si un champ est vide
         echo "Veuillez remplir tous les champs.";
         exit;
