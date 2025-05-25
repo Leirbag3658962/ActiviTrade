@@ -1,48 +1,56 @@
 <?php
 session_start();
-
-
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: LogIn.php"); 
-    exit;
-}
-
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
 require_once(__DIR__ . '../../Components/Footer2.php');
 $pdo = getPDO();
 
-$idUser = (int) $_GET['id'];
-$_SESSION['idUser'] = $idUser;
+//$_SESSION['idUser'] = 2;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$idForum = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-    $theme = htmlspecialchars($_POST['theme']);
-    $contenu = htmlspecialchars($_POST['contenu']);
-//    $idUser = $_SESSION['idUser'];
-    $date = date("Y-m-d H:i:s");
+$forum = null;
+if ($idForum > 0) {
+    $stmt = $pdo->prepare("SELECT f.*, u.nom, u.prenom 
+                            FROM forum f
+                            JOIN utilisateur u ON f.idUser = u.idUtilisateur
+                            WHERE f.idForum = ?");
+    $stmt->execute([$idForum]);
+    $forum = $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
-    $idParent = NULL;
+$replies = [];
+if ($idForum > 0) {
 
-    $sql = "INSERT INTO forum (theme, date, contenu, idUser, idParent) 
-            VALUES (:theme, :date, :contenu, :idUser, :idParent)";
+    $stmt = $pdo->prepare("SELECT f.*, u.nom, u.prenom
+                           FROM forum f
+                           JOIN utilisateur u ON f.idUser = u.idUtilisateur
+                           WHERE f.idParent = ? 
+                           ORDER BY f.date ASC");
+    $stmt->execute([$idForum]);
+    $replies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-    $stmt = $pdo->prepare($sql);
+$idForumPost = isset($_POST['idForum']) ? intval($_POST['idForum']) : 0;
+$contenu = isset($_POST['contenu']) ? trim($_POST['contenu']) : '';
 
-    $stmt->bindParam(':theme', $theme);
-    $stmt->bindParam(':date', $date);
-    $stmt->bindParam(':contenu', $contenu);
-    $stmt->bindParam(':idUser', $idUser);
-    $stmt->bindParam(':idParent', $idParent);
-
-    if ($stmt->execute()) {
-        echo "Le sujet a été créé avec succès.";
-    } else {
-        echo "Erreur lors de la création du sujet.";
+if ($idForumPost > 0 && !empty($contenu)) {
+    if (!isset($_SESSION['idUser'])) {
+        header("Location: LogIn.php");
+        exit;
     }
+
+    $idUser = $_SESSION['idUser']; 
+    $stmt = $pdo->prepare("INSERT INTO forum (idUser, contenu, date, idParent) 
+                           VALUES (?, ?, NOW(), ?)");
+    $stmt->execute([$idUser, $contenu, $idForum]);
+
+    header("Location: ForumDetail.php?id=$idForum");
+    exit();
+} else if ($idForumPost > 0) {
+    echo "Erreur: Le contenu de la réponse est vide.";
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -52,8 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../Style/Forum.css">
     <link rel="stylesheet" href="../Style/navbar2.css">
     <link rel="stylesheet" href="../Style/footer2.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Créer un Forum</title>
+    <title>Détails du sujet</title>
 </head>
 <body>
 <header id="navbar" class="navbar">
@@ -61,37 +68,80 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 
 <div class="main-content">
-    <h1>Création d'un Nouveau Sujet</h1>
-    <div class="createforum-container">
+    <?php if ($forum): ?>
+    <div class="thread-detail">
+        
+        <div class="post-info-container">
+            <div class="post-info">
+                <p><strong>Par:</strong> <?php echo htmlspecialchars($forum['prenom'] . ' ' . $forum['nom']); ?></p>
+                <p><strong>Date:</strong> <?php echo htmlspecialchars($forum['date']); ?></p>
+            </div>
+        </div>
+    
+        <div class="title-context-container">
+            <div class="title-container">
+                <h2><?php echo htmlspecialchars($forum['theme']); ?></h2>
+            </div>
+        
+            <div class="thread-context">
+                <?php echo nl2br(htmlspecialchars($forum['contenu'])); ?>
+            </div>
+        </div>
+    </div>
 
-        <form action="CreationForum.php" method="POST">
-            <label for="theme">Thème:</label>
-            <input type="text" id="theme" name="theme" required><br>
+    <hr>
 
-            <label for="contenu">Contenu:</label>
-            <textarea id="contenu" name="contenu" rows="4" cols="50" required></textarea><br>
+    <div class="replies">
+        <h3>RE: <?php echo htmlspecialchars($forum['theme']); ?></h3><br>
+        <?php foreach ($replies as $reply): ?>
+            <div class="reply">
+                <div class="post-info-container">
+                    <div class="post-info">
+                        <p><strong>Par:</strong> <?php echo htmlspecialchars($reply['prenom'] . ' ' . $reply['nom']); ?></p>
+                        <p><strong>Date:</strong> <?php echo htmlspecialchars($reply['date']); ?></p>
+                    </div>
+                </div>
 
-            <button id="Button" type="submit">Confirmer</button>
+                <div class="title-context-container">
+                    <div class="thread-context">
+                        <?php echo nl2br(htmlspecialchars($reply['contenu'])); ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <?php $isLoggedIn = isset($_SESSION['idUser']); ?>
+
+
+    <button class="reply-button">
+        Répondre
+    </button>
+
+    <?php if ($isLoggedIn): ?>
+    <div class="reply-form" id="reply-form-main" style="display: none;">
+        <form action="ForumDetail.php?id=<?php echo $idForum; ?>" method="POST">
+            <input type="hidden" name="idForum" value="<?php echo $forum['idForum']; ?>">
+            <textarea name="contenu" rows="4" cols="50" required placeholder="Écrivez votre réponse ici..."></textarea><br>
+            <button type="submit">Envoyer</button>
         </form>
     </div>
+    <?php endif; ?>
+    <?php endif; ?>
 </div>
 
 <!--<footer id="footer" class="footer"></footer>-->
 <footer id="footer" class="footer"><?php echo Footer2(); ?></footer>
 
-
 </body>
-
-<!--<script src="../Components/Navbar2.js"></script>-->
-<!--<script>-->
-<!--    document.getElementById("navbar").innerHTML = Navbar2();-->
-<!--</script>-->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
 <!--<script src="../Components/Footer2.js"></script>-->
+<script>
+    window.isLoggedIn = <?= json_encode($isLoggedIn); ?>;
+</script>
+<script src="../Components/ForumAnswer.js"></script>
 <!--<script>-->
-<!--    document.getElementById("footer").innerHTML = Footer2();-->
+<!--	document.getElementById("footer").innerHTML = Footer2();-->
 <!--</script>-->
-
 </html>
-
