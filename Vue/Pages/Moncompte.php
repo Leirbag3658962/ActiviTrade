@@ -120,6 +120,8 @@ if (isset($_SESSION['user']['id'])) {
 				<p>Description de l'activité précédente 3</p>
             </div>
         </div>
+        <button class="carousel-btn left" onclick="moveSlideRelative(this, -1)">‹</button>
+        <button class="carousel-btn right" onclick="moveSlideRelative(this, 1)">›</button>
         <div class="carousel-indicators">
             <span class="indicator active" onclick="moveSlide(0)"></span>
             <span class="indicator" onclick="moveSlide(1)"></span>
@@ -174,6 +176,8 @@ if (isset($_SESSION['user']['id'])) {
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
             </div>
+            <button class="carousel-btn left" onclick="moveSlideRelative(this, -1)">‹</button>
+            <button class="carousel-btn right" onclick="moveSlideRelative(this, 1)">›</button>
             <div class="carousel-indicators">
                 <span class="indicator active" data-index="0"></span>
                 <span class="indicator" data-index="1"></span>
@@ -195,6 +199,8 @@ if (isset($_SESSION['user']['id'])) {
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
             </div>
+            <button class="carousel-btn left" onclick="moveSlideRelative(this, -1)">‹</button>
+            <button class="carousel-btn right" onclick="moveSlideRelative(this, 1)">›</button>
             <div class="carousel-indicators">
                 <span class="indicator active" data-index="0"></span>
                 <span class="indicator" data-index="1"></span>
@@ -247,6 +253,22 @@ if (isset($_SESSION['user']['id'])) {
     iframe.contentWindow.postMessage("ouvrir-messagerie", "*");
     
   }
+  function moveSlideRelative(button, direction) {
+    const carousel = button.closest('.carousel');
+    const inner = carousel.querySelector('.carousel-inner');
+    const indicators = carousel.querySelectorAll('.indicator');
+    const slides = carousel.querySelectorAll('.slide');
+    const slideWidth = slides[0]?.clientWidth || 0;
+
+    let activeIndex = Array.from(indicators).findIndex(ind => ind.classList.contains('active'));
+    let newIndex = (activeIndex + direction + slides.length) % slides.length;
+
+    inner.style.transform = `translateX(${-newIndex * slideWidth}px)`;
+
+    indicators.forEach(ind => ind.classList.remove('active'));
+    indicators[newIndex].classList.add('active');
+}
+
 </script>
 
 <script>
