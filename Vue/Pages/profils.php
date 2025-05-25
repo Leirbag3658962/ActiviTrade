@@ -123,7 +123,7 @@ $user = User::getById($_SESSION['user']['id']);
     <div class="carousel">
         <div class="carousel-inner">
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="../img/banner8.jpeg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
             <div class="slide">
@@ -161,15 +161,15 @@ $user = User::getById($_SESSION['user']['id']);
             <h4>Activité dans la liste d'attente</h4>
             <div class="liste-activites">
                 <div class="activite">
-                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <img src="../img/banner1.jpg" alt="Image ISEP">
                     <p>Activité 1 - Description ici</p>
                 </div>
                 <div class="activite">
-                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <img src="../img/banner1.jpg" alt="Image ISEP">
                     <p>Activité 2 - Description ici</p>
                 </div>
                 <div class="activite">
-                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <img src="../img/banner1.jpg" alt="Image ISEP">
                     <p>Activité 3 - Description ici</p>
                 </div>
                 <div class="activite">
@@ -191,7 +191,7 @@ $user = User::getById($_SESSION['user']['id']);
         <h4>Activité créée</h4>
         <div class="carousel" id="carousel-creee">
             <div class="carousel-inner">
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="../img/banner7.jpeg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
@@ -212,7 +212,7 @@ $user = User::getById($_SESSION['user']['id']);
         <h4>Activité précédente</h4>
         <div class="carousel" id="carousel-precedente">
             <div class="carousel-inner">
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="../img/bibliotheque.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
                 <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
