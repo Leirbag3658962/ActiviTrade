@@ -3,6 +3,7 @@ session_start();
 
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 $pdo = getPDO();
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -191,7 +192,8 @@ $participant_count = count($participants);
         <button id="confirmer">Confirmer</button>
     </div>
 </div>
-<footer id="footer" class="footer"></footer>
+<!--<footer id="footer" class="footer"></footer>-->
+<footer id="footer" class="footer"><?php echo Footer2(); ?></footer>
 </body>
 <!-- <script src="../Components/Navbar2.js"></script>
 <script>
@@ -231,10 +233,9 @@ $participant_count = count($participants);
     });
 </script>
 
-<script src="../Components/Footer2.js"></script>
-<script>
-    document.getElementById("footer").innerHTML = Footer2();
-</script>
+<!--<script src="../Components/Footer2.js"></script>-->
+<!--<script>-->
+<!--    document.getElementById("footer").innerHTML = Footer2();-->
+<!--</script>-->
 </html>
-
 
