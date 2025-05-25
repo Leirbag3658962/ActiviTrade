@@ -81,7 +81,7 @@ $placesDisponibles = max(0, $placesDisponibles);
                 <p class="creator-info">Activité créée par <a href="Profil.php?id=<?= $activite['idCreateur']?>"><?= htmlspecialchars($activite['prenom']) ?> <?= htmlspecialchars($activite['nom']) ?></a></p>
             </div>
             <div class="cta-container">
-                <a href="ReservationActivite.php?id=<?= $activite['idActivite'] ?>">
+                <a href="ReservationActivite.php?id=<?php echo $activite['idActivite'] ?>">
                         <button class="cta-button">Réserver</button>
                 </a>
                 <p class="places-info">Places disponibles: <?= htmlspecialchars($placesDisponibles) ?> / <?= htmlspecialchars($activite['nbrParticipantMax']) ?></p>

@@ -3,17 +3,18 @@ session_start();
 
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 $pdo = getPDO();
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //$_SESSION['idUser'] = 11;
 
-if (!isset($_SESSION['idUser'])) {
+if (!isset($_SESSION['user']['id'])) {
     header("Location: LogIn.php");
     exit;
 }
 
-$idUser = $_SESSION['idUser'];
+$idUser = $_SESSION['user']['id'];
 
 //if (isset($_GET['id'])) {
 //    $_SESSION['idActivite'] = (int)$_GET['id'];
@@ -35,10 +36,10 @@ if ($idActivite > 0) {
     }
 }
 
-var_dump($idUser);
-var_dump($idActivite);
-echo "idUser: " . $idUser . "<br>";
-echo "idActivite: " . $idActivite . "<br>";
+// var_dump($idUser);
+// var_dump($idActivite);
+// echo "idUser: " . $idUser . "<br>";
+// echo "idActivite: " . $idActivite . "<br>";
 
 $participants = [];
 $participant_count = 0;
@@ -195,12 +196,10 @@ $participant_count = count($participants);
         <button id="confirmer">Confirmer</button>
     </div>
 </div>
-<footer id="footer" class="footer"></footer>
+<footer id="footer" class="footer">
+    <?php echo Footer2(); ?>
+</footer>
 </body>
-<!-- <script src="../Components/Navbar2.js"></script>
-<script>
-    document.getElementById("navbar").innerHTML = Navbar2();
-</script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/Reservation.js"></script>
 <script>
@@ -233,11 +232,6 @@ $participant_count = count($participants);
                 alert("Échec de l'enregistrement.");
             });
     });
-</script>
-
-<script src="../Components/Footer2.js"></script>
-<script>
-    document.getElementById("footer").innerHTML = Footer2();
 </script>
 </html>
 
