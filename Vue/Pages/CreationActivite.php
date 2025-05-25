@@ -4,6 +4,7 @@ session_start();
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../../Modele/Theme.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 
 // require_once "../../../Controller/ActiviteController.php";
 $pdo = getPDO();
@@ -109,14 +110,10 @@ if(empty($idCreator)){
 </form>
 <br><br>
 
-<footer id="footer" class="footer"></footer>
+<footer id="footer" class="footer">
+	<?php echo Footer2(); ?>
+</footer>
 </body>
-
-<!-- <script src="../Components/NavbarAnim.js"></script> -->
 <script src="../Components/DragAndDrop.js"></script>
-<script src="../Components/Footer2.js"></script>
 <script src="../Components/CreationActivite.js"></script>
-<script>
-	document.getElementById("footer").innerHTML = Footer2();
-</script>
 </html>

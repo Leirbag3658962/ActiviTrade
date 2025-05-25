@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div class="contact-text">
-                                <a href="mailto:contact@activitrade.com">contact@activitrade.com</a>
+                                <a href="mailto:activitrade.sav@gmail.com">activitrade.sav@gmail.com</a>
                             </div>
                         </div>
                         

@@ -2,6 +2,7 @@
 session_start();
 require_once(__DIR__ . '../../Components/Navbar2.php');
 require_once(__DIR__ . '../../../Modele/CGUModele.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,12 +23,10 @@ require_once(__DIR__ . '../../../Modele/CGUModele.php');
     ?>
 
 
-<footer id="footer" class="footer"></footer>
+<footer id="footer" class="footer">
+    <?php echo Footer2(); ?>
+</footer>
 </body>
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
-<script src="../Components/Footer2.js"></script>
-<script>
-	document.getElementById("footer").innerHTML = Footer2();
-</script>
 </html>

@@ -104,10 +104,10 @@ $user = User::getById($_SESSION['user']['id']);
 
         <div class="bloc-titre-modifier">
             <h4>Informations personnelles</h4>
-                <a href="ModificationInfoPersonnelle.php?id=<?php echo $_SESSION['user']['id'] ?>" title="Modifier mon profil" aria-label="Modifier mon profil">
+                <a href="ModificationInfoPersonnelle.php?id=<?php echo $_SESSION['user']['id']?>" title="Modifier mon profil" aria-label="Modifier mon profil">
                     <img src="../img/CrayonIcone.png" alt="Modifier mon profil" class="icone-modifier">
                 </a>
-        </div>
+</div>
 
 
         <p><strong>Nom :</strong> <?= htmlspecialchars($user['nom']) ?></p>
@@ -119,30 +119,32 @@ $user = User::getById($_SESSION['user']['id']);
 
        <!-- Activité réservé -->
 <div class="boite-info">
-    <h4>Activité réservé</h4>
+    <h4>Activité réservée</h4>
     <div class="carousel">
         <div class="carousel-inner">
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
         </div>
+        <button class="carousel-btn left" onclick="moveSlideRelative(this, -1)">‹</button>
+        <button class="carousel-btn right" onclick="moveSlideRelative(this, 1)">›</button>
         <div class="carousel-indicators">
             <span class="indicator active" onclick="moveSlide(0)"></span>
             <span class="indicator" onclick="moveSlide(1)"></span>
@@ -161,23 +163,23 @@ $user = User::getById($_SESSION['user']['id']);
             <h4>Activité dans la liste d'attente</h4>
             <div class="liste-activites">
                 <div class="activite">
-                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <img src="https://static4.depositphotos.com/1004999/269/i/950/depositphotos_2693490-stock-photo-beautiful-park.jpg" alt="Image ISEP">
                     <p>Activité 1 - Description ici</p>
                 </div>
                 <div class="activite">
-                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <img src="https://static4.depositphotos.com/1004999/269/i/950/depositphotos_2693490-stock-photo-beautiful-park.jpg"alt="Image ISEP">
                     <p>Activité 2 - Description ici</p>
                 </div>
                 <div class="activite">
-                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <img src="https://static4.depositphotos.com/1004999/269/i/950/depositphotos_2693490-stock-photo-beautiful-park.jpg" alt="Image ISEP">
                     <p>Activité 3 - Description ici</p>
                 </div>
                 <div class="activite">
-                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <img src="https://static4.depositphotos.com/1004999/269/i/950/depositphotos_2693490-stock-photo-beautiful-park.jpg" alt="Image ISEP">
                     <p>Activité 4 - Description ici</p>
                 </div>
                 <div class="activite">
-                    <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Image ISEP">
+                    <img src="https://static4.depositphotos.com/1004999/269/i/950/depositphotos_2693490-stock-photo-beautiful-park.jpg" alt="Image ISEP">
                     <p>Activité 5 - Description ici</p>
                 </div>
             </div>
@@ -191,12 +193,14 @@ $user = User::getById($_SESSION['user']['id']);
         <h4>Activité créée</h4>
         <div class="carousel" id="carousel-creee">
             <div class="carousel-inner">
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
             </div>
+            <button class="carousel-btn left" onclick="moveSlideRelative(this, -1)">‹</button>
+            <button class="carousel-btn right" onclick="moveSlideRelative(this, 1)">›</button>
             <div class="carousel-indicators">
                 <span class="indicator active" data-index="0"></span>
                 <span class="indicator" data-index="1"></span>
@@ -212,12 +216,14 @@ $user = User::getById($_SESSION['user']['id']);
         <h4>Activité précédente</h4>
         <div class="carousel" id="carousel-precedente">
             <div class="carousel-inner">
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
-                <div class="slide"><img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
+                <div class="slide"><img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP"><p>Description de l'activité précédente 3</p></div>
             </div>
+            <button class="carousel-btn left" onclick="moveSlideRelative(this, -1)">‹</button>
+            <button class="carousel-btn right" onclick="moveSlideRelative(this, 1)">›</button>
             <div class="carousel-indicators">
                 <span class="indicator active" data-index="0"></span>
                 <span class="indicator" data-index="1"></span>
@@ -272,6 +278,22 @@ $user = User::getById($_SESSION['user']['id']);
     iframe.contentWindow.postMessage("ouvrir-messagerie", "*");
     
   }
+  function moveSlideRelative(button, direction) {
+    const carousel = button.closest('.carousel');
+    const inner = carousel.querySelector('.carousel-inner');
+    const indicators = carousel.querySelectorAll('.indicator');
+    const slides = carousel.querySelectorAll('.slide');
+    const slideWidth = slides[0]?.clientWidth || 0;
+
+    let activeIndex = Array.from(indicators).findIndex(ind => ind.classList.contains('active'));
+    let newIndex = (activeIndex + direction + slides.length) % slides.length;
+
+    inner.style.transform = `translateX(${-newIndex * slideWidth}px)`;
+
+    indicators.forEach(ind => ind.classList.remove('active'));
+    indicators[newIndex].classList.add('active');
+}
+
 </script>
 
 <script>
