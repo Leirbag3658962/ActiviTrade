@@ -9,6 +9,7 @@ session_start(); // Très important pour accéder à $_SESSION
 
 
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 
 $conn = new mysqli($host, $user, $password, $dbname);
 if ($conn->connect_error) {
@@ -243,8 +244,8 @@ if (isset($_SESSION['user']['id'])) {
   cursor: pointer;
   z-index: 999;
 ">💬</button>
+<footer id="footer" class="footer"><?php echo Footer2(); ?></footer>
 
-<footer id="footer" class="footer"></footer>
 </body>
 <script>
   function ouvrirMessagerie() {
@@ -315,11 +316,7 @@ window.addEventListener("message", function(event) {
 </script>
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
-<!-- <script src="../Components/BackgroundImageChanges.js"></script> -->
-<script src="../Components/Footer2.js"></script>
-<script>
-	document.getElementById("footer").innerHTML = Footer2();
-</script>
+
 
 </body>
 </html>
