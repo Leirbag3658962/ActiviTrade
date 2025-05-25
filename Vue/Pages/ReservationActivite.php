@@ -35,10 +35,6 @@ if ($idActivite > 0) {
     }
 }
 
-var_dump($idUser);
-var_dump($idActivite);
-echo "idUser: " . $idUser . "<br>";
-echo "idActivite: " . $idActivite . "<br>";
 
 $participants = [];
 $participant_count = 0;
