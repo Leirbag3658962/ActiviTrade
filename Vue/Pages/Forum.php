@@ -3,6 +3,7 @@ session_start();
 
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 $pdo = getPDO(); 
 
 $idUser = $_SESSION['idUser'] ?? null;
@@ -58,7 +59,8 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <i class="fas fa-plus"></i> Créer un sujet
 </a>
 <br><br>
-<footer id="footer" class="footer"></footer>
+<!--<footer id="footer" class="footer"></footer>-->
+<footer id="footer" class="footer"><?php echo Footer2(); ?></footer>
 </body>
 
 <!-- <script src="../Components/Navbar2.js"></script>
@@ -67,8 +69,8 @@ $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </script> -->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
-<script src="../Components/Footer2.js"></script>
-<script>
-	document.getElementById("footer").innerHTML = Footer2();
-</script>
+<!--<script src="../Components/Footer2.js"></script>-->
+<!--<script>-->
+<!--	document.getElementById("footer").innerHTML = Footer2();-->
+<!--</script>-->
 </html>
