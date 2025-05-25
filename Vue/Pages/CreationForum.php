@@ -3,12 +3,13 @@ session_start();
 
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: LogIn.php"); // 或者：die("Aucune activité spécifiée.");
+    header("Location: LogIn.php"); 
     exit;
 }
 
 require_once(__DIR__ . '../../../Modele/Database.php');
 require_once(__DIR__ . '../../Components/Navbar2.php');
+require_once(__DIR__ . '../../Components/Footer2.php');
 $pdo = getPDO();
 
 $idUser = (int) $_GET['id'];
@@ -75,7 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
 
-<footer id="footer" class="footer"></footer>
+<!--<footer id="footer" class="footer"></footer>-->
+<footer id="footer" class="footer"><?php echo Footer2(); ?></footer>
 
 
 </body>
@@ -86,10 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!--</script>-->
 <script src="../Components/NavbarAnim.js"></script>
 <script src="../Components/DragAndDrop.js"></script>
-<script src="../Components/Footer2.js"></script>
-<script>
-    document.getElementById("footer").innerHTML = Footer2();
-</script>
+<!--<script src="../Components/Footer2.js"></script>-->
+<!--<script>-->
+<!--    document.getElementById("footer").innerHTML = Footer2();-->
+<!--</script>-->
 
 </html>
 
