@@ -96,27 +96,27 @@ if (isset($_SESSION['user']['id'])) {
 
        <!-- Activité réservé -->
 <div class="boite-info">
-    <h4>Activité réservé</h4>
+    <h4>Activité réservée</h4>
     <div class="carousel">
         <div class="carousel-inner">
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
             <div class="slide">
-                <img src="https://www.jeduka.com/storage/school_image/2/isep.jpg" alt="Logo ISEP">
+                <img src="https://www.factory-bowling.com/wp-content/uploads/2024/05/NOUVEAU-LASERGAME-scaled.jpg" alt="Logo ISEP">
 				<p>Description de l'activité précédente 3</p>
             </div>
         </div>
