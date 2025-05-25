@@ -1,0 +1,272 @@
+/* Conteneur */
+.conteneur {
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Slider */
+.image-slider {
+    width: 100%;
+    max-width: 1200px;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.image-slider img.active {
+    display: block;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* Conteneur des boîtes */
+.conteneur-boites {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 50px auto;
+    align-items: stretch;
+}
+
+/* Colonnes */
+.gauche, .droite {
+    flex: 1;
+    max-width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Boîtes info */
+.boite-info {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.boite-info:first-child {
+    flex-grow: 1;
+}
+
+/* Activité */
+.carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.slide img {
+    width: 120px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Indicateurs */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.indicator.active {
+    background-color: #333;
+}
+
+/* Liste d'activités */
+.liste-activites {
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.activite {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    min-height: 150px;
+    flex-shrink: 0;
+}
+
+.activite img {
+    width: 120px;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.activite p {
+    font-size: 1.2em;
+    color: #333;
+    margin: 0;
+}
+
+/* Activités du bas */
+.conteneur-activites-bas {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto;
+    box-sizing: border-box;
+}
+
+.conteneur-activites-bas .boite-info {
+    flex: 1;
+    width: calc(50% - 15px);
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 1.2em;
+    box-sizing: border-box;
+}
+
+.conteneur-activites-bas h4 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.conteneur-activites-bas .carousel {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.conteneur-activites-bas .carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.conteneur-activites-bas .slide {
+    flex: 0 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.conteneur-activites-bas .slide img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.conteneur-activites-bas .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.conteneur-activites-bas .indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.conteneur-activites-bas .indicator.active {
+    background-color: #333;
+}
+
+.bloc-titre-modifier {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* CENTRER HORIZONTALEMENT */
+  gap: 8px; /* espace entre titre et icône */
+}
+
+.icone-modifier {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    user-select: none;
+}
+
+.carousel-btn.left {
+    left: 10px;
+}
+
+.carousel-btn.right {
+    right: 10px;
+}
+
